@@ -4,7 +4,6 @@ import Navigation from "./Navigation";
 import { Outlet } from 'react-router-dom'
 import Search from "./Search";
 
-
 const Home = () => {
   return (
     <div className="w-full flex flex-col items-center h-full">

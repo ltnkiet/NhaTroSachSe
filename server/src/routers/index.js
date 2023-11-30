@@ -4,8 +4,8 @@ import postRouter from "./post";
 import priceRouter from './price'
 import areaRouter from './area'
 import provinceRouter from './province'
-// import insertRouter from "./insert";
 // import userRouter from './user'
+// import insertRouter from "./insert";
 
 const initRoutes = (app) => {
   app.use("/api/v1/auth", authRouter);
