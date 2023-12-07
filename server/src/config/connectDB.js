@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("prj2_ntss", "root", null, {
+const sequelize = new Sequelize("ntssdb", "root", null, {
   host: "localhost",
   dialect: "mysql",
   logging: false,

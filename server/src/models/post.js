@@ -2,21 +2,16 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       Post.belongsTo(models.Image, { foreignKey: 'imagesId', targetKey: 'id', as: 'images' })
       Post.belongsTo(models.Attribute, { foreignKey: 'attributesId', targetKey: 'id', as: 'attributes' })
       Post.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'id', as: 'user' })
+      Post.hasOne(models.Review, { foreignKey: 'postId', as: 'review' });
     }
   }
   Post.init(
     {
       title: DataTypes.STRING,
-      star: DataTypes.STRING,
       labelCode: DataTypes.STRING,
       address: DataTypes.STRING,
       attributesId: DataTypes.STRING,
@@ -28,8 +23,10 @@ module.exports = (sequelize, DataTypes) => {
       userId: DataTypes.STRING,
       overviewId: DataTypes.STRING,
       imagesId: DataTypes.STRING,
+      reviewId: DataTypes.STRING,
       priceNumber: DataTypes.FLOAT,
       areaNumber: DataTypes.FLOAT,
+      status: DataTypes.ENUM('pending', 'active')
     },
     {
       sequelize,

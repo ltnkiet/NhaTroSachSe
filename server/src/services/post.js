@@ -1,7 +1,7 @@
 import db from "../models";
 const { Op } = require("sequelize");
 
-export const getPostsService = () =>
+export const getPostsServiceByAdmin = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.Post.findAll({
@@ -90,3 +90,27 @@ export const getNewPostService = () =>
       reject(error);
     }
   });
+
+export const createPostService = (body, user_id) => 
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await db.Post.create({
+        raw: true,
+        nest: true,
+        offset: 0,
+        order: [['createdAt', 'DESC']],
+        include: [
+          {model: db.Image, as: 'images', attribute: ['image']},
+          {model: db.Attribute, as: 'attributes', attribute: ['price', 'acreage', 'published', 'hashtag']}
+        ],
+        attribute: ['id', 'title', 'star', 'createdAt']
+      })
+      resolve({
+        err: response ? 0 : 1,
+        msg: response ? 'Created post successfully' : 'Create post failed',
+        response
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })

@@ -11,10 +11,6 @@ module.exports = {
       title: {
         type: Sequelize.STRING,
       },
-      star: {
-        type: Sequelize.STRING,
-        defaultValue: "0",
-      },
       labelCode: {
         type: Sequelize.STRING,
       },
@@ -48,6 +44,9 @@ module.exports = {
       imagesId: {
         type: Sequelize.STRING,
       },
+      reviewId: {
+        type: Sequelize.STRING
+      },
       priceNumber: {
         type: Sequelize.FLOAT,
       },
@@ -57,6 +56,7 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
       },
       updatedAt: {
         allowNull: false,

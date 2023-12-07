@@ -11,10 +11,13 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      password: {
+      phone: {
         type: Sequelize.STRING,
       },
-      phone: {
+      email: {
+        type: Sequelize.STRING
+      },
+      password: {
         type: Sequelize.STRING,
       },
       zalo: {
@@ -26,9 +29,26 @@ module.exports = {
       avatar: {
         type: Sequelize.BLOB("long"),
       },
+      role: {
+        type: Sequelize.ENUM,
+        values: ['user', 'admin']
+      },
+      refreshToken: {
+        type: Sequelize.STRING,
+      },
+      passwordChangedAt: {
+        type: Sequelize.STRING,
+      },
+      passwordResetToken: {
+        type: Sequelize.STRING,
+      },
+      passwordResetExpires: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
       },
       updatedAt: {
         allowNull: false,
