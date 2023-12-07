@@ -45,7 +45,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       reviewId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       priceNumber: {
         type: Sequelize.FLOAT,
@@ -53,10 +53,14 @@ module.exports = {
       areaNumber: {
         type: Sequelize.FLOAT,
       },
+      status: {
+        type: Sequelize.ENUM,
+        values: ["pending", "active"],
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+        defaultValue: Sequelize.NOW,
       },
       updatedAt: {
         allowNull: false,

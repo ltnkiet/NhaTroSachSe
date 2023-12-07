@@ -32,7 +32,7 @@ export const getPostsLimitService = ( page, query, { priceNumber, areaNumber }) 
   new Promise(async (resolve, reject) => {
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1;
-      const queries = { ...query };
+      const queries = { ...query, status: 'active' };
       if (priceNumber) queries.priceNumber = { [Op.between]: priceNumber };
       if (areaNumber) queries.areaNumber = { [Op.between]: areaNumber };
       const response = await db.Post.findAndCountAll({
@@ -50,7 +50,7 @@ export const getPostsLimitService = ( page, query, { priceNumber, areaNumber }) 
           },
           { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
         ],
-        attributes: ["id", "title", "star", "address", "description"],
+        attributes: ["id", "title", "address", "description"],
       });
       resolve({
         err: response ? 0 : 1,
@@ -66,6 +66,7 @@ export const getNewPostService = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.Post.findAll({
+        where: {status: 'active'},
         raw: true,
         nest: true,
         offset: 0,
@@ -79,7 +80,7 @@ export const getNewPostService = () =>
             attributes: ["price", "acreage", "published", "hashtag"],
           },
         ],
-        attributes: ["id", "title", "star", "createdAt"],
+        attributes: ["id", "title", "createdAt"],
       });
       resolve({
         err: response ? 0 : 1,

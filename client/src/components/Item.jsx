@@ -11,7 +11,6 @@ const Item = ({
   images,
   user,
   title,
-  star,
   description,
   attributes,
   address,
@@ -57,12 +56,12 @@ const Item = ({
       <div className="w-[70%]">
         <div className="flex justify-between gap-2 w-full">
           <div className="flex flex-col">
-            <div className="text-red-600 font-medium flex flex-row">
+            {/* <div className="text-red-600 font-medium flex flex-row">
               {handleStar(+star).length > 0 &&
                 handleStar(+star).map((star, number) => {
                   return <span key={number}>{star}</span>;
               })}
-            </div>
+            </div> */}
             <p className="font-medium">{title}</p>
           </div>
           <div className="w-[10%] flex justify-end">
