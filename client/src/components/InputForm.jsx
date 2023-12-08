@@ -1,6 +1,10 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
+import icons from '../asset/icon'
 
-const InputForm = ({ label, value, setValue, keyPayload, invalidFields, setInvalidFields, type }) => {
+const {AiOutlineEye, AiOutlineEyeInvisible } = icons
+
+const InputForm = ({ label, value, setValue, keyPayload, invalidFields, setInvalidFields, type, icons }) => {
+    const [showPassword, setShowPassword] = useState(false);
     return (
         <div>
             <label htmlFor={keyPayload} className='text-xs' >{label}</label>

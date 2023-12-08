@@ -1,4 +1,5 @@
 export const path = {
+  // Public
   HOME: '/*',
   HOME__PAGE: ':page',
   LOGIN: 'login',
@@ -8,8 +9,16 @@ export const path = {
   CHO_THUE_PHONG_TRO: 'cho-thue-phong-tro',
   DETAL_POST__TITLE__POSTID: 'chi-tiet/:title/:postId',
   SEARCH: 'tim-kiem',
+  // System
   SYSTEM: '/he-thong/*',
-  CREATE_POST: 'tao-moi-bai-dang'
+  CREATE_POST: 'tao-bai-dang',
+  // Admin
+  ADMIN: '/quan-tri/*',
+  // ADMIN_AUTH: '/quan-tri/dang-nhap',
+  ADMIN_POST: '/quan-tri/quan-ly-bai-dang',
+  ADMIN_CATEGORY: '/quan-tri/quan-ly-danh-muc*',
+  ADMIN_USER: '/quan-tri/quan-ly-nguoi-dung',
+
 }
 
 export const text = {

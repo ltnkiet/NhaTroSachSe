@@ -12,6 +12,7 @@ const Login = () => {
   const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
   const [isRegister, setIsRegister] = useState(location.state?.flag);
   const [invalidFields, setInvalidFields] = useState([]);
+  const [showPassword, setShowPassword] = useState(false);
   const [payload, setPayload] = useState({
     email: "",
     phone: "",
@@ -88,18 +89,18 @@ const Login = () => {
             invalids++;
           }
           break;
-          case "email":
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(item[1])) {
-              setInvalidFields((prev) => [
-                ...prev,
-                {
-                  name: item[0],
-                  message: "Email không hợp lệ.",
-                },
-              ]);
-              invalids++;
-            }
+        case "email":
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(item[1])) {
+            setInvalidFields((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                message: "Email không hợp lệ.",
+              },
+            ]);
+            invalids++;
+          }
           break;
         default:
           break;
@@ -149,8 +150,14 @@ const Login = () => {
             value={payload.password}
             setValue={setPayload}
             keyPayload={"password"}
-            type="password"
+            type={showPassword ? "text" : "password"}
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="text-blue-500 text-sm hover:underline cursor-pointer flex justify-end">
+            {showPassword ? "Ẩn mật khẩu" : "Hiển thị mật khẩu"}
+          </button>
           <Button
             text={isRegister ? "Đăng kí" : "Đăng nhập"}
             bgColor="bg-secondary"
@@ -159,7 +166,7 @@ const Login = () => {
             onClick={handleSubmit}
           />
         </div>
-        <div className="mt-7 flex items-center justify-between">
+        <div className="mt-7 flex items-center justify-between text-xl">
           {isRegister ? (
             <small>
               Bạn đã có tài khoản?{" "}
@@ -179,7 +186,7 @@ const Login = () => {
             </small>
           ) : (
             <>
-              <small className="text-[blue] hover:text-[red] cursor-pointer">
+              <small className="text-blue-500 hover:underline cursor-pointer">
                 Bạn quên mật khẩu
               </small>
               <small
@@ -192,7 +199,7 @@ const Login = () => {
                     name: "",
                   });
                 }}
-                className="text-[blue] hover:text-[red] cursor-pointer">
+                className="text-blue-500 hover:hover:underline cursor-pointer">
                 Tạo tài khoản mới
               </small>
             </>

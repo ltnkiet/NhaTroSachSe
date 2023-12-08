@@ -1,4 +1,5 @@
 import actionTypes from "../actions/actionTypes";
+
 const initState = {
   posts: [],
   msg: "",

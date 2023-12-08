@@ -1,20 +1,29 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import logo from "../../asset/img/logo_ntss.png";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
-import { Button } from "../../components";
+import { Button, User } from "../../components";
 import icons from "../../asset/icon";
 import { path } from "../../utils/constant";
 import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../../store/actions";
 
-const { AiOutlinePlusCircle, AiOutlineLogout, BsChevronDown } = icons;
+const { AiOutlinePlusCircle, AiOutlineLogout, BsChevronDown, MdOutlineLibraryBooks } = icons;
 
 const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useSelector((state) => state.auth);
-  
+  const [isShowMenu, setIsShowMenu] = useState(false);
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const headerRef = useRef();
+
+
   const goLogin = useCallback((flag) => {
     navigate(path.LOGIN, { state: { flag } });
   }, []);
+  // useEffect(() => {
+  //   headerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  // }, [searchParams.get("page")]);
 
   return (
     <div  className="w-[70%]">
@@ -45,30 +54,26 @@ const Header = () => {
           )}
           {isLoggedIn && (
             <div className="flex items-center gap-3 relative">
-              {/* <User /> */}
+              <User />
               <Button
-                text={"Quản lý tài khoản"}
+                text={"Tùy chọn"}
                 textColor="text-white"
-                bgColor="bg-blue-700"
+                bgColor="bg-main"
                 px="px-4"
                 IcAfter={BsChevronDown}
-                // onClick={() => setIsShowMenu((prev) => !prev)}
+                onClick={() => setIsShowMenu((prev) => !prev)}
               />
-              {/* {isShowMenu && (
-                <div className="absolute min-w-200 top-full bg-white shadow-md rounded-md p-4 right-0 flex flex-col">
-                  {menuManage.map((item) => {
-                    return (
-                      <Link
-                        className="hover:text-orange-500 flex items-center gap-2 text-blue-600 border-b border-gray-200 py-2"
-                        key={item.id}
-                        to={item?.path}>
-                        {item?.icon}
-                        {item.text}
-                      </Link>
-                    );
-                  })}
+              {isShowMenu && (
+                <div className="absolute min-w-200 top-full bg-white shadow-md rounded-md p-4 right-0 flex flex-col mt-2">
+                  <Link
+                    className="cursor-pointer hover:underline text-blue-500 py-2 flex items-center gap-2"
+                    to={"/he-thong"}
+                    >
+                    <MdOutlineLibraryBooks />
+                    Quản lý tài khoản
+                  </Link>
                   <span
-                    className="cursor-pointer hover:text-orange-500 text-blue-500 py-2 flex items-center gap-2"
+                    className="cursor-pointer hover:underline text-blue-500 py-2 flex items-center gap-2"
                     onClick={() => {
                       setIsShowMenu(false);
                       dispatch(actions.logout());
@@ -77,7 +82,7 @@ const Header = () => {
                     Đăng xuất
                   </span>
                 </div>
-              )} */}
+              )}
             </div>
           )}
           <Button
