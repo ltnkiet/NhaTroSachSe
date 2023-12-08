@@ -13,6 +13,7 @@ const Login = () => {
   const [isRegister, setIsRegister] = useState(location.state?.flag);
   const [invalidFields, setInvalidFields] = useState([]);
   const [payload, setPayload] = useState({
+    email: "",
     phone: "",
     password: "",
     name: "",
@@ -23,6 +24,7 @@ const Login = () => {
 
   useEffect(() => {
     isLoggedIn && navigate("/");
+    // eslint-disable-next-line
   }, [isLoggedIn]);
 
   useEffect(() => {
@@ -62,19 +64,20 @@ const Login = () => {
     fields.forEach((item) => {
       switch (item[0]) {
         case "password":
-          if (item[1].length < 6) {
+          if (item[1].length < 8) {
             setInvalidFields((prev) => [
               ...prev,
               {
                 name: item[0],
-                message: "Mật khẩu phải có tối thiểu 6 kí tự.",
+                message: "Mật khẩu phải có tối thiểu 8 kí tự.",
               },
             ]);
             invalids++;
           }
           break;
         case "phone":
-          if (!+item[1]) {
+          const phoneRegex = /^\d{10,11}$/;
+          if (!phoneRegex.test(item[1])) {
             setInvalidFields((prev) => [
               ...prev,
               {
@@ -85,7 +88,19 @@ const Login = () => {
             invalids++;
           }
           break;
-
+          case "email":
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(item[1])) {
+              setInvalidFields((prev) => [
+                ...prev,
+                {
+                  name: item[0],
+                  message: "Email không hợp lệ.",
+                },
+              ]);
+              invalids++;
+            }
+          break;
         default:
           break;
       }
@@ -100,14 +115,24 @@ const Login = () => {
         </h3>
         <div className="w-full flex flex-col gap-5">
           {isRegister && (
-            <InputForm
-              setInvalidFields={setInvalidFields}
-              invalidFields={invalidFields}
-              label={"HỌ TÊN"}
-              value={payload.name}
-              setValue={setPayload}
-              keyPayload={"name"}
-            />
+            <>
+              <InputForm
+                setInvalidFields={setInvalidFields}
+                invalidFields={invalidFields}
+                label={"HỌ TÊN"}
+                value={payload.name}
+                setValue={setPayload}
+                keyPayload={"name"}
+              />
+              <InputForm
+                setInvalidFields={setInvalidFields}
+                invalidFields={invalidFields}
+                label={"EMAIL"}
+                value={payload.email}
+                setValue={setPayload}
+                keyPayload={"email"}
+              />
+            </>
           )}
           <InputForm
             setInvalidFields={setInvalidFields}
@@ -142,6 +167,7 @@ const Login = () => {
                 onClick={() => {
                   setIsRegister(false);
                   setPayload({
+                    email: "",
                     phone: "",
                     password: "",
                     name: "",
@@ -160,6 +186,7 @@ const Login = () => {
                 onClick={() => {
                   setIsRegister(true);
                   setPayload({
+                    email: "",
                     phone: "",
                     password: "",
                     name: "",

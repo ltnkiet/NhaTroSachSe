@@ -33,9 +33,6 @@ module.exports = {
         type: Sequelize.ENUM,
         values: ['user', 'admin']
       },
-      refreshToken: {
-        type: Sequelize.STRING,
-      },
       passwordChangedAt: {
         type: Sequelize.STRING,
       },

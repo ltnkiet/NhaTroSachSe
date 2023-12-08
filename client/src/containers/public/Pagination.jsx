@@ -18,7 +18,7 @@ const Pagination = () => {
     let page = searchParams.get("page");
     page && +page !== currentPage && setCurrentPage(+page);
     !page && setCurrentPage(1);
-  }, [searchParams]);
+  }, [searchParams, currentPage]);
 
   useEffect(() => {
     let maxPage = Math.ceil(count / process.env.REACT_APP_LIMIT_POSTS);
@@ -29,7 +29,6 @@ const Pagination = () => {
     setArrPage(temp);
     currentPage >= maxPage - 2 ? setIsHideEnd(true) : setIsHideEnd(false);
     currentPage <= 3 ? setIsHideStart(true) : setIsHideStart(false);
-    // 3 => 1 2 3 (1 ... 2 3)
   }, [count, posts, currentPage]);
   return (
     <div className="flex items-center justify-center gap-2 py-5">

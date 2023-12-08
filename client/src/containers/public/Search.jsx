@@ -17,7 +17,6 @@ const {
 const Search = () => {
 
   const { provinces, areas, prices, categories } = useSelector(state => state.app)
-
   const navigate = useNavigate()
   const location = useLocation()
   const [queries, setQueries] = useState({})
@@ -25,6 +24,7 @@ const Search = () => {
   const [content, setContent] = useState([])
   const [name, setName] = useState('')
   const [defaultText, setDefaultText] = useState('')
+  const [arrMinMax, setArrMinMax] = useState({})
 
   const handleShowModal = (content, name, defaultText) => {
     setContent(content)
@@ -39,11 +39,13 @@ const Search = () => {
     }
   }, [location]);
 
-  const handleSubmit = useCallback((e, query) => {
+  const handleSubmit = useCallback((e, query, arrMaxMin) => {
     e.stopPropagation()
     setQueries(prev => ({ ...prev, ...query }))
     setIsShowModal(false)
-  }, [isShowModal, queries]);
+    arrMaxMin && setArrMinMax(prev => ({ ...prev, ...arrMaxMin }))
+    // eslint-disable-next-line
+  }, [isShowModal, queries]); 
 
   const handleSearch = () => {
     const queryCodes = Object.entries(queries).filter(item => item[0].includes('Number') || item[0].includes('Code')).filter(item => item[1])
@@ -123,6 +125,7 @@ const Search = () => {
         queries={queries}
         content={content}
         name={name}
+        arrMinMax={arrMinMax}
         setIsShowModal={setIsShowModal}
         defaultText={defaultText}
         />

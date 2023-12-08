@@ -4,7 +4,7 @@ import axiosDefault from 'axios'
 export const apiGetPrices = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({
-            method: 'get',
+            method: 'GET',
             url: '/api/v1/price/all'
         })
         resolve(response)
@@ -15,7 +15,7 @@ export const apiGetPrices = () => new Promise(async (resolve, reject) => {
 export const apiGetAreas = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({
-            method: 'get',
+            method: 'GET',
             url: '/api/v1/area/all'
         })
         resolve(response)
@@ -26,7 +26,7 @@ export const apiGetAreas = () => new Promise(async (resolve, reject) => {
 export const apiGetProvinces = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({
-            method: 'get',
+            method: 'GET',
             url: '/api/v1/province/all'
         })
         resolve(response)
@@ -37,7 +37,7 @@ export const apiGetProvinces = () => new Promise(async (resolve, reject) => {
 export const apiGetPublicProvinces = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosDefault({
-            method: 'get',
+            method: 'GET',
             url: 'https://vapi.vnappmob.com/api/province/'
         })
         resolve(response)
@@ -48,7 +48,7 @@ export const apiGetPublicProvinces = () => new Promise(async (resolve, reject) =
 export const apiGetPublicDistrict = (provinceId) => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosDefault({
-            method: 'get',
+            method: 'GET',
             url: `https://vapi.vnappmob.com/api/province/district/${provinceId}`
         })
         resolve(response)
