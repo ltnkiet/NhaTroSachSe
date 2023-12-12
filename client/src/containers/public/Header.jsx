@@ -17,16 +17,15 @@ const Header = () => {
   const [searchParams] = useSearchParams();
   const headerRef = useRef();
 
-
   const goLogin = useCallback((flag) => {
     navigate(path.LOGIN, { state: { flag } });
   }, []);
-  // useEffect(() => {
-  //   headerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  // }, [searchParams.get("page")]);
+  useEffect(() => {
+    headerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [searchParams.get("page")]);
 
   return (
-    <div  className="w-[70%]">
+    <div ref={headerRef}  className="w-[70%]">
       <div className="w-full flex items-center justify-between my-4">
         <Link to={"/"}>
           <img
@@ -85,12 +84,13 @@ const Header = () => {
               )}
             </div>
           )}
+          {isLoggedIn &&
           <Button
             text={"Đăng tin"}
             textColor="text-white"
             bgColor="bg-secondary"
             IcAfter={AiOutlinePlusCircle}
-          />
+          />}
         </div>
       </div>
     </div>
