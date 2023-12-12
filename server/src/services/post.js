@@ -12,7 +12,7 @@ export const getPostsServiceByAdmin = () =>
           {
             model: db.Attribute,
             as: "attributes",
-            attributes: ["price", "acreage", "published", "hashtag"],
+            attributes: ["price", "acreage"],
           },
           { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
         ],
@@ -46,7 +46,7 @@ export const getPostsLimitService = ( page, query, { priceNumber, areaNumber }) 
           {
             model: db.Attribute,
             as: "attributes",
-            attributes: ["price", "acreage", "published", "hashtag"],
+            attributes: ["price", "acreage"],
           },
           { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
         ],
@@ -77,7 +77,7 @@ export const getNewPostService = () =>
           {
             model: db.Attribute,
             as: "attributes",
-            attributes: ["price", "acreage", "published", "hashtag"],
+            attributes: ["price", "acreage"],
           },
         ],
         attributes: ["id", "title", "createdAt"],
@@ -102,7 +102,7 @@ export const createPostService = (body, user_id) =>
         order: [['createdAt', 'DESC']],
         include: [
           {model: db.Image, as: 'images', attribute: ['image']},
-          {model: db.Attribute, as: 'attributes', attribute: ['price', 'acreage', 'published', 'hashtag']}
+          {model: db.Attribute, as: 'attributes', attribute: ['price', 'acreage']}
         ],
         attribute: ['id', 'title', 'star', 'createdAt']
       })

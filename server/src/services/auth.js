@@ -48,10 +48,8 @@ export const loginService = ({ phone, password }) =>
         where: { phone },
         raw: true,
       });
-      const isCorrectPassword =
-        response && bcrypt.compareSync(password, response.password);
-      const token =
-        isCorrectPassword &&
+      const isCorrectPassword = response && bcrypt.compareSync(password, response.password);
+      const token = isCorrectPassword &&
         jwt.sign(
           { id: response.id, phone: response.phone },
           process.env.TOKEN_SECRET_KEY,
