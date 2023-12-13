@@ -35,29 +35,29 @@ export const login = async (req, res) => {
     });
   }
 };
-export const forgotPassword = async (req, res) => {
-  const { email } = req.query;
-  try {
-    if (!email) {
-      return res.status(400).json({
-        err: 1,
-        msg: "Missing Email",
+  export const forgotPassword = async (req, res) => {
+    const { email } = req.query;
+    try {
+      if (!email) {
+        return res.status(400).json({
+          err: 1,
+          msg: "Missing Email",
+        });
+      }
+      const response = await authService.forgotPasswordService(email);
+      if (response.err === 0) {
+        const resetToken = response.passwordResetToken;
+        const html = `<p>Chọn vào đây để thay đổi mật khẩu: <a href="#">${resetToken}</a></p>`;
+        await sendMail({ email, html });
+      }
+      return res.status(200).json(response);
+    } catch (error) {
+      return res.status(500).json({
+        err: -1,
+        msg: "Fail at auth controller: " + error,
       });
     }
-    const response = await authService.forgotPasswordService(email);
-    if (response.err === 0) {
-      const resetToken = response.passwordResetToken;
-      const html = `<p>Chọn vào đây để thay đổi mật khẩu: <a href="#">${resetToken}</a></p>`;
-      await sendMail({ email, html });
-    }
-    return res.status(200).json(response);
-  } catch (error) {
-    return res.status(500).json({
-      err: -1,
-      msg: "Fail at auth controller: " + error,
-    });
-  }
-};
+  };
 export const resetPassword = async (req, res) => {
   const { password, token } = req.body;
   try {

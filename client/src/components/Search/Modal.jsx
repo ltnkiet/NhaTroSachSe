@@ -1,11 +1,18 @@
-import React, { useState, useEffect, memo } from 'react'
-import icons from '../asset/icon'
-import { getNumbersPrice, getNumbersArea } from "../utils/Common/getNumbers";
+import React, { useState, useEffect, memo } from "react";
+import icons from "../../asset/icon";
+import { getNumbersPrice, getNumbersArea } from "../../utils/Common/getNumbers";
 
+const { GrLinkPrevious } = icons;
 
-const { GrLinkPrevious } = icons
-
-const Modal = ({ setIsShowModal, content, name, handleSubmit, queries, arrMinMax, defaultText }) => {
+const Modal = ({
+  setIsShowModal,
+  content,
+  name,
+  handleSubmit,
+  queries,
+  arrMinMax,
+  defaultText,
+}) => {
   const [activedEl, setActivedEl] = useState("");
   const [persent1, setPersent1] = useState(
     name === "price" && arrMinMax?.priceArr
@@ -100,98 +107,89 @@ const Modal = ({ setIsShowModal, content, name, handleSubmit, queries, arrMinMax
     );
   };
   return (
-    <div onClick={() => { setIsShowModal(false) }} 
-      className='fixed top-0 left-0 right-0 bottom-0 bg-overlay-70 z-20 flex justify-center items-center'>
-      <div onClick={(e) => {
-        e.stopPropagation() 
-        setIsShowModal(true)}} 
-        className='w-2/5 h-[70%] bg-white rounded-md relative'>
-        <div className='h-[45px] px-4 flex items-center border-b border-gray-200'>  
-          <span className='cursor-poiter' 
+    <div
+      onClick={() => {
+        setIsShowModal(false);
+      }}
+      className="fixed top-0 left-0 right-0 bottom-0 bg-overlay-70 z-20 flex justify-center items-center">
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsShowModal(true);
+        }}
+        className="w-2/5 h-[70%] bg-white rounded-md relative">
+        <div className="h-[45px] px-4 flex items-center border-b border-gray-200">
+          <span
+            className="cursor-poiter"
             onClick={(e) => {
-            e.stopPropagation()
-            setIsShowModal(false)}}
-          ><GrLinkPrevious size={20} />
+              e.stopPropagation();
+              setIsShowModal(false);
+            }}>
+            <GrLinkPrevious size={20} />
           </span>
         </div>
-        {(name === 'category' || name === 'province') && 
-          <div className='p-4 flex flex-col'>
-            <span className='py-2 flex gap-2 items-center border-b border-gray-200'>
+        {(name === "category" || name === "province") && (
+          <div className="p-4 flex flex-col">
+            <span className="py-2 flex gap-2 items-center border-b border-gray-200">
               <input
-                  type="radio"
-                  name={name}
-                  value={defaultText || ''}
-                  id='default'
-                  checked={!queries[`${name}Code`] ? true : false}
-                  onChange={(e) => handleSubmit(e, { [name]: defaultText, [`${name}Code`]: null })}
+                type="radio"
+                name={name}
+                value={defaultText || ""}
+                id="default"
+                checked={!queries[`${name}Code`] ? true : false}
+                onChange={(e) =>
+                  handleSubmit(e, {
+                    [name]: defaultText,
+                    [`${name}Code`]: null,
+                  })
+                }
               />
-              <label htmlFor='default'>{defaultText}</label>
+              <label htmlFor="default">{defaultText}</label>
             </span>
-            {content?.map(item => {
+            {content?.map((item) => {
               return (
-                <span key={item.code} className='py-2 flex gap-2 items-center border-b border-gray-200'>
+                <span
+                  key={item.code}
+                  className="py-2 flex gap-2 items-center border-b border-gray-200">
                   <input
-                      type="radio"
-                      name={name}
-                      id={item.code}
-                      value={item.code}
-                      checked={item.code === queries[`${name}Code`] ? true : false}
-                      onChange={(e) => handleSubmit(e, { [name]: item.value, [`${name}Code`]: item.code })}
+                    type="radio"
+                    name={name}
+                    id={item.code}
+                    value={item.code}
+                    checked={
+                      item.code === queries[`${name}Code`] ? true : false
+                    }
+                    onChange={(e) =>
+                      handleSubmit(e, {
+                        [name]: item.value,
+                        [`${name}Code`]: item.code,
+                      })
+                    }
                   />
                   <label htmlFor={item.code}>{item.value}</label>
                 </span>
-              )
+              );
             })}
           </div>
-        }
-        {/* {(name === "price" || name === "area") && (
-          <div className='p-4 flex flex-col'>
-            <span className='py-2 flex gap-2 items-center border-b border-gray-200 cursor-pointer'>
-              <input
-                  type="radio"
-                  name={name}
-                  value={defaultText || ''}
-                  id='default'
-                  checked={!queries[`${name}Code`] ? true : false}
-                  onChange={(e) => handleSubmit(e, { [name]: defaultText, [`${name}Code`]: null })}
-              />
-              <label htmlFor='default' className='cursor-pointer'>{defaultText}</label>
-            </span>
-            {content?.map(item => {
-              return (
-                <span key={item.code} className='py-2 flex gap-2 items-center border-b border-gray-200'>
-                  <input
-                      type="radio"
-                      name={name}
-                      id={item.code}
-                      value={item.code}
-                      checked={item.code === queries[`${name}Code`] ? true : false}
-                      onChange={(e) => handleSubmit(e, { [name]: item.value, [`${name}Code`]: item.code })}
-                  />
-                  <label htmlFor={item.code} className='cursor-pointer'>{item.value}</label>
-                </span>
-              )
-            })}
-          </div>
-        )} */}
+        )}
         {(name === "price" || name === "area") && (
           <div className="p-12 py-20 ">
             <div className="flex flex-col items-center justify-center relative">
               <div className="z-30 absolute top-[-48px] font-bold text-xl text-orange-600">
-                    {persent1 === 100 && persent2 === 100
-                    ? `Trên ${convert100toTarget(persent1)} ${
-                        name === "price" ? "triệu" : "m2"
-                        } +`
-                    : `Từ ${
-                        persent1 <= persent2
-                            ? convert100toTarget(persent1)
-                            : convert100toTarget(persent2)
-                        } - ${
-                        persent2 >= persent1
-                            ? convert100toTarget(persent2)
-                            : convert100toTarget(persent1)
-                        } ${name === "price" ? "triệu" : "m2"}`}
-                </div>
+                {persent1 === 100 && persent2 === 100
+                  ? `Trên ${convert100toTarget(persent1)} ${
+                      name === "price" ? "triệu" : "m2"
+                    } +`
+                  : `Từ ${
+                      persent1 <= persent2
+                        ? convert100toTarget(persent1)
+                        : convert100toTarget(persent2)
+                    } - ${
+                      persent2 >= persent1
+                        ? convert100toTarget(persent2)
+                        : convert100toTarget(persent1)
+                    } ${name === "price" ? "triệu" : "m2"}`}
+              </div>
               <div
                 onClick={handleClickTrack}
                 id="track"
@@ -276,7 +274,7 @@ const Modal = ({ setIsShowModal, content, name, handleSubmit, queries, arrMinMax
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default memo(Modal);

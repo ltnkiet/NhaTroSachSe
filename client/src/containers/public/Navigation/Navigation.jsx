@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { formatVietnameseToString } from "../../utils/Common/formatVietnameseToString";
+import { formatVietnameseToString } from "../../../utils/Common/formatVietnameseToString";
 import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../store/actions";
+import * as actions from "../../../store/actions";
 
-const notActive = "px-4 h-full flex items-center bg-main outline-none hover:underline";
+const notActive =
+  "px-4 h-full flex items-center bg-main outline-none hover:underline";
 const active = "px-4 h-full flex items-center underline";
 
 const Navigation = () => {
@@ -30,7 +31,7 @@ const Navigation = () => {
                 className="h-full flex justify-center items-center">
                 <NavLink
                   to={`/${formatVietnameseToString(item.value)}`}
-                  className={({ isActive }) => (isActive ? active  : notActive)}>
+                  className={({ isActive }) => (isActive ? active : notActive)}>
                   {item.value}
                 </NavLink>
               </div>

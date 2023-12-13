@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { InputForm, Button } from "../../components";
+import { InputForm, Button } from "../../../components";
 import { useLocation, useNavigate } from "react-router-dom";
-import * as actions from "../../store/actions";
+import * as actions from "../../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
@@ -44,7 +44,6 @@ const Login = () => {
       isRegister
         ? dispatch(actions.register(payload))
         : dispatch(actions.login(payload));
-    console.log("oke");
   };
 
   const validate = (payload) => {

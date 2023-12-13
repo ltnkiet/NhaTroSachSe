@@ -1,24 +1,19 @@
-export { default as Button } from './Button'
-export { default as InputForm} from './InputForm'
-export { default as SearchItem} from './SearchItem'
-export { default as Province} from './Province'
-export { default as ProvinceBtn} from './ProvinceBtn'
-export { default as Item} from './Item'
-export { default as PageNum} from './PageNum'
-export { default as ItemSidebar} from './ItemSidebar'
-export { default as Contact} from './Contact'
-export { default as RelatedPost } from './RelatedPost'
-export { default as Sitem } from './Sitem'
-export { default as Modal } from './Modal'
-export { default as User } from './User'
-
-
-
-
-
-
-
-
-
-
-
+export { default as Button } from "./Button/Button";
+export { default as InputForm } from "./Input/InputForm";
+export { default as SearchItem } from "./Search/SearchItem";
+export { default as Province } from "./Province/Province";
+export { default as ProvinceBtn } from "./Province/ProvinceBtn";
+export { default as Item } from "./Post/Item";
+export { default as PageNum } from "./Pagigation/PageNum";
+export { default as ItemSidebar } from "./SideBar/ItemSidebar";
+export { default as RelatedPost } from "./Post/RelatedPost";
+export { default as Sitem } from "./Post/Sitem";
+export { default as Modal } from "./Search/Modal";
+export { default as User } from "./Users/User";
+export { default as Address } from "./CreatePost/Address";
+export { default as InputReadOnly } from "./Input/InputReadOnly";
+export { default as Select } from "./CreatePost/Select";
+export { default as InputFormV2 } from "./Input/InputFormV2";
+export { default as InputFormV3 } from "./Input/InputFormV3";
+export { default as Overview } from "./CreatePost/Overview";
+export { default as Loading } from "./Loading/Loading";

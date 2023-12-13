@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useNavigate, createSearchParams, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { path } from "../../utils/constant";
-import { SearchItem, Modal } from "../../components";
+import { useNavigate, createSearchParams, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { path } from "../../../utils/constant";
+import { SearchItem, Modal } from "../../../components";
 
-import icons from "../../asset/icon";
+import icons from "../../../asset/icon";
 const {
   BsChevronRight,
   HiOutlineLocationMarker,
@@ -15,58 +15,70 @@ const {
 } = icons;
 
 const Search = () => {
-
-  const { provinces, areas, prices, categories } = useSelector(state => state.app)
-  const navigate = useNavigate()
-  const location = useLocation()
-  const [queries, setQueries] = useState({})
-  const [isShowModal, setIsShowModal] = useState(false)
-  const [content, setContent] = useState([])
-  const [name, setName] = useState('')
-  const [defaultText, setDefaultText] = useState('')
-  const [arrMinMax, setArrMinMax] = useState({})
+  const { provinces, areas, prices, categories } = useSelector(
+    (state) => state.app
+  );
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [queries, setQueries] = useState({});
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [content, setContent] = useState([]);
+  const [name, setName] = useState("");
+  const [defaultText, setDefaultText] = useState("");
+  const [arrMinMax, setArrMinMax] = useState({});
 
   const handleShowModal = (content, name, defaultText) => {
-    setContent(content)
-    setName(name)
-    setDefaultText(defaultText)
-    setIsShowModal(true)
+    setContent(content);
+    setName(name);
+    setDefaultText(defaultText);
+    setIsShowModal(true);
   };
 
   useEffect(() => {
     if (!location?.pathname.includes(path.SEARCH)) {
-      setQueries({})
+      setQueries({});
     }
   }, [location]);
 
-  const handleSubmit = useCallback((e, query, arrMaxMin) => {
-    e.stopPropagation()
-    setQueries(prev => ({ ...prev, ...query }))
-    setIsShowModal(false)
-    arrMaxMin && setArrMinMax(prev => ({ ...prev, ...arrMaxMin }))
-    // eslint-disable-next-line
-  }, [isShowModal, queries]); 
+  const handleSubmit = useCallback(
+    (e, query, arrMaxMin) => {
+      e.stopPropagation();
+      setQueries((prev) => ({ ...prev, ...query }));
+      setIsShowModal(false);
+      arrMaxMin && setArrMinMax((prev) => ({ ...prev, ...arrMaxMin }));
+      // eslint-disable-next-line
+    },
+    [isShowModal, queries]
+  );
 
   const handleSearch = () => {
-    const queryCodes = Object.entries(queries).filter(item => item[0].includes('Number') || item[0].includes('Code')).filter(item => item[1])
-    let queryCodesObj = {}
-    queryCodes.forEach(item => { queryCodesObj[item[0]] = item[1] })
-    const queryText = Object.entries(queries).filter(item => !item[0].includes('Code') || !item[0].includes('Number'))
-    let queryTextObj = {}
-    queryText.forEach(item => { queryTextObj[item[0]] = item[1] })
-    let titleSearch = `${queryTextObj.category
-        ? queryTextObj.category
-        : 'Cho thuê tất cả'} ${queryTextObj.province
-            ? `tỉnh ${queryTextObj.province}`
-            : ''} ${queryTextObj.price
-                ? `giá ${queryTextObj.price}`
-                : ''} ${queryTextObj.area
-                    ? `diện tích ${queryTextObj.area}` : ''} `
-    navigate({
+    const queryCodes = Object.entries(queries)
+      .filter((item) => item[0].includes("Number") || item[0].includes("Code"))
+      .filter((item) => item[1]);
+    let queryCodesObj = {};
+    queryCodes.forEach((item) => {
+      queryCodesObj[item[0]] = item[1];
+    });
+    const queryText = Object.entries(queries).filter(
+      (item) => !item[0].includes("Code") || !item[0].includes("Number")
+    );
+    let queryTextObj = {};
+    queryText.forEach((item) => {
+      queryTextObj[item[0]] = item[1];
+    });
+    let titleSearch = `${
+      queryTextObj.category ? queryTextObj.category : "Cho thuê tất cả"
+    } ${queryTextObj.province ? `tỉnh ${queryTextObj.province}` : ""} ${
+      queryTextObj.price ? `giá ${queryTextObj.price}` : ""
+    } ${queryTextObj.area ? `diện tích ${queryTextObj.area}` : ""} `;
+    navigate(
+      {
         pathname: path.SEARCH,
         search: createSearchParams(queryCodesObj).toString(),
-    }, { state: { titleSearch } })
-  }
+      },
+      { state: { titleSearch } }
+    );
+  };
 
   return (
     <>
@@ -120,16 +132,17 @@ const Search = () => {
           Tìm kiếm
         </button>
       </div>
-      {isShowModal && <Modal  
-        handleSubmit={handleSubmit}
-        queries={queries}
-        content={content}
-        name={name}
-        arrMinMax={arrMinMax}
-        setIsShowModal={setIsShowModal}
-        defaultText={defaultText}
+      {isShowModal && (
+        <Modal
+          handleSubmit={handleSubmit}
+          queries={queries}
+          content={content}
+          name={name}
+          arrMinMax={arrMinMax}
+          setIsShowModal={setIsShowModal}
+          defaultText={defaultText}
         />
-      }
+      )}
     </>
   );
 };

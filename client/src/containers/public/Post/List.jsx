@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { Button, Item } from "../../components";
-import { getPostsLimit } from "../../store/actions/post";
+import { Button, Item } from "../../../components";
+import { getPostsLimit } from "../../../store/actions/post";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
@@ -33,7 +33,9 @@ const List = ({ categoryCode }) => {
   }, [searchParams.get("page")]);
 
   return (
-    <div ref={listRef}  className="w-full p-2 bg-white shadow-md rounded-md px-6">
+    <div
+      ref={listRef}
+      className="w-full p-2 bg-white shadow-md rounded-md px-6">
       <div className="flex items-center justify-between my-3">
         <h4 className="text-xl font-semibold">Danh sách tin đăng</h4>
       </div>

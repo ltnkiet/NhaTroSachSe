@@ -1,6 +1,6 @@
 import React from "react";
-import { ProvinceBtn } from "./index";
-import { location } from "../utils/constant";
+import { ProvinceBtn } from "../index";
+import { location } from "../../utils/constant";
 
 const Province = () => {
   return (

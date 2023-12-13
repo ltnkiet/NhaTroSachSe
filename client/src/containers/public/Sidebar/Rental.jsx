@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Province, ItemSidebar, RelatedPost } from "../../components";
-import { List, Pagination } from "./index";
+import { Province, ItemSidebar, RelatedPost } from "../../../components";
+import { List, Pagination } from "../index";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { formatVietnameseToString } from "../../utils/Common/formatVietnameseToString";
+import { formatVietnameseToString } from "../../../utils/Common/formatVietnameseToString";
 
 const Rental = () => {
   const { prices, areas, categories } = useSelector((state) => state.app);
@@ -35,8 +35,18 @@ const Rental = () => {
           <Pagination />
         </div>
         <div className="w-[30%] flex flex-col gap-4 justify-start items-center">
-          <ItemSidebar isDouble={true} type='priceCode' content={prices} title='Xem theo giá' />
-          <ItemSidebar isDouble={true} type='areaCode' content={areas} title='Xem theo diện tích' />
+          <ItemSidebar
+            isDouble={true}
+            type="priceCode"
+            content={prices}
+            title="Xem theo giá"
+          />
+          <ItemSidebar
+            isDouble={true}
+            type="areaCode"
+            content={areas}
+            title="Xem theo diện tích"
+          />
           <RelatedPost />
         </div>
       </div>
