@@ -38,15 +38,21 @@ export const getNewPosts = async (req, res) => {
   }
 };
 
-// export const createPost = async (req, res) => {
-//   try {
-//     const {categoryCode, title, priceNumber, areaNumber, labelCode, ...payload} = req.body
-//     const {user_id} = req.user
-//     if(!user_id || !categoryCode || !title || !priceNumber || areaNumber || !labelCode) return res.status(400).json({
-//       err: 1,
-//       msg: "Missing Input"
-//     })
-//   } catch (error) {
-    
-//   }
-// }
+export const createPost = async (req, res) => {
+  try {
+    const {categoryCode, title, priceNumber, areaNumber, label} = req.body
+    const { id } = req.user
+    if(!id || !categoryCode || !title || !priceNumber || !areaNumber || !label) 
+    return res.status(400).json({
+      err: 1,
+      msg: "Missing Input"
+    })
+    const response = await postService.createPostService(id, req.body)
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(500).json({
+      err: -1,
+      msg: "Failed at post controller: " + error,
+    });
+  }
+}

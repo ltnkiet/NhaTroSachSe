@@ -42,7 +42,7 @@ export const apiUploadImages = (images) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axios({
-        method: "post",
+        method: "POST",
         url: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload/`,
         data: images,
       });
@@ -51,3 +51,16 @@ export const apiUploadImages = (images) =>
       reject(error);
     }
   });
+export const apiCreatePost = (payload) =>
+new Promise(async (resolve, reject) => {
+  try {
+    const response = await axiosConfig({
+      method: "POST",
+      url: `/api/v1/post/create-post`,
+      data: payload,
+    });
+    resolve(response);
+  } catch (error) {
+    reject(error);
+  }
+});

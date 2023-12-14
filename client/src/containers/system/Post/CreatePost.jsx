@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Address, Overview, Loading, Button } from "../../../components";
 import icons from "../../../asset/icon";
-import { apiUploadImages } from "../../../services";
+import { apiUploadImages, apiCreatePost } from "../../../services";
 import { getCodesArea, getCodesPrice } from "../../../utils/Common/getCodes";
 import { useSelector } from "react-redux";
 
@@ -11,7 +11,9 @@ const CreatePost = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [imagesPreview, setImagesPreview] = useState([]);
-  const { prices, areas } = useSelector((state) => state.app);
+
+  const { prices, areas, categories, provinces } = useSelector((state) => state.app);
+  const {currentData} = useSelector((state) => state.user)
 
   const [payload, setPayload] = useState({
     categoryCode: "",
@@ -24,6 +26,7 @@ const CreatePost = () => {
     areaCode: "",
     description: "",
     province: "",
+    category: ""
   });
 
   const handleFiles = async (e) => {
@@ -34,15 +37,11 @@ const CreatePost = () => {
     let formData = new FormData();
     for (let i of files) {
       formData.append("file", i);
-      formData.append(
-        "upload_preset",
-        process.env.REACT_APP_UPLOAD_PRESER_NAME
-      );
+      formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESER_NAME);
       formData.append("folder", "nhatrosachse");
       let response = await apiUploadImages(formData);
       if (response.status === 200)
         images = [...images, response.data?.secure_url];
-      console.log(response);
     }
     setIsLoading(false);
     setImagesPreview((prev) => [...prev, ...images]);
@@ -57,8 +56,8 @@ const CreatePost = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    let priceCodeArr = getCodesPrice(+payload.priceNumber, prices, 1, 15);
+  const handleSubmit = async () => {
+    let priceCodeArr = getCodesPrice(+payload.priceNumber / Math.pow(10,6), prices, 1, 15);
     let priceCode = priceCodeArr[0]?.code;
     let areaCodeArr = getCodesArea(+payload.areaNumber, areas, 0, 90);
     let areaCode = areaCodeArr[0]?.code;
@@ -66,9 +65,15 @@ const CreatePost = () => {
     let finalPayload = {
       ...payload,
       priceCode,
-      areaCode
+      areaCode,
+      category: categories?.find(item => item.code === payload.categoryCode)?.value,
+      priceNumber: +payload.priceNumber / Math.pow(10,6),
+      label: `${categories?.find(item => item.code === payload.categoryCode)?.value}${payload?.address?.split(",")[2]}`,
+      userId: currentData.id,
     }
-    console.log(finalPayload)
+    // console.log(finalPayload)
+    const response = await apiCreatePost(finalPayload)
+    console.log(response)
   };
   return (
     <div className="px-6">
@@ -77,7 +82,7 @@ const CreatePost = () => {
       </h1>
       <div className="flex gap-4">
         <div className="py-4 flex flex-col gap-8 flex-auto">
-          <Address payload={payload} setPayload={setPayload} />
+          <Address payload={payload} setPayload={setPayload}/>
           <Overview payload={payload} setPayload={setPayload} />
           <div className="w-full mb-6">
             <h2 className="font-semibold text-xl py-4">Hình ảnh</h2>

@@ -55,7 +55,7 @@ const Address = ({ setPayload }) => {
   useEffect(() => {
     setPayload((prev) => ({
       ...prev,
-      address: `${street ? `${street}, ` : ""} ${
+      address: `${street ? `${street},` : ""} ${
         ward
           ? `${wards?.find((item) => item.ward_id === ward)?.ward_name},`
           : ""
@@ -113,10 +113,9 @@ const Address = ({ setPayload }) => {
           setValue={setStreet}
           label="Số nhà/Tên đường"
         />
-        {console.log(street)}
         <InputReadOnly
           label="Địa chỉ chính xác"
-          value={`${street ? `${street}, ` : ""} ${
+          value={`${street ? `${street},` : ""} ${
             ward
               ? `${wards?.find((item) => item.ward_id === ward)?.ward_name},`
               : ""

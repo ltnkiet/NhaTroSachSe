@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING,
       },
-      code: {
-        type: Sequelize.STRING,
-      },
       area: {
         type: Sequelize.STRING,
       },

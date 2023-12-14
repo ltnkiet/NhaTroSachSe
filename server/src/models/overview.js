@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Overview.init({
-    code: DataTypes.STRING,
     area: DataTypes.STRING,
     type: DataTypes.STRING,
   }, {

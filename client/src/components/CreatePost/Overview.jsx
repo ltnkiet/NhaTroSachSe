@@ -39,7 +39,7 @@ const Overview = ({ payload, setPayload }) => {
         <div className="w-1/2 flex flex-col gap-4">
           <InputReadOnly
             label="Thông tin liên hệ"
-            value={currentData?.name || currentData?.username}
+            value={currentData?.name}
           />
           <InputReadOnly label="Điện thoại" value={currentData?.phone} />
           <InputFormV2
