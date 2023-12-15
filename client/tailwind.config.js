@@ -9,7 +9,8 @@ module.exports = {
         '1100': '1100px'
       },
       colors: {
-        main:  '#181460'
+        main:  '#181460',
+        secondary: '#1266dd',
       },
       backgroundColor: {
         main: '#181460',

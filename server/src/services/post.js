@@ -31,7 +31,7 @@ export const getPostsServiceByAdmin = () =>
     }
   });
 
-export const getPostsLimitService = (page, query,{ priceNumber, areaNumber }) =>
+export const getPostsLimitService = (page, query, { priceNumber, areaNumber }) =>
   new Promise(async (resolve, reject) => {
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1;
@@ -120,7 +120,7 @@ export const createPostService = (userId, body) =>
           : generateCode(body?.province?.replace("Tỉnh ", "")) || null,
         priceNumber: body.priceNumber,
         areaNumber: body.areaNumber,
-        status: "pending"
+        status: "pending",
       });
       await db.Attribute.create({
         id: attributesId,

@@ -74,7 +74,7 @@ const Item = ({
           </span>
           <span className="flex-1">{attributes?.acreage}</span>
           <span className="flex-3 whitespace-nowrap overflow-hidden text-ellipsis">
-            {`${address.split(",")[address.split(",").length - 2]}${
+            {`${address.split(",")[address.split(",").length - 2]}, ${
               address.split(",")[address.split(",").length - 1]
             }`}
           </span>

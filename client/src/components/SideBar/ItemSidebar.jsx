@@ -9,6 +9,7 @@ import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 const { GrNext } = icons;
 
 const ItemSidebar = ({ title, content, isDouble, type }) => {
+
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -61,12 +62,12 @@ const ItemSidebar = ({ title, content, isDouble, type }) => {
                   <div className=" flex items-center justify-around">
                     <div
                       onClick={() => handleFilterPosts(item.left.code)}
-                      className="flex flex-1 gap-2 items-center cursor-pointer hover:text-orange-600 border-b border-gray-200 pb-1 border-dashed">
+                      className="flex flex-1 gap-2 items-center cursor-pointer hover:text-secondary border-b border-gray-200 pb-1 border-dashed">
                       <GrNext size={10} color="#ccc" />
                       <p>{item.left.value}</p>
                     </div>
                     <div
-                      className="flex flex-1 gap-2 items-center cursor-pointer hover:text-orange-600 border-b border-gray-200 pb-1 border-dashed"
+                      className="flex flex-1 gap-2 items-center cursor-pointer hover:text-secondary border-b border-gray-200 pb-1 border-dashed"
                       onClick={() => handleFilterPosts(item.right.code)}>
                       <GrNext size={10} color="#ccc" />
                       <p>{item.right.value}</p>
