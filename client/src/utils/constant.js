@@ -9,6 +9,7 @@ export const path = {
   CHO_THUE_PHONG_TRO: 'cho-thue-phong-tro',
   DETAL_POST__TITLE__POSTID: 'chi-tiet/:title/:postId',
   SEARCH: 'tim-kiem',
+  RESET_PASSWORD: "password/reset/:token",
   // System
   SYSTEM: '/he-thong/*',
   CREATE_POST: 'tao-bai-dang',

@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const sendMail = async ({ email, html }) => {
+const sendMail = async ({ email, html, subject }) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -13,7 +13,7 @@ const sendMail = async ({ email, html }) => {
   const info = await transporter.sendMail({
     from: '"Nhà Trọ Sạch Sẽ" <no-replay@nhatrosachse.com>',
     to: email,
-    subject: "[Nhà Trọ Sạch Sẽ] Password Reset E-Mail",
+    subject: subject,
     html: html,
   });
   return info;

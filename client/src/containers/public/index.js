@@ -1,4 +1,5 @@
 export { default as Login } from "./Auth/Login";
+export { default as ResetPassword } from "./Auth/ResetPassword";
 export { default as Home } from "./Home/Home";
 export { default as Header } from "./Header/Header";
 export { default as Navigation } from "./Navigation/Navigation";

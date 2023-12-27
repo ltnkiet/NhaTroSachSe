@@ -34,6 +34,7 @@ export const apiGetNewPosts = () =>
         url: `/api/v1/post/new-post`,
       });
       resolve(response);
+      console.log(response)
     } catch (error) {
       reject(error);
     }

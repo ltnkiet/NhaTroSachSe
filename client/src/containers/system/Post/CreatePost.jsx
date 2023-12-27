@@ -73,7 +73,6 @@ const CreatePost = () => {
     }
     // console.log(finalPayload)
     const response = await apiCreatePost(finalPayload)
-    console.log(response)
   };
   return (
     <div className="px-6">

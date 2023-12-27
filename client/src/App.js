@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { Routes, Route } from "react-router-dom";
-import { Home, Login, Homepage, Rental, SearchDetail } from "./containers/public";
+import { Home, Login, Homepage, Rental, SearchDetail, ResetPassword } from "./containers/public";
 import {System, CreatePost} from './containers/system'
 import {Admin, Auth} from './containers/admin'
 import { path } from "./utils/constant";
@@ -27,6 +27,7 @@ function App() {
         <Route path={path.HOME} element={<Home />}>
           <Route path="*" element={<Homepage />} />
           <Route path={path.LOGIN} element={<Login />} />
+          <Route path={path.RESET_PASSWORD} element={<ResetPassword />} />
           <Route path={path.CHO_THUE_CAN_HO} element={<Rental />} />
           <Route path={path.CHO_THUE_MAT_BANG} element={<Rental />} />
           <Route path={path.CHO_THUE_PHONG_TRO} element={<Rental />} />

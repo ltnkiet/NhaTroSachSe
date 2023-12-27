@@ -18,7 +18,6 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
 // Add a response interceptor
 instance.interceptors.response.use(
   function (response) {
@@ -29,5 +28,4 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 export default instance;

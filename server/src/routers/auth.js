@@ -3,7 +3,7 @@ import * as authController from '../controllers/auth'
 
 router.post('/register', authController.register)
 router.post('/login', authController.login)
-router.get("/password/forgot", authController.forgotPassword);
+router.post("/password/forgot", authController.forgotPassword);
 router.put("/password/reset", authController.resetPassword);
 
 export default router;

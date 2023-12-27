@@ -88,14 +88,16 @@ const Header = () => {
               )}
             </div>
           )}
-          {isLoggedIn && (
-            <Button
-              text={"Đăng tin"}
-              textColor="text-white"
-              bgColor="bg-secondary"
-              IcAfter={AiOutlinePlusCircle}
-            />
-          )}
+          {/* {isLoggedIn && (
+            <Link to={`${path.SYSTEM}${path.CREATE_POST}`}>
+              <Button
+                text={"Đăng tin"}
+                textColor="text-white"
+                bgColor="bg-secondary"
+                IcAfter={AiOutlinePlusCircle}
+              />
+            </Link>
+          )} */}
         </div>
       </div>
     </div>

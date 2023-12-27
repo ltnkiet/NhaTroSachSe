@@ -30,7 +30,7 @@ export const registerService = ({ phone, password, name, email }) =>
           { expiresIn: "2d" }
         );
       resolve({
-        err: token ? 0 : 2,
+        err: token ? 0 : 1,
         msg: token
           ? "Register is successfully !"
           : "Phone number has been aldready used !",
@@ -56,7 +56,7 @@ export const loginService = ({ phone, password }) =>
           { expiresIn: "2d" }
         );
       resolve({
-        err: token ? 0 : 2,
+        err: token ? 0 : 1,
         msg: token
           ? "Login is successfully !"
           : response
@@ -78,7 +78,7 @@ export const forgotPasswordService = (email) =>
       if (!response) {
         resolve({
           err: 1,
-          msg: "User not found",
+          msg: "Email này chưa được đăng ký",
         });
       } else {
         const resetToken = crypto.randomBytes(32).toString("hex");
@@ -88,7 +88,7 @@ export const forgotPasswordService = (email) =>
         resolve({
           err: 0,
           passwordResetToken: resetToken,
-          msg: "Token sent successfully",
+          msg: "Tin nhắn đã được gửi đến email của bạn",
         });
       }
     } catch (error) {
@@ -108,7 +108,7 @@ export const resetPasswordService = (password, token) =>
       if (!response) {
         resolve({
           err: 1,
-          msg: "Invalid Reset Token",
+          msg: "Bạn đã hết thời hạn thay đổi mật khẩu, vui lòng thử lại!",
         });
       } else {
         response.password = hashPassword(password);
@@ -118,7 +118,7 @@ export const resetPasswordService = (password, token) =>
         await response.save();
         resolve({
           err: 0,
-          msg: "Password updated successfully",
+          msg: "Đổi mật khẩu thành công",
         });
       }
     } catch (error) {

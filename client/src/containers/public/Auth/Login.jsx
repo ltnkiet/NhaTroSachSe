@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { InputForm, Button } from "../../../components";
 import { useLocation, useNavigate } from "react-router-dom";
 import * as actions from "../../../store/actions";
+import { apiForgotPassword } from "../../../services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
@@ -9,8 +10,9 @@ const Login = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
+  const { isLoggedIn, msg, update, err } = useSelector((state) => state.auth);
   const [isRegister, setIsRegister] = useState(location.state?.flag);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [invalidFields, setInvalidFields] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const [payload, setPayload] = useState({
@@ -19,20 +21,26 @@ const Login = () => {
     password: "",
     name: "",
   });
+
   useEffect(() => {
     setIsRegister(location.state?.flag);
   }, [location.state?.flag]);
 
   useEffect(() => {
     isLoggedIn && navigate("/");
-    // eslint-disable-next-line
   }, [isLoggedIn]);
 
   useEffect(() => {
-    msg && Swal.fire("Oops !", msg, "error");
-  }, [msg, update]);
+    if (msg) {
+      if (err === 0) {
+        Swal.fire("Thành công", msg, "success");
+      } else {
+        Swal.fire("Sự cố!", msg, "error");
+      }
+    }
+  }, [msg, err, update]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     let finalPayload = isRegister
       ? payload
       : {
@@ -44,6 +52,15 @@ const Login = () => {
       isRegister
         ? dispatch(actions.register(payload))
         : dispatch(actions.login(payload));
+  };
+
+  const handleForgotPass = async () => {
+    const response = await apiForgotPassword(payload);
+    if (response?.data?.err === 1)
+      Swal.fire("Sự cố!", response?.data?.msg, "error");
+    else {
+      Swal.fire("Thành công", response?.data?.msg, "success");
+    }
   };
 
   const validate = (payload) => {
@@ -109,8 +126,39 @@ const Login = () => {
   };
   return (
     <div className="w-full flex items-center justify-center">
+      {isForgotPassword && (
+        <div className="w-full h-full absolute bg-primary top-[36%] flex items-start justify-center">
+          <div className="bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm">
+            <h3 className="font-semibold text-2xl mb-5">Quên mật khẩu</h3>
+            <div className="w-full flex flex-col gap-5">
+              <InputForm
+                setInvalidFields={setInvalidFields}
+                invalidFields={invalidFields}
+                label={"EMAIL"}
+                value={payload.email}
+                setValue={setPayload}
+                keyPayload={"email"}
+              />
+              <Button
+                text="Gửi"
+                bgColor="bg-secondary"
+                textColor="text-white"
+                fullWidth
+                onClick={handleForgotPass}
+              />
+            </div>
+            <div className="mt-7 flex items-center justify-between text-xl">
+              <small
+                onClick={() => setIsForgotPassword(false)}
+                className="text-blue-500 hover:underline cursor-pointer">
+                Quay lại
+              </small>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm">
-        <h3 className="font-semibold text-2xl mb-3">
+        <h3 className="font-semibold text-2xl mb-5">
           {isRegister ? "Đăng kí tài khoản" : "Đăng nhập"}
         </h3>
         <div className="w-full flex flex-col gap-5">
@@ -145,7 +193,7 @@ const Login = () => {
           <InputForm
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
-            label={"MẬT KHÂU"}
+            label={"MẬT KHẨU"}
             value={payload.password}
             setValue={setPayload}
             keyPayload={"password"}
@@ -185,7 +233,9 @@ const Login = () => {
             </small>
           ) : (
             <>
-              <small className="text-blue-500 hover:underline cursor-pointer">
+              <small
+                onClick={() => setIsForgotPassword(true)}
+                className="text-blue-500 hover:underline cursor-pointer">
                 Bạn quên mật khẩu
               </small>
               <small

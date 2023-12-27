@@ -13,6 +13,7 @@ const Home = () => {
       <div className="w-[90%] lg:w-[70%] flex flex-col items-start justify-start mt-3">
         <Outlet />
       </div>
+      <div className="h-[500px]"></div>
     </div>
   );
 };

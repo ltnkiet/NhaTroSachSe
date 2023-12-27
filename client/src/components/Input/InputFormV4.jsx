@@ -1,6 +1,6 @@
-import React, { memo } from "react";
+import React from "react";
 
-const InputForm = ({
+const InputFormV4 = ({
   label,
   value,
   setValue,
@@ -20,7 +20,7 @@ const InputForm = ({
         className="outline-none bg-[#e8f0fe] p-2 rounded-md w-full"
         value={value}
         onChange={(e) =>
-          setValue((prev) => ({ ...prev, [keyPayload]: e.target.value }))
+          setValue((prev) => ({ ...prev, keyPayload: e.target.value }))
         }
         onFocus={() => setInvalidFields([])}
       />
@@ -34,4 +34,4 @@ const InputForm = ({
   );
 };
 
-export default memo(InputForm);
+export default InputFormV4;
