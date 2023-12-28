@@ -1,4 +1,5 @@
 import * as authService from "../services/auth";
+import crypto from "crypto";
 const sendMail = require("../utils/sendMail");
 
 export const register = async (req, res) => {
@@ -9,7 +10,25 @@ export const register = async (req, res) => {
         err: 1,
         msg: "Missing inputs !",
       });
-    const response = await authService.registerService(req.body);
+    const emailVerifyToken = crypto.randomBytes(32).toString("hex");
+    const data = res.cookie("data", {...req.body, emailVerifyToken}, { httpOnly: true, maxAge: 3 * 60 * 1000 });
+    const response = await authService.registerService(data);
+    const html = `
+      <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 500; font-size: 14px">
+        Cảm ơn bạn vì đã chọn đồng hành cùng chúng tôi
+      </p>
+      <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 500; font-size: 14px">
+        Chọn vào đây để hoàn tất quá trình đăng ký, yêu cầu này chỉ tồn tại 3 phút:
+      </p>
+      <button style="padding: 14px; background-color: #1E90FF; border-radius: 5px; border-style: none; cursor: pointer">
+        <a href=${process.env.CLIENT_URL}/register/email-verify/${emailVerifyToken}
+          style="color:white; text-decoration-line: none; font-size: 14px; font-weight: 700">
+            Xác thực tài khoản
+        </a>
+      </button>
+      <p style="font-family: Arial, Helvetica, sans-serif; font-weight: 500; font-size: 14px">Nhà Trọ Sạch Sẽ Support Team!</p>
+      <img src="https://res.cloudinary.com/ltnkiet/image/upload/v1701678830/DigitalHippo/thumb/lz2p2azdm5d1l8mxpmjl.png" style="width: 20rem" alt="thumbnail">`;
+    await sendMail({ email, html, subject: "[Nhà Trọ Sạch Sẽ] E-Mail Verify" });
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({

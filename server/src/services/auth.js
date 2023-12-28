@@ -13,7 +13,7 @@ export const registerService = ({ phone, password, name, email }) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.User.findOrCreate({
-        where: { phone },
+        where: { [Op.or]: [{ phone }, { email }] },
         defaults: {
           phone,
           email,
@@ -32,8 +32,8 @@ export const registerService = ({ phone, password, name, email }) =>
       resolve({
         err: token ? 0 : 1,
         msg: token
-          ? "Register is successfully !"
-          : "Phone number has been aldready used !",
+          ? "Đăng ký hoàn tất !"
+          : "Số điện thoại hoặc Email này đã tồn tại!",
         token: token || null,
       });
     } catch (error) {
@@ -45,7 +45,7 @@ export const loginService = ({ phone, password }) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.User.findOne({
-        where: { phone },
+        where: { [Op.or]: [{ phone }, { email }], },
         raw: true,
       });
       const isCorrectPassword = response && bcrypt.compareSync(password, response.password);
@@ -58,10 +58,10 @@ export const loginService = ({ phone, password }) =>
       resolve({
         err: token ? 0 : 1,
         msg: token
-          ? "Login is successfully !"
+          ? "Đăng nhập thành công !"
           : response
-          ? "Password is wrong !"
-          : "Phone number not found !",
+          ? "Mật khẩu không đúng !"
+          : "Số điện thoại và Email không tồn tại!",
         token: token || null,
       });
     } catch (error) {
