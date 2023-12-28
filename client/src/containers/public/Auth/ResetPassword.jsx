@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { apiResetPassword } from "../../../services/auth";
 
 const ResetPassword = () => {
-  const [payload, setPayload] = useState({ password: "" });
+  const [payload, setPayload] = useState({ password: "", confirmPass: "" });
   const [invalidFields, setInvalidFields] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const { token } = useParams();
@@ -39,6 +39,17 @@ const ResetPassword = () => {
             invalids++;
           }
           break;
+        case "confirmPass":
+          if (item[1] !== payload.password) {
+            setInvalidFields((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                message: "Mật khẩu không khớp.",
+              },
+            ]);
+            invalids++;
+          }
         default:
           break;
       }
@@ -46,7 +57,7 @@ const ResetPassword = () => {
     return invalids;
   };
   const handleReset = async () => {
-    const invalids = validate(payload); // Validate the password
+    const invalids = validate(payload);
     if (invalids === 0) {
       const finalPayload = { ...payload, token };
       const response = await apiResetPassword(finalPayload);
@@ -70,6 +81,15 @@ const ResetPassword = () => {
             value={payload.password}
             setValue={setPayload}
             keyPayload={"password"}
+            type={showPassword ? "text" : "password"}
+          />
+          <InputForm
+            setInvalidFields={setInvalidFields}
+            invalidFields={invalidFields}
+            label={"NHẬP LẠI MẬT KHẨU"}
+            value={payload.confirmPass}
+            setValue={setPayload}
+            keyPayload={"confirmPass"}
             type={showPassword ? "text" : "password"}
           />
           <button

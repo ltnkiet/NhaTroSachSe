@@ -8,7 +8,6 @@ export { default as InputForm } from "./Input/InputForm";
 export { default as InputReadOnly } from "./Input/InputReadOnly";
 export { default as InputFormV2 } from "./Input/InputFormV2";
 export { default as InputFormV3 } from "./Input/InputFormV3";
-export { default as InputFormV4 } from "./Input/InputFormV4";
 
 
 export { default as Loading } from "./Loading/Loading";

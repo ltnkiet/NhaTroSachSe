@@ -33,7 +33,7 @@ const Login = () => {
   useEffect(() => {
     if (msg) {
       if (err === 0) {
-        Swal.fire("Thành công", msg, "success");
+        Swal.fire("Hoàn tất", msg, "success");
       } else {
         Swal.fire("Sự cố!", msg, "error");
       }
@@ -59,7 +59,7 @@ const Login = () => {
     if (response?.data?.err === 1)
       Swal.fire("Sự cố!", response?.data?.msg, "error");
     else {
-      Swal.fire("Thành công", response?.data?.msg, "success");
+      Swal.fire("Hoàn tất", response?.data?.msg, "success");
     }
   };
 
