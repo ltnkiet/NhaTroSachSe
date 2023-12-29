@@ -45,7 +45,7 @@ export const loginService = ({ phone, password }) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.User.findOne({
-        where: { [Op.or]: [{ phone }, { email }], },
+        where: { phone },
         raw: true,
       });
       const isCorrectPassword = response && bcrypt.compareSync(password, response.password);
@@ -61,7 +61,7 @@ export const loginService = ({ phone, password }) =>
           ? "Đăng nhập thành công !"
           : response
           ? "Mật khẩu không đúng !"
-          : "Số điện thoại và Email không tồn tại!",
+          : "Số điện thoại không tồn tại!",
         token: token || null,
       });
     } catch (error) {
