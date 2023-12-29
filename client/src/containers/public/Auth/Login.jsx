@@ -29,7 +29,7 @@ const Login = () => {
   useEffect(() => {
     isLoggedIn && navigate("/");
   }, [isLoggedIn]);
-
+  
   useEffect(() => {
     if (msg) {
       if (err === 0) {
@@ -39,29 +39,6 @@ const Login = () => {
       }
     }
   }, [msg, err, update]);
-
-  const handleSubmit = () => {
-    let finalPayload = isRegister
-      ? payload
-      : {
-          phone: payload.phone,
-          password: payload.password,
-        };
-    let invalids = validate(finalPayload);
-    if (invalids === 0)
-      isRegister
-        ? dispatch(actions.register(payload))
-        : dispatch(actions.login(payload));
-  };
-
-  const handleForgotPass = async () => {
-    const response = await apiForgotPassword(payload);
-    if (response?.data?.err === 1)
-      Swal.fire("Sự cố!", response?.data?.msg, "error");
-    else {
-      Swal.fire("Hoàn tất", response?.data?.msg, "success");
-    }
-  };
 
   const validate = (payload) => {
     let invalids = 0;
@@ -123,6 +100,28 @@ const Login = () => {
       }
     });
     return invalids;
+  };
+  const handleSubmit = () => {
+    let finalPayload = isRegister
+      ? payload
+      : {
+          phone: payload.phone,
+          password: payload.password,
+        };
+    let invalids = validate(finalPayload);
+    if (invalids === 0)
+      isRegister
+        ? dispatch(actions.register(payload))
+        : dispatch(actions.login(payload));
+  };
+
+  const handleForgotPass = async () => {
+    const response = await apiForgotPassword(payload);
+    if (response?.data?.err === 1)
+      Swal.fire("Sự cố!", response?.data?.msg, "error");
+    else {
+      Swal.fire("Hoàn tất", response?.data?.msg, "success");
+    }
   };
   return (
     <div className="w-full flex items-center justify-center">

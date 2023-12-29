@@ -73,10 +73,11 @@ const Item = ({
             {attributes?.price}
           </span>
           <span className="flex-1">{attributes?.acreage}</span>
-          <span className="flex-3 whitespace-nowrap overflow-hidden text-ellipsis">
-            {`${address.split(",")[address.split(",").length - 2]}, ${
-              address.split(",")[address.split(",").length - 1]
-            }`}
+          <span className="flex-3 whitespace-nowrap overflow-hidden text-ellipsis text-sm">
+            {`
+              ${address.split(",")[address.split(",").length - 2]}, 
+              ${address.split(",")[address.split(",").length - 1]}
+            `}
           </span>
         </div>
         <p className="text-gray-500 w-full h-[50px] text-ellipsis overflow-hidden">
