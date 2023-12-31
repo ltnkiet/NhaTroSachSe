@@ -4,6 +4,8 @@ import icons from "../../../asset/icon";
 import { apiUploadImages, apiCreatePost } from "../../../services";
 import { getCodesArea, getCodesPrice } from "../../../utils/Common/getCodes";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+
 
 const { BsCameraFill, ImBin } = icons;
 
@@ -11,7 +13,7 @@ const CreatePost = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [imagesPreview, setImagesPreview] = useState([]);
-
+  
   const { prices, areas, categories, provinces } = useSelector((state) => state.app);
   const {currentData} = useSelector((state) => state.user)
 
@@ -71,8 +73,10 @@ const CreatePost = () => {
       label: `${categories?.find(item => item.code === payload.categoryCode)?.value}${payload?.address?.split(",")[2]}`,
       userId: currentData.id,
     }
-    // console.log(finalPayload)
+
     const response = await apiCreatePost(finalPayload)
+    if (response?.data?.err === 1) Swal.fire("Sự cố!", response?.data?.msg, "error");
+    else Swal.fire("Hoàn tất", response?.data?.msg, "success");
   };
   return (
     <div className="px-6">

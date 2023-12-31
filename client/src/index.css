@@ -88,3 +88,8 @@ input[type="range"]::-ms-thumb:active {
       transform: translateX(100px);
   }
 }
+
+label:has(+ [required])::after {
+  content: "*";
+  color: red
+}

@@ -19,8 +19,8 @@ const memuSidebar = [
     },
     {
         id: 3,
-        text: 'Sửa thông tin cá nhân',
-        path: '/he-thong/sua-thong-tin-ca-nhan',
+        text: 'Thông tin cá nhân',
+        path: '/he-thong/thong-tin-ca-nhan',
         icon: <BiUserPin />
     },
     {

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 const Login = () => {
+
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,12 +16,13 @@ const Login = () => {
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [invalidFields, setInvalidFields] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
+
   const [payload, setPayload] = useState({
     email: "",
     phone: "",
     password: "",
     name: "",
-  });
+  }); 
 
   useEffect(() => {
     setIsRegister(location.state?.flag);
@@ -101,6 +103,7 @@ const Login = () => {
     });
     return invalids;
   };
+
   const handleSubmit = () => {
     let finalPayload = isRegister
       ? payload
@@ -123,46 +126,42 @@ const Login = () => {
       Swal.fire("Hoàn tất", response?.data?.msg, "success");
     }
   };
+
   return (
     <div className="w-full flex items-center justify-center">
-      {isForgotPassword && (
-        <div className="w-full h-full absolute bg-primary top-[36%] flex items-start justify-center">
-          <div className="bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm">
-            <h3 className="font-semibold text-2xl mb-5">Quên mật khẩu</h3>
-            <div className="w-full flex flex-col gap-5">
-              <InputForm
-                setInvalidFields={setInvalidFields}
-                invalidFields={invalidFields}
-                label={"EMAIL"}
-                value={payload.email}
-                setValue={setPayload}
-                keyPayload={"email"}
-              />
-              <Button
-                text="Gửi"
-                bgColor="bg-secondary"
-                textColor="text-white"
-                fullWidth
-                onClick={handleForgotPass}
-              />
-            </div>
-            <div className="mt-7 flex items-center justify-between text-xl">
-              <small
-                onClick={() => setIsForgotPassword(false)}
-                className="text-blue-500 hover:underline cursor-pointer">
-                Quay lại
-              </small>
-            </div>
+      <div className="bg-white w-[600px] p-8 rounded-md shadow-sm">
+        {isForgotPassword ? (<>
+          <h3 className="font-semibold text-2xl mb-5">Quên mật khẩu</h3>
+          <div className="w-full flex flex-col gap-5">
+            <InputForm
+              setInvalidFields={setInvalidFields}
+              invalidFields={invalidFields}
+              label={"EMAIL"}
+              value={payload.email}
+              setValue={setPayload}
+              keyPayload={"email"}
+            />
+            <Button
+              text="Gửi"
+              bgColor="bg-secondary"
+              textColor="text-white"
+              fullWidth
+              onClick={handleForgotPass}
+            />
           </div>
-        </div>
-      )}
-      <div className="bg-white w-[600px] p-[30px] pb-[100px] rounded-md shadow-sm">
-        <h3 className="font-semibold text-2xl mb-5">
-          {isRegister ? "Đăng kí tài khoản" : "Đăng nhập"}
-        </h3>
-        <div className="w-full flex flex-col gap-5">
-          {isRegister && (
-            <>
+          <div className="mt-7 flex items-center justify-between text-xl">
+            <small
+              onClick={() => setIsForgotPassword(false)}
+              className="text-blue-500 hover:underline cursor-pointer">
+              Quay lại
+            </small>
+          </div>
+        </>) : (<>
+          <h3 className="font-semibold text-2xl mb-5">
+            {isRegister ? "Đăng kí tài khoản" : "Đăng nhập"}
+          </h3>
+          <div className="w-full flex flex-col gap-5">
+            {isRegister && (<>
               <InputForm
                 setInvalidFields={setInvalidFields}
                 invalidFields={invalidFields}
@@ -179,59 +178,57 @@ const Login = () => {
                 setValue={setPayload}
                 keyPayload={"email"}
               />
-            </>
-          )}
-          <InputForm
-            setInvalidFields={setInvalidFields}
-            invalidFields={invalidFields}
-            label={"SỐ ĐIỆN THOẠI"}
-            value={payload.phone}
-            setValue={setPayload}
-            keyPayload={"phone"}
-          />
-          <InputForm
-            setInvalidFields={setInvalidFields}
-            invalidFields={invalidFields}
-            label={"MẬT KHẨU"}
-            value={payload.password}
-            setValue={setPayload}
-            keyPayload={"password"}
-            type={showPassword ? "text" : "password"}
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword((prev) => !prev)}
-            className="text-blue-500 text-sm hover:underline cursor-pointer flex justify-end">
-            {showPassword ? "Ẩn mật khẩu" : "Hiển thị mật khẩu"}
-          </button>
-          <Button
-            text={isRegister ? "Đăng kí" : "Đăng nhập"}
-            bgColor="bg-secondary"
-            textColor="text-white"
-            fullWidth
-            onClick={handleSubmit}
-          />
-        </div>
-        <div className="mt-7 flex items-center justify-between text-xl">
-          {isRegister ? (
-            <small>
-              Bạn đã có tài khoản?{" "}
-              <span
-                onClick={() => {
-                  setIsRegister(false);
-                  setPayload({
-                    email: "",
-                    phone: "",
-                    password: "",
-                    name: "",
-                  });
-                }}
-                className="text-blue-500 hover:underline cursor-pointer">
-                Đăng nhập ngay
-              </span>
-            </small>
-          ) : (
-            <>
+            </>)}
+            <InputForm
+              setInvalidFields={setInvalidFields}
+              invalidFields={invalidFields}
+              label={"SỐ ĐIỆN THOẠI"}
+              value={payload.phone}
+              setValue={setPayload}
+              keyPayload={"phone"}
+            />
+            <InputForm
+              setInvalidFields={setInvalidFields}
+              invalidFields={invalidFields}
+              label={"MẬT KHẨU"}
+              value={payload.password}
+              setValue={setPayload}
+              keyPayload={"password"}
+              type={showPassword ? "text" : "password"}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="text-blue-500 text-sm hover:underline cursor-pointer flex justify-end">
+              {showPassword ? "Ẩn mật khẩu" : "Hiển thị mật khẩu"}
+            </button>
+            <Button
+              text={isRegister ? "Đăng kí" : "Đăng nhập"}
+              bgColor="bg-secondary"
+              textColor="text-white"
+              fullWidth
+              onClick={handleSubmit}
+            />
+          </div>
+          <div className="mt-7 flex items-center justify-between text-xl">
+            {isRegister ? (
+              <small>
+                Bạn đã có tài khoản?{" "}
+                <span
+                  onClick={() => {
+                    setIsRegister(false);
+                    setPayload({
+                      email: "",
+                      phone: "",
+                      password: "",
+                      name: "",
+                    });
+                  }}
+                  className="text-blue-500 hover:underline cursor-pointer">
+                  Đăng nhập ngay
+                </span>
+              </small>
+            ) : (<>
               <small
                 onClick={() => setIsForgotPassword(true)}
                 className="text-blue-500 hover:underline cursor-pointer">
@@ -250,9 +247,9 @@ const Login = () => {
                 className="text-blue-500 hover:hover:underline cursor-pointer">
                 Tạo tài khoản mới
               </small>
-            </>
-          )}
-        </div>
+            </> )}
+          </div>
+        </>)}
       </div>
     </div>
   );
