@@ -31,7 +31,8 @@ module.exports = {
       },
       role: {
         type: Sequelize.ENUM,
-        values: ['user', 'admin']
+        values: ['user', 'admin'],
+        defaultValue: 'user'
       },
       passwordChangedAt: {
         type: Sequelize.STRING,

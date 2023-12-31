@@ -120,7 +120,6 @@ export const createPostService = (userId, body) =>
           : generateCode(body?.province?.replace("Tỉnh ", "")) || null,
         priceNumber: body.priceNumber,
         areaNumber: body.areaNumber,
-        status: "pending",
       });
       await db.Attribute.create({
         id: attributesId,
@@ -164,10 +163,9 @@ export const createPostService = (userId, body) =>
           value: body.label,
         },
       });
-
       resolve({
         err: 0,
-        msg: "created",
+        msg: "Tạo bài đăng thành công, hãy chờ được duyệt",
       });
     } catch (error) {
       reject(error);
