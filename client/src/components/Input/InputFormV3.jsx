@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InputFormV3 = ({ label, value, setValue}) => {
+const InputFormV3 = ({ label, name, value, setValue, invalidFields, setInvalidField}) => {
   return (
     <div>
       <label htmlFor="title">{label}</label>
@@ -14,6 +14,10 @@ const InputFormV3 = ({ label, value, setValue}) => {
           }
         />
       </div>
+      <small className="text-red-500">
+          {invalidFields?.some((item) => (item.name = name)) 
+          && invalidFields?.find((item) => (item.name = name))?.message}
+        </small>
     </div>
   )
 }

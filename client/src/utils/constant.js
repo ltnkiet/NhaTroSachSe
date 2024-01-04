@@ -13,6 +13,7 @@ export const path = {
   // System
   SYSTEM: '/he-thong/*',
   CREATE_POST: 'tao-bai-dang',
+  MANAGE_POST: 'quan-ly-bai-dang',
   // Admin
   ADMIN: '/quan-tri/*',
   // ADMIN_AUTH: '/quan-tri/dang-nhap',

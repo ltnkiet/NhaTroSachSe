@@ -3,71 +3,18 @@ import { InputForm, Button } from "../../../components";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { apiResetPassword } from "../../../services/auth";
+import validate from '../../../utils/validateFields'
 
 const ResetPassword = () => {
+  
   const [payload, setPayload] = useState({ password: "", confirmPass: "" });
   const [invalidFields, setInvalidFields] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const { token } = useParams();
 
-  const validate = (payload) => {
-    let invalids = 0;
-    let fields = Object.entries(payload);
-    fields.forEach((item) => {
-      if (item[1] === "") {
-        setInvalidFields((prev) => [
-          ...prev,
-          {
-            name: item[0],
-            message: "Bạn không được bỏ trống trường này.",
-          },
-        ]);
-        invalids++;
-      }
-    });
-    fields.forEach((item) => {
-      switch (item[0]) {
-        case "password":
-          if (item[1].length < 8) {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                message: "Mật khẩu phải có tối thiểu 8 kí tự.",
-              },
-            ]);
-            invalids++;
-          }
-          break;
-        case "confirmPass":
-          if (item[1].length < 8) {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                message: "Mật khẩu phải có tối thiểu 8 kí tự.",
-              },
-            ]);
-            invalids++;
-          } else if (item[1] !== payload.password) {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                message: "Mật khẩu không khớp.",
-              },
-            ]);
-            invalids++;
-          }
-        default:
-          break; // eslint-disable-next-line
-      }
-    });
-    return invalids;
-  };
-  
+
   const handleReset = async () => {
-    const invalids = validate(payload);
+    const invalids = validate(payload, setInvalidFields);
     if (invalids === 0) {
       const finalPayload = { ...payload, token };
       const response = await apiResetPassword(finalPayload);

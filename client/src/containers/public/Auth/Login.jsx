@@ -5,6 +5,7 @@ import * as actions from "../../../store/actions";
 import { apiForgotPassword } from "../../../services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import validate from '../../../utils/validateFields'
 
 const Login = () => {
 
@@ -42,68 +43,6 @@ const Login = () => {
     }
   }, [msg, err, update]);
 
-  const validate = (payload) => {
-    let invalids = 0;
-    let fields = Object.entries(payload);
-    fields.forEach((item) => {
-      if (item[1] === "") {
-        setInvalidFields((prev) => [
-          ...prev,
-          {
-            name: item[0],
-            message: "Bạn không được bỏ trống trường này.",
-          },
-        ]);
-        invalids++;
-      }
-    });
-    fields.forEach((item) => {
-      switch (item[0]) {
-        case "password":
-          if (item[1].length < 8) {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                message: "Mật khẩu phải có tối thiểu 8 kí tự.",
-              },
-            ]);
-            invalids++;
-          }
-          break;
-        case "phone":
-          const phoneRegex = /^\d{10,11}$/;
-          if (!phoneRegex.test(item[1])) {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                message: "Số điện thoại không hợp lệ.",
-              },
-            ]);
-            invalids++;
-          }
-          break;
-        case "email":
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(item[1])) {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                message: "Email không hợp lệ.",
-              },
-            ]);
-            invalids++;
-          }
-          break;
-        default:
-          break;
-      }
-    });
-    return invalids;
-  };
-
   const handleSubmit = () => {
     let finalPayload = isRegister
       ? payload
@@ -111,7 +50,7 @@ const Login = () => {
           phone: payload.phone,
           password: payload.password,
         };
-    let invalids = validate(finalPayload);
+    let invalids = validate(finalPayload, setInvalidFields);
     if (invalids === 0)
       isRegister
         ? dispatch(actions.register(payload))
@@ -126,7 +65,7 @@ const Login = () => {
       Swal.fire("Hoàn tất", response?.data?.msg, "success");
     }
   };
-
+  
   return (
     <div className="w-full flex items-center justify-center">
       <div className="bg-white w-[600px] p-8 rounded-md shadow-sm">

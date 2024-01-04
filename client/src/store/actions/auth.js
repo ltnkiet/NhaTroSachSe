@@ -55,7 +55,10 @@ export const forgotPassword = (payload) => async (dispatch) => {
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.FORGOT_PASSWORD_SUCCESS,
-        data: response.data.msg,
+        data: {
+          msg: response.data.msg,
+          token: response.data.token,
+        },
       });
     } else {
       dispatch({

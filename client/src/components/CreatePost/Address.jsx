@@ -6,7 +6,7 @@ import {
   apiGetPublicWard,
 } from "../../services";
 
-const Address = ({ setPayload }) => {
+const Address = ({ setPayload, invalidFields, setInvalidFields }) => {
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
@@ -85,6 +85,8 @@ const Address = ({ setPayload }) => {
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-4">
           <Select
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields} 
             type="province"
             value={province}
             setValue={setProvince}
@@ -92,6 +94,8 @@ const Address = ({ setPayload }) => {
             label="Tỉnh/Thành phố"
           />
           <Select
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields} 
             reset={reset}
             type="district"
             value={district}
@@ -100,6 +104,8 @@ const Address = ({ setPayload }) => {
             label="Quận/Huyện"
           />
           <Select
+            invalidFields={invalidFields}
+            setInvalidFields={setInvalidFields} 
             reset={reset}
             type="ward"
             value={ward}
@@ -109,6 +115,9 @@ const Address = ({ setPayload }) => {
           />
         </div>
         <InputFormV3
+          name="street"
+          invalidFields={invalidFields}
+          setInvalidFields={setInvalidFields} 
           value={street}
           setValue={setStreet}
           label="Số nhà/Tên đường"

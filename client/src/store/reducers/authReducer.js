@@ -41,6 +41,7 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         msg: action.data,
+        token: action.data,
         err: 0,
       };
     case actionTypes.FORGOT_PASSWORD_FAIL:

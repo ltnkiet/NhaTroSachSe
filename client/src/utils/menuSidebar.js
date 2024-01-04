@@ -13,8 +13,8 @@ const memuSidebar = [
     },
     {
         id: 2,
-        text: 'Quản lý tin đăng',
-        path: '/he-thong/quan-ly-bai-dang',
+        text: 'Quản lý bài đăng',
+        path: path.MANAGE_POST,
         icon: <MdOutlineLibraryBooks />
     },
     {
