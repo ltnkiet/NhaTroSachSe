@@ -5,9 +5,9 @@
 
 ## Tech stack
 
-- ReactJS + TailiwindCSS
+- ReactJS + TailwindCSS
 - Redux
-- Node
+- NodeJS
 - MySQL
 - Sequelize
 
