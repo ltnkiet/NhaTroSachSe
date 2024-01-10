@@ -18,7 +18,7 @@ export default function Footer() {
   //   }, [searchParams.get("page")]);
 
   return (
-    <div className="bg-[#0174BE] text-whblackite text-left">
+    <div className="bg-main text-whblackite text-left">
       <div className="w-10/12 mx-auto pt-20 pb-8 flex flex-col sm:flex-row space-y-2 justify-start">
         <div className="w-full sm:w-2/5 pr-6 flex flex-col space-y-2 pb-6">
           <Link className="flex pt-1" to="/">
@@ -28,34 +28,38 @@ export default function Footer() {
               alt="logo"
             />
           </Link>
-          <p className="md:w-80 w-full text-lg font-medium -mt-2 text-white ">
+          <p className="md:w-80 w-full text-lg font-normal -mt-2 text-yellow-500 ">
             Chất lượng hơn số lượng.
           </p>
 
-          <a
-            className="w-[220px] text-lg font-medium border-b-2 text-white border-white hover:opacity-60"
+          <p className="md:w-80 w-full text-xl font-bold -mt-2 text-yellow-500 ">
+            Powered By ltnkiet and NhatKha
+          </p>
+
+          {/* <a
+            className="w-[220px] text-lg font-medium border-b-2 text-yellow-500 border-white hover:opacity-60"
             href="mailto:nhatkha06299@gmail.com"
           >
             nhatkha06299@gmail.com
           </a>
           <a
-            className="w-[220px] text-lg font-medium border-b-2 text-white border-white hover:opacity-60"
+            className="w-[220px] text-lg font-medium border-b-2 text-yellow-500 border-white hover:opacity-60"
             href="mailto:ltnkietviii@gmail.com"
           >
             ltnkietviii@gmail.com
-          </a>
+          </a> */}
         </div>
         <div className="w-full sm:w-1/5 flex flex-col space-y-2 pb-6">
-          <h1 className="text-2xl font-semibold text-white">Welcome</h1>
+          <h1 className="text-2xl font-semibold text-yellow-500">Welcome</h1>
           <Link
-            className="w-28 opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="w-28 font-semibold text-lg text-yellow-500"
             to="/for-applicant"
           >
             How it works
           </Link>
 
           <Link
-            className="w-28 opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="w-28  font-semibold text-lg text-yellow-500"
             to="/jobs"
           >
             Tìm phòng trọ
@@ -69,14 +73,14 @@ export default function Footer() {
           </Link> */}
 
           <Link
-            className="w-28 opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="w-28  font-semibold text-lg text-yellow-500"
             to="/sign-in"
           >
             Đăng nhập
           </Link>
 
           <Link
-            className="w-40 opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="w-40  font-semibold text-lg text-yellow-500"
             to="/sign-up/new-applicant"
           >
             Đăng ký
@@ -84,24 +88,24 @@ export default function Footer() {
         </div>
 
         <div className="w-full sm:w-1/5 flex flex-col space-y-2 pb-6">
-          <h1 className="text-2xl font-semibold text-white">Chủ trọ</h1>
+          <h1 className="text-2xl font-semibold text-yellow-500">Chủ trọ</h1>
 
           <Link
-            className="w-28 opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="w-28 font-semibold text-lg text-yellow-500"
             to="/for-recruiter"
           >
             How it works
           </Link>
 
           <Link
-            className="w-28 opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="w-28 font-semibold text-lg text-yellow-500"
             to="/sign-in"
           >
             Đăng nhập
           </Link>
 
           <Link
-            className="w-40 opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="w-40font-semibold text-lg text-yellow-500"
             to="/sign-up/new-recruiter"
           >
             Đăng ký
@@ -109,24 +113,24 @@ export default function Footer() {
         </div>
 
         <div className="w-full sm:w-1/5 flex flex-col space-y-2 pb-6">
-          <h1 className="text-2xl font-semibold text-white">Thông tin</h1>
+          <h1 className="text-2xl font-semibold text-yellow-500">Thông tin</h1>
 
           <Link
-            className="w-28 opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="w-28 font-semibold text-lg text-yellow-500"
             to="/about"
           >
             About us
           </Link>
 
           <Link
-            className="opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="font-semibold text-lg text-yellow-500"
             to="/privacy-policy"
           >
             Privacy policy
           </Link>
 
           <Link
-            className="opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="font-semibold text-lg text-yellow-500"
             to="/cookie-policy"
           >
             Cookie policy
@@ -134,9 +138,9 @@ export default function Footer() {
         </div>
 
         <div className="w-full sm:w-1/5 flex flex-col space-y-2 pb-6">
-          <h1 className="text-2xl font-semibold text-white">Follow us</h1>
+          <h1 className="text-2xl font-semibold text-yellow-500">Follow us</h1>
           <a
-            className="w-28 opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="w-28 font-semibold text-lg text-yellow-500"
             href="https://www.instagram.com/kha_martin/"
             target="_blank"
             rel="noreferrer"
@@ -144,7 +148,7 @@ export default function Footer() {
             Instagram
           </a>
           <a
-            className="w-28 opacity-60 hover:opacity-100 font-semibold text-lg text-white"
+            className="w-28 font-semibold text-lg text-yellow-500"
             href="https://github.com/Nhat-Kha"
             target="_blank"
             rel="noreferrer"
