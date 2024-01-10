@@ -22,5 +22,3 @@ export const getNumberFromStringV2 = (string) => {
     }
     return +number
 }
-
-export const test = () => {}

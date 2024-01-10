@@ -87,6 +87,7 @@ const CreatePost = () => {
       userId: currentData.id,
     };
     const rs = validate(finalPayload, setInvalidFields);
+    console.log(finalPayload)
     if(rs === 0) {
       const response = await apiCreatePost(finalPayload);
       if (response?.data?.err === 1)
