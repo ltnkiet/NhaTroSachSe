@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("ntssdb", "root", null, {
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER_NAME, null, {
   host: "localhost",
   dialect: "mysql",
   logging: false,
