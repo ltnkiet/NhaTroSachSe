@@ -21,25 +21,36 @@
 
 ```
 # Service
-
 PORT=yout-port
 CLIENT_URL =your-client-react-url
 LIMIT = your-limit-app (5 or 10)
 NODE_ENV=development
 
 # MySQL
-
 DB_NAME=your-db-name
 DB_USER_NAME=your-db-user-name
 
 # Email App
-
 EMAIL_NAME=your-email-name
 EMAIL_APP_PASSWORD=your-email-app-password
 
 # Token
-
 TOKEN_SECRET_KEY=your-jwt-secret
 SECRET_GENERATE=your-jwt-secret
+
+```
+
+- Run Project
+
+```
+# Server
+cd server
+npm install
+npm start
+
+# Client
+cd client
+npm install
+npm start
 
 ```
