@@ -9,28 +9,31 @@ import validate from "../../../utils/validateFields";
 
 const { BsCameraFill, ImBin } = icons;
 
-const CreatePost = () => {
+const CreatePost = ({isEdit}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [imagesPreview, setImagesPreview] = useState([]);
   const [invalidFields, setInvalidFields] = useState([]);
-
   const { prices, areas, categories, provinces } = useSelector(
     (state) => state.app
   );
-  const { currentData } = useSelector((state) => state.user);
-
-  const [payload, setPayload] = useState({
-    categoryCode: "",
-    title: "",
-    priceNumber: 0,
-    areaNumber: 0,
-    images: "",
-    address: "",
-    priceCode: "",
-    areaCode: "",
-    description: "",
-    province: "",
-    category: "",
+  const { userData } = useSelector((state) => state.user);
+  const { dataPost } = useSelector((state) => state.post);
+  
+  const [payload, setPayload] = useState(() => {
+    const initData = {
+      categoryCode: dataPost?.categoryCode || "",
+      title: dataPost?.title || "",
+      priceNumber: dataPost?.priceNumber * 1000000 || 0,
+      areaNumber: dataPost?.areaNumber || 0,
+      images: dataPost?.images || "",
+      address: dataPost?.address || "",
+      priceCode: dataPost?.priceCode || "",
+      areaCode: dataPost?.areaCode || "",
+      description: dataPost?.description || "",
+      province: dataPost?.province || "",
+      category: dataPost?.category || "",
+    }
+    return initData
   });
 
   const handleFiles = async (e) => {
@@ -84,9 +87,10 @@ const CreatePost = () => {
       label: `${
         categories?.find((item) => item.code === payload.categoryCode)?.value
       }${payload?.address?.split(",")[2]}`,
-      userId: currentData.id,
+      userId: userData.id,
     };
     const rs = validate(finalPayload, setInvalidFields);
+    console.log(finalPayload)
     if(rs === 0) {
       const response = await apiCreatePost(finalPayload);
       if (response?.data?.err === 1)
@@ -115,7 +119,7 @@ const CreatePost = () => {
   return (
     <div className="px-6">
       <h1 className="text-3xl font-medium py-4 border-b border-gray-200">
-        Đăng tin mới
+        {isEdit ? "Chỉnh sửa tin đăng" : "Đăng tin mới"}
       </h1>
       <div className="flex gap-4">
         <div className="py-4 flex flex-col gap-8 flex-auto">
@@ -183,7 +187,7 @@ const CreatePost = () => {
           </div>
           <Button
             onClick={handleSubmit}
-            text="Tạo mới"
+            text={isEdit ? "Cập nhật" : "Tạo tin"}
             bgColor="bg-green-600"
             textColor="text-white"
           />

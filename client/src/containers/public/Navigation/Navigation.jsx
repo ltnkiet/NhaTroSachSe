@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../store/actions";
 
 const notActive =
-  "px-4 h-full flex items-center bg-main outline-none hover:underline";
-const active = "px-4 h-full flex items-center underline";
+  "px-4 h-full flex items-center bg-main outline-none hover:text-white";
+const active = "px-4 h-full flex items-center text-white";
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -16,8 +16,8 @@ const Navigation = () => {
   }, []);
   return (
     <div
-      className={`w-full flex justify-center items-center h-[40px] bg-main text-white`}>
-      <div className="w-[70%] flex h-full py-5 items-center justify-evenly text-sm font-medium">
+      className={`w-full flex justify-center items-center h-[40px] bg-yellow-400 text-main`}>
+      <div className="w-[70%] flex h-full py-5 items-center justify-evenly text-base font-bold">
         <NavLink
           to={`/`}
           className={({ isActive }) => (isActive ? active : notActive)}>

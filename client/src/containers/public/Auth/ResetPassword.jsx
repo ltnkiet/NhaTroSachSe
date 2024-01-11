@@ -52,7 +52,7 @@ const ResetPassword = () => {
           <button
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
-            className="text-blue-500 text-sm hover:underline cursor-pointer flex justify-end">
+            className="text-main font-medium text-sm hover:underline cursor-pointer flex justify-end">
             {showPassword ? "Ẩn mật khẩu" : "Hiển thị mật khẩu"}
           </button>
           <Button

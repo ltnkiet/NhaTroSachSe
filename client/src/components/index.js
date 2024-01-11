@@ -17,6 +17,8 @@ export { default as PageNum } from "./Pagigation/PageNum";
 export { default as Item } from "./Post/Item";
 export { default as RelatedPost } from "./Post/RelatedPost";
 export { default as Sitem } from "./Post/Sitem";
+export { default as EditPost } from "./Post/EditPost";
+
 
 export { default as Province } from "./Province/Province";
 export { default as ProvinceBtn } from "./Province/ProvinceBtn";

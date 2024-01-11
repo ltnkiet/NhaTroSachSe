@@ -5,6 +5,8 @@ const initState = {
   msg: "",
   count: 0,
   newPosts: [],
+  postByUser: [],
+  dataPost: {}
 };
 
 const postReducer = (state = initState, action) => {
@@ -21,8 +23,19 @@ const postReducer = (state = initState, action) => {
       return {
         ...state,
         msg: action.msg || "",
-        newPosts: action.newPosts || [],
+        newPosts: action.posts || [],
       };
+    case actionTypes.GET_POST_USER:
+      return {
+        ...state,
+        msg: action.msg || "",
+        postByUser: action.posts || [],
+      }
+    case actionTypes.EDIT_POST:
+      return {
+        ...state,
+        dataPost: action.dataPost || {},
+      }
     default:
       return state;
   }

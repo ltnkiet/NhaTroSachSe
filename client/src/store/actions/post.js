@@ -1,27 +1,29 @@
 import actionTypes from "./actionTypes";
 import {
   apiGetNewPosts,
-  apiGetPosts,
+  apiGetPostByUser,
   apiGetPostsLimit,
 } from "../../services/post";
 
-export const getPosts = () => async (dispatch) => {
+export const getPostByUser = (query) => async (dispatch) => {
   try {
-    const response = await apiGetPosts();
-    if (response?.data.err === 0) {
+    const response = await apiGetPostByUser(query);
+    if (response?.err === 0) {
       dispatch({
-        type: actionTypes.GET_POSTS,
-        posts: response.data.response,
+        type: actionTypes.GET_POST_USER,
+        posts: response?.response?.rows,
+        count: response?.response?.count,
       });
     } else {
       dispatch({
-        type: actionTypes.GET_POSTS,
-        msg: response.data.msg,
+        type: actionTypes.GET_POST_USER,
+        msg: response?.msg,
+        posts: null
       });
     }
   } catch (error) {
     dispatch({
-      type: actionTypes.GET_POSTS,
+      type: actionTypes.GET_POST_USER,
       posts: null,
     });
   }
@@ -39,6 +41,7 @@ export const getPostsLimit = (query) => async (dispatch) => {
       dispatch({
         type: actionTypes.GET_POSTS_LIMIT,
         msg: response.data.msg,
+        posts: null
       });
     }
   } catch (error) {
@@ -54,19 +57,23 @@ export const getNewPosts = () => async (dispatch) => {
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_NEW_POST,
-        newPosts: response.data.response,
+        posts: response.data.response,
       });
     } else {
       dispatch({
         type: actionTypes.GET_NEW_POST,
         msg: response.data.msg,
-        newPosts: null,
+        posts: null,
       });
     }
   } catch (error) {
     dispatch({
       type: actionTypes.GET_NEW_POST,
-      newPosts: null,
+      posts: null,
     });
   }
 };
+export const editPosts = (data) => ({
+  type: actionTypes.EDIT_POST,
+  data
+});

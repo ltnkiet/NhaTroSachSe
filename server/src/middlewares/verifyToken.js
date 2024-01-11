@@ -20,7 +20,7 @@ const verifyTokens = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
   const { role } = req.user;
-  if (role !== "admin")
+  if (role !== 1)
     return res.status(401).json({
       err: 1,
       msg: "Require admin role",

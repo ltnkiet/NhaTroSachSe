@@ -25,6 +25,7 @@ const Header = () => {
   const goLogin = useCallback((flag) => {
     navigate(path.LOGIN, { state: { flag } });
   }, []);
+  
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [searchParams.get("page")]);
@@ -71,8 +72,7 @@ const Header = () => {
                 <div className="absolute min-w-200 top-full bg-white shadow-md rounded-md p-4 right-0 flex flex-col mt-2">
                   <Link
                     className="cursor-pointer hover:underline text-blue-500 py-2 flex items-center gap-2"
-                    to={"/he-thong"}
-                  >
+                    to={"/he-thong"}>
                     <MdOutlineLibraryBooks />
                     Quản lý tài khoản
                   </Link>
@@ -81,8 +81,7 @@ const Header = () => {
                     onClick={() => {
                       setIsShowMenu(false);
                       dispatch(actions.logout());
-                    }}
-                  >
+                    }}>
                     <AiOutlineLogout />
                     Đăng xuất
                   </span>

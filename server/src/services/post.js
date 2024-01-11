@@ -4,22 +4,24 @@ import generateCode from "../utils/generateCode";
 import moment from "moment";
 const { Op } = require("sequelize");
 
-export const getPostsServiceByAdmin = () =>
+export const getPostsByAdminService = (page, query) =>
   new Promise(async (resolve, reject) => {
     try {
-      const response = await db.Post.findAll({
+      let offset = !page || +page <= 1 ? 0 : +page - 1;
+      const queries = {...query }
+      const response = await db.Post.findAndCountAll({
+        where: queries,
         raw: true,
         nest: true,
+        offset: offset * +process.env.LIMIT,
+        limit: +process.env.LIMIT,
+        order: [["createdAt", "DESC"]],
         include: [
           { model: db.Image, as: "images", attributes: ["image"] },
-          {
-            model: db.Attribute,
-            as: "attributes",
-            attributes: ["price", "acreage"],
-          },
-          { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
+          { model: db.Attribute, as: "attributes", attributes: ["price", "acreage"] },
+          { model: db.User, as: "user", attributes: ["name", "zalo", "phone", "role"] },
         ],
-        attributes: ["id", "title", "star", "address", "description"],
+        attributes: ["id", "title", "address", "description", "status"],
       });
       resolve({
         err: response ? 0 : 1,
@@ -30,6 +32,35 @@ export const getPostsServiceByAdmin = () =>
       reject(error);
     }
   });
+
+export const getPostByUserService = (page, id, query) => 
+  new Promise(async (resolve, reject) => {
+    try {
+      let offset = !page || +page <= 1 ? 0 : +page - 1;
+      const queries = { ...query, userId: id};  
+      const response = await db.Post.findAndCountAll({
+        where: queries,
+        raw: true,
+        nest: true,
+        offset: offset * +process.env.LIMIT,
+        limit: +process.env.LIMIT,
+        order: [["createdAt", "DESC"]],
+        include: [
+          { model: db.Image, as: "images", attributes: ["image"] },
+          { model: db.Attribute, as: "attributes", ttributes: ["price", "acreage"] },
+          { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
+        ],
+        // attributes: ["id", "title", "address", "description", "status", "createdAt", "updatedAt"],
+      });
+      resolve({
+        err: response ? 0 : 1,
+        msg: response ? "OK" : "Getting posts is failed.",
+        response,
+      });
+    } catch (error) {
+      reject(error);
+    }
+  })
 
 export const getPostsLimitService = (page, query, { priceNumber, areaNumber }) =>
   new Promise(async (resolve, reject) => {

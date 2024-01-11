@@ -95,12 +95,12 @@ const Item = ({
           <div className="flex flex-col items-center gap-1">
             <button
               type="button"
-              className="bg-blue-700 text-white p-1 rounded-md">
+              className="bg-secondary text-white p-1 rounded-md">
               {`Gọi ${user?.phone}`}
             </button>
             <button
               type="button"
-              className="text-blue-700 p-1 rounded-md border border-blue-700">
+              className="text-secondary p-1 rounded-md border border-secondary">
               Nhắn zalo
             </button>
           </div>

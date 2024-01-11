@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   const { categories } = useSelector((state) => state.app);
-  const { currentData } = useSelector((state) => state.user);
+  const { userData } = useSelector((state) => state.user);
   return (
     <div>
       <h2 className="font-semibold text-xl py-4">Thông tin mô tả</h2>
@@ -48,9 +48,9 @@ const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
         <div className="w-1/2 flex flex-col gap-4">
           <InputReadOnly
             label="Thông tin liên hệ"
-            value={currentData?.name}
+            value={userData?.name}
           />
-          <InputReadOnly label="Điện thoại" value={currentData?.phone} />
+          <InputReadOnly label="Điện thoại" value={userData?.phone} />
           <InputFormV2
             invalidFields={invalidFields}
             setInvalidFields={setInvalidFields} 
