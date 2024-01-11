@@ -5,16 +5,25 @@ import {
   apiGetPublicDistrict,
   apiGetPublicWard,
 } from "../../services";
+import { useSelector } from 'react-redux'
 
 const Address = ({ setPayload, invalidFields, setInvalidFields }) => {
+  const { dataPost } = useSelector(state => state.post)
+
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
-  const [province, setProvince] = useState("");
+  const [province, setProvince] = useState(() => {
+    let addressArray = dataPost?.address?.split(",")
+    console.log(addressArray)
+    return provinces?.find(item => item.province.nam === addressArray[addressArray.length - 1])?.province_id || " "
+  }); 
+  console.log(province)
   const [district, setDistrict] = useState("");
   const [ward, setWard] = useState("");
   const [street, setStreet] = useState("");
   const [reset, setReset] = useState(false);
+
 
   useEffect(() => {
     const fetchPublicProvince = async () => {

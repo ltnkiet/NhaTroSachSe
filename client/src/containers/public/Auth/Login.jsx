@@ -91,7 +91,7 @@ const Login = () => {
           <div className="mt-7 flex items-center justify-between text-xl">
             <small
               onClick={() => setIsForgotPassword(false)}
-              className="text-blue-500 hover:underline cursor-pointer">
+              className="text-main font-medium hover:underline cursor-pointer">
               Quay lại
             </small>
           </div>
@@ -138,7 +138,7 @@ const Login = () => {
             <button
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
-              className="text-blue-500 text-sm hover:underline cursor-pointer flex justify-end">
+              className="text-main font-medium text-sm hover:underline cursor-pointer flex justify-end">
               {showPassword ? "Ẩn mật khẩu" : "Hiển thị mật khẩu"}
             </button>
             <Button
@@ -163,14 +163,14 @@ const Login = () => {
                       name: "",
                     });
                   }}
-                  className="text-blue-500 hover:underline cursor-pointer">
+                  className="text-main font-medium hover:underline cursor-pointer">
                   Đăng nhập ngay
                 </span>
               </small>
             ) : (<>
               <small
                 onClick={() => setIsForgotPassword(true)}
-                className="text-blue-500 hover:underline cursor-pointer">
+                className="text-main font-medium hover:underline cursor-pointer">
                 Bạn quên mật khẩu
               </small>
               <small
@@ -183,7 +183,7 @@ const Login = () => {
                     name: "",
                   });
                 }}
-                className="text-blue-500 hover:hover:underline cursor-pointer">
+                className="text-main font-medium hover:hover:underline cursor-pointer">
                 Tạo tài khoản mới
               </small>
             </> )}

@@ -1,14 +1,16 @@
 import axiosConfig from "../axiosConfig";
 import axios from "axios";
 
-export const apiGetPosts = () =>
+export const apiGetPostByUser = (query) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axiosConfig({
         method: "GET",
-        url: "/api/v1/post/all",
+        url: "/api/v1/post/all/user",
+        params: query,
+
       });
-      resolve(response);
+      resolve(response?.data);
     } catch (error) {
       reject(error);
     }

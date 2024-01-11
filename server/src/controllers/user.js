@@ -1,6 +1,6 @@
 import * as services from '../services/user'
 
-export const getCurrent = async (req, res) => {
+export const getUser= async (req, res) => {
     const { id } = req.user
     try {
         const response = await services.getOne(id)

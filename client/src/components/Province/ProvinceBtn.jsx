@@ -2,7 +2,7 @@ import React, { memo } from "react";
 
 const ProvinceBtn = ({ name, image }) => {
   return (
-    <div className="shadow-md rounded-bl-md text-blue-700 rounded-br-md cursor-pointer hover:text-orange-600">
+    <div className="shadow-md rounded-bl-md text-main rounded-br-md cursor-pointer hover:text-secondary">
       <img
         src={image}
         alt={name}

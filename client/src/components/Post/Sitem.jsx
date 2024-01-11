@@ -14,7 +14,7 @@ const Sitem = ({ title, price, image, createdAt }) => {
         className="w-[65px] h-[65px] object-cover flex-none rounded-md"
       />
       <div className="w-full flex-auto flex flex-col justify-between gap-1">
-        <h4 className="text-blue-600 text-[14px]">{`${title?.slice(
+        <h4 className="text-secondary text-[14px]">{`${title?.slice(
           0,
           45
         )}...`}</h4>

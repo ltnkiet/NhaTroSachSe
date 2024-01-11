@@ -8,7 +8,7 @@ export const getPostsByAdminService = (page, query) =>
   new Promise(async (resolve, reject) => {
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1;
-      const queries = { ...query };  
+      const queries = {...query }
       const response = await db.Post.findAndCountAll({
         where: queries,
         raw: true,
@@ -19,9 +19,9 @@ export const getPostsByAdminService = (page, query) =>
         include: [
           { model: db.Image, as: "images", attributes: ["image"] },
           { model: db.Attribute, as: "attributes", attributes: ["price", "acreage"] },
-          { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
+          { model: db.User, as: "user", attributes: ["name", "zalo", "phone", "role"] },
         ],
-        attributes: ["id", "title", "star", "address", "description", "status"],
+        attributes: ["id", "title", "address", "description", "status"],
       });
       resolve({
         err: response ? 0 : 1,
@@ -33,7 +33,7 @@ export const getPostsByAdminService = (page, query) =>
     }
   });
 
-export const getPostByCurrentService = (page, id, query) => 
+export const getPostByUserService = (page, id, query) => 
   new Promise(async (resolve, reject) => {
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1;
@@ -50,7 +50,7 @@ export const getPostByCurrentService = (page, id, query) =>
           { model: db.Attribute, as: "attributes", ttributes: ["price", "acreage"] },
           { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
         ],
-        attributes: ["id", "title", "address", "description", "status"],
+        // attributes: ["id", "title", "address", "description", "status", "createdAt", "updatedAt"],
       });
       resolve({
         err: response ? 0 : 1,

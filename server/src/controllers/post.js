@@ -3,26 +3,27 @@ import * as postService from "../services/post";
 export const getPostbyAdmin= async (req, res) => {
   const { page, ...query } = req.body;
   try {
-    const response = await postService.getPostByCurrentService(page, id, query);
+    const response = await postService.getPostsByAdminService(page, query);
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({
-      err: -1,
+      err: -1,  
       msg: "Failed at post controller: " + error,
     });
   }
 };
 
-export const getPostByCurrent = async (req, res) => {
+export const getPostByUser = async (req, res) => {
   const { page, ...query } = req.body;
   const { id } = req.user;
   try {
-    if (!id)
+    if (!id) {
       return res.status(400).json({
         err: 1,
         msg: "Require Auth",
       });
-    const response = await postService.getPostByCurrentService(page, id, query);
+    }
+    const response = await postService.getPostByUserService(page, id, query);
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({

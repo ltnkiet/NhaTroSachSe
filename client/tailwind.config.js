@@ -10,12 +10,12 @@ module.exports = {
       },
       colors: {
         main:  '#181460',
-        secondary: '#1266dd',
+        secondary: '#fbbf24',
       },
       backgroundColor: {
         main: '#181460',
         primary: '#F5F5F5',
-        secondary: '#1266dd',
+        secondary: '#fbbf24',
         'overlay-30': 'rgba(0,0,0,0.3)',
         'overlay-70': 'rgba(0,0,0,0.7)',
       },

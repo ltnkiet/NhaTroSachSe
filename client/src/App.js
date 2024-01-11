@@ -13,7 +13,7 @@ function App() {
   const { isLoggedIn } = useSelector(state => state.auth)
   useEffect(() => {
     setTimeout(() => {
-      isLoggedIn && dispatch(actions.getCurrent())
+      isLoggedIn && dispatch(actions.getUser())
     }, 1000)
   }, [isLoggedIn])
   useEffect(() => {
