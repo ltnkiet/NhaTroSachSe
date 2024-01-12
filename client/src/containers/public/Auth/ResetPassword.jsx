@@ -3,7 +3,7 @@ import { InputForm, Button } from "../../../components";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { apiResetPassword } from "../../../services/auth";
-import validate from '../../../utils/validateFields'
+import validate from '../../../utils/helper'
 
 const ResetPassword = () => {
   

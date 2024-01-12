@@ -1,7 +1,6 @@
 import db from "../models";
 import { v4 } from "uuid";
 import generateCode from "../utils/generateCode";
-import moment from "moment";
 const { Op } = require("sequelize");
 
 export const getPostsByAdminService = (page, query) =>
@@ -17,11 +16,10 @@ export const getPostsByAdminService = (page, query) =>
         limit: +process.env.LIMIT,
         order: [["createdAt", "DESC"]],
         include: [
-          { model: db.Image, as: "images", attributes: ["image"] },
-          { model: db.Attribute, as: "attributes", attributes: ["price", "acreage"] },
-          { model: db.User, as: "user", attributes: ["name", "zalo", "phone", "role"] },
+          { model: db.Image, as: "images"},
+          { model: db.Attribute, as: "attributes"},
+          { model: db.User, as: "user"},
         ],
-        attributes: ["id", "title", "address", "description", "status"],
       });
       resolve({
         err: response ? 0 : 1,
@@ -46,11 +44,11 @@ export const getPostByUserService = (page, id, query) =>
         limit: +process.env.LIMIT,
         order: [["createdAt", "DESC"]],
         include: [
-          { model: db.Image, as: "images", attributes: ["image"] },
-          { model: db.Attribute, as: "attributes", ttributes: ["price", "acreage"] },
-          { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
+          { model: db.Image, as: "images"},
+          { model: db.Attribute, as: "attributes"},
+          { model: db.User, as: "user"},
+          { model: db.Overview, as: "overviews"},
         ],
-        // attributes: ["id", "title", "address", "description", "status", "createdAt", "updatedAt"],
       });
       resolve({
         err: response ? 0 : 1,
@@ -77,11 +75,7 @@ export const getPostsLimitService = (page, query, { priceNumber, areaNumber }) =
         limit: +process.env.LIMIT,
         include: [
           { model: db.Image, as: "images", attributes: ["image"] },
-          {
-            model: db.Attribute,
-            as: "attributes",
-            attributes: ["price", "acreage"],
-          },
+          { model: db.Attribute, as: "attributes", attributes: ["price", "acreage"]},
           { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
         ],
         attributes: ["id", "title", "address", "description"],
@@ -202,3 +196,77 @@ export const createPostService = (userId, body) =>
       reject(error);
     }
   });
+
+  export const updatePostService = ({postId, attributesId, overviewId, imagesId, ...body}) =>
+    new Promise(async (resolve, reject) => {
+      try {
+        const labelCode = generateCode(body.label);
+        await db.Post.update({
+          title: body.title,
+          labelCode,
+          address: body.address || null,
+          categoryCode: body.categoryCode,
+          description: JSON.stringify(body.description) || null,
+          areaCode: body.areaCode || null,
+          priceCode: body.priceCode || null,
+          provinceCode: body?.province?.includes("Thành phố")
+            ? generateCode(body?.province?.replace("Thành phố ", ""))
+            : generateCode(body?.province?.replace("Tỉnh ", "")) || null,
+          priceNumber: body.priceNumber,
+          areaNumber: body.areaNumber,
+        }, {
+          where: {id: postId}
+        });
+        await db.Attribute.update({
+          price:
+            +body.priceNumber < 1
+              ? `${body.priceNumber * 1000000} đồng/tháng`
+              : `${body.priceNumber} triệu/tháng`,
+          acreage: `${body.areaNumber}m2`,
+        }, {
+          where: {id: attributesId}
+        });
+        await db.Image.update({
+          image: JSON.stringify(body.images)
+        }, {
+          where: {id: imagesId,}
+        });
+        await db.Overview.update({
+          area: body.label,
+          type: body?.category,
+        }, {
+          where: {id: overviewId,}
+        });
+        await db.Province.findOrCreate({
+          where: {
+            [Op.or]: [
+              { value: body?.province?.replace("Tỉnh ", "") },
+              { value: body?.province?.replace("Thành phố ", "") },
+            ],
+          },
+          defaults: {
+            code: body?.province?.includes("Thành phố")
+              ? generateCode(body?.province?.replace("Thành phố ", ""))
+              : generateCode(body?.province?.replace("Tỉnh ", "")),
+            value: body?.province?.includes("Thành phố")
+              ? body?.province?.replace("Thành phố ", "")
+              : body?.province?.replace("Tỉnh ", ""),
+          },
+        });
+        await db.Label.findOrCreate({
+          where: {
+            code: labelCode,
+          },
+          defaults: {
+            code: labelCode,
+            value: body.label,
+          },
+        });
+        resolve({
+          err: 0 ,
+          msg: "Cập nhật bài viết thành công"
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })

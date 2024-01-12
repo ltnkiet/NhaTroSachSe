@@ -4,6 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { path } from "../../../utils/constant";
 import { Sidebar } from "..";
 
+
 const System = () => {
   
   const { isLoggedIn } = useSelector((state) => state.auth);

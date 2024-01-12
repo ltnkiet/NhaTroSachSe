@@ -5,7 +5,7 @@ export const apiGetUser = () =>
     try {
       const response = await axios({
         method: "GET",
-        url: "/api/v1/user",
+        url: "/user",
       });
       resolve(response);
     } catch (error) {

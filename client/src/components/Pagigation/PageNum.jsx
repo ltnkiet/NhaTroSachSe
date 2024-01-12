@@ -12,8 +12,10 @@ const active =
   "w-[46px] h-[48px] flex justify-center items-center bg-[#1266dd] text-white hover:opacity-90 rounded-md";
 
 const PageNum = ({ text, currentPage, icon, setCurrentPage, type }) => {
+
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(location)
   const [paramsSeach] = useSearchParams();
   let entries = paramsSeach.entries();
 
