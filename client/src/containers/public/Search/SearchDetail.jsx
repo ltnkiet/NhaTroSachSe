@@ -1,5 +1,5 @@
 import React from "react";
-import { ItemSidebar, RelatedPost } from "../../../components";
+import { ItemSidebar, RelatedPost } from "components";
 import { List, Pagination } from "../index";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { InputForm, Button } from "../../../components";
+import { InputForm, Button } from "components";
 import { useLocation, useNavigate } from "react-router-dom";
-import * as actions from "../../../store/actions";
-import { apiForgotPassword } from "../../../services/auth";
+import * as actions from "store/actions";
+import { apiForgotPassword } from "services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import validate from '../../../utils/helper'
+import validate from 'utils/helper'
 
 const Login = () => {
 

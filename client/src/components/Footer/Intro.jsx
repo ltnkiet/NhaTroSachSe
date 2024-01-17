@@ -1,10 +1,10 @@
 import React, { memo } from "react";
-import { intro } from "../../utils/constant";
-import icons from "../../asset/icon";
-import { Button } from "..";
+import { intro } from "utils/constant";
+import icons from "asset/icon";
+import { Button } from "components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { formatVietnameseToString } from "../../utils/Common/formatVietnameseToString";
+import { formatVietnameseToString } from "utils/Common/formatVietnameseToString";
 
 const { GrStar } = icons;
 const star = [1, 2, 3, 4, 5];

@@ -1,6 +1,6 @@
 import React from "react";
-import { text } from "../../../utils/constant";
-import { Province, ItemSidebar, RelatedPost } from "../../../components";
+import { text } from "utils/constant";
+import { Province, ItemSidebar, RelatedPost } from "components";
 import { List, Pagination } from "../index";
 import { useSelector } from "react-redux";
 

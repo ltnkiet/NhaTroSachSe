@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { formatVietnameseToString } from "../../../utils/Common/formatVietnameseToString";
+import { formatVietnameseToString } from "utils/Common/formatVietnameseToString";
 import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../store/actions";
+import * as actions from "store/actions";
 
 const notActive =
   "px-4 h-full flex items-center bg-main outline-none hover:text-white";

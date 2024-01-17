@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
-import icons from "../../asset/icon";
+import icons from "asset/icon";
 import { Link } from "react-router-dom";
-import { formatVietnameseToString } from "../../utils/Common/formatVietnameseToString";
+import { formatVietnameseToString } from "utils/Common/formatVietnameseToString";
 
 const indexs = [0, 1, 2, 3];
 

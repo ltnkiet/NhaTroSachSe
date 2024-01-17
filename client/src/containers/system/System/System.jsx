@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
-import { path } from "../../../utils/constant";
+import { path } from "utils/constant";
 import { Sidebar } from "..";
 
 

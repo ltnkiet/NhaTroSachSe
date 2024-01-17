@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { InputForm, Button } from "../../../components";
+import { InputForm, Button } from "components";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { apiResetPassword } from "../../../services/auth";
-import validate from '../../../utils/helper'
+import { apiResetPassword } from "services/auth";
+import validate from 'utils/helper'
 
 const ResetPassword = () => {
   

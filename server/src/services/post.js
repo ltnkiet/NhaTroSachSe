@@ -270,3 +270,19 @@ export const createPostService = (userId, body) =>
         reject(error)
       }
     })
+
+export const deletePostService = (postId) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await db.Post.destroy({
+        where: { id: postId },
+      });
+      resolve({
+        err: response > 0 ? 0 : 1,
+        msg: response > 0 ? "Đã xóa bài viết của bạn" : "Thất bại.",
+        response,
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });

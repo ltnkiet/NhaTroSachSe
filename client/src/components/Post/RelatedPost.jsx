@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Sitem } from "../index";
 import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../store/actions";
+import * as actions from "store/actions";
 
 const RelatedPost = () => {
   const { newPosts } = useSelector((state) => state.post);

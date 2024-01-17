@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, createSearchParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { path } from "../../../utils/constant";
-import { SearchItem, Modal } from "../../../components";
+import { path } from "utils/constant";
+import { SearchItem, Modal } from "components";
 
-import icons from "../../../asset/icon";
+import icons from "asset/icon";
 const {
   BsChevronRight,
   HiOutlineLocationMarker,

@@ -1,6 +1,6 @@
 import React from "react";
-import { contact } from "../../utils/constant";
-import { Button } from "../../components";
+import { contact } from "utils/constant";
+import { Button } from "components";
 
 const Contact = () => {
   return (

@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import logo from "../../../asset/img/logo_ntss.png";
+import logo from 'asset/img/logo_ntss.png'
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
-import { Button, User } from "../../../components";
-import icons from "../../../asset/icon";
-import { path } from "../../../utils/constant";
+import { Button, User } from "components";
+import icons from "asset/icon";
+import { path } from "utils/constant";
 import { useSelector, useDispatch } from "react-redux";
-import * as actions from "../../../store/actions";
+import * as actions from "store/actions";
 
 const {
   AiOutlinePlusCircle,
