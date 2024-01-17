@@ -1,22 +1,45 @@
   import React, { useEffect, useState } from "react";
-  import * as actions from "../../../store/actions";
+  import * as actions from "store/actions";
   import { useDispatch, useSelector } from "react-redux";
-  import { formatTime } from "../../../utils/helper";
-  import { Button, EditPost } from "../../../components";
-  import Pagination from '../../public/Post/Pagination'
+  import { formatTime } from "utils/helper";
+  import { Button, EditPost } from "components";
+  import { Pagination } from 'containers/public'
+  import { apiDeletePost } from 'services'
+  import Swal from 'sweetalert2'
 
   const ManagePost = () => {
+
     const [isEdit, setIsEdit] = useState(false);
+    const [update, setUpdate] = useState(false)
     const dispatch = useDispatch();
     const { postByUser, dataPost } = useSelector((state) => state.post);
 
     useEffect(() => {
-      dispatch(actions.getPostByUser());
-    }, []);
+      !dataPost && dispatch(actions.getPostByUser());
+    }, [dataPost, update]);
 
     useEffect(() => {
       !dataPost && setIsEdit(false);
     }, [dataPost]);
+
+    const handleDeletePost = (postId) => {
+      Swal.fire({
+        icon: "question",
+        title: "Xóa bài viết",
+        text: 'Bạn có chắc là muốn xóa bài viết này?',
+        cancelButtonText: 'Hủy',
+        confirmButtonText: 'Xóa',
+        showCancelButton: true,
+      }).then( async (rs) => {
+        if(rs.isConfirmed) {
+          const res = await apiDeletePost(postId) 
+          if (res?.data?.err === 0) {
+            setUpdate(prev => !prev)
+            Swal.fire("Hoàn tất", res?.data?.msg, "success")
+          } else  Swal.fire("Sự cố", res?.data?.msg, "error")
+        }
+      })
+    }
 
     return (
       <div className="flex flex-col gap-5">
@@ -78,7 +101,11 @@
                           setIsEdit(true);
                         }}
                       />
-                      <Button text={"Xóa"} bgColor={"bg-red-500"} />
+                      <Button 
+                        onClick={() => handleDeletePost(item.id)}
+                        text={"Xóa"} 
+                        bgColor={"bg-red-500"}
+                      />
                     </td>
                   </tr>
                 );
@@ -87,7 +114,6 @@
           </tbody>
         </table>
         {isEdit && <EditPost setIsEdit={setIsEdit} />}
-        {/* <Pag/> */}
         <Pagination />
       </div>
     );

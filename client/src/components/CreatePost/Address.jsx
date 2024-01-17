@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from "react";
-import { Select, InputReadOnly, InputFormV3 } from "..";
+import { Select, InputReadOnly, InputFormV3 } from "components";
 import {
   apiGetPublicProvinces,
   apiGetPublicDistrict,
   apiGetPublicWard,
-} from "../../services";
+} from "services";
 import { useSelector } from 'react-redux'
 
 const Address = ({ setPayload, invalidFields, setInvalidFields }) => {
@@ -22,31 +22,38 @@ const Address = ({ setPayload, invalidFields, setInvalidFields }) => {
   const [reset, setReset] = useState(false);
 
   useEffect(() => {
-    let addressArray = dataPost?.address?.split(',')
-    let foundProvince = provinces.length > 0 && 
-      provinces?.find(item => item.province_name === addressArray[addressArray.length - 1]?.trim())
-    setProvince(foundProvince ? foundProvince.province_id : "")
-  }, [provinces])
+    if(dataPost) {
+      let addressArray = dataPost?.address?.split(',')
+      let foundProvince = provinces?.length > 0 && 
+        provinces?.find(item => item.province_name === addressArray[addressArray.length - 1]?.trim())
+      setProvince(foundProvince ? foundProvince.province_id : "")
+    }
+  }, [provinces, dataPost])
 
   useEffect(() => {
-    let addressArray = dataPost?.address?.split(',')
-    let foundDistrict = districts.length > 0 && 
-      districts?.find(item => item.district_name === addressArray[addressArray.length - 2]?.trim())
-    setDistrict(foundDistrict ? foundDistrict.district_id : "")
-  }, [districts])
+    if(dataPost) {
+      let addressArray = dataPost?.address?.split(',')
+      let foundDistrict = districts?.length > 0 && 
+        districts?.find(item => item.district_name === addressArray[addressArray.length - 2]?.trim())
+      setDistrict(foundDistrict ? foundDistrict.district_id : "")
+    }
+  }, [districts, dataPost])
 
   useEffect(() => {
-    let addressArray = dataPost?.address?.split(',')
-    let foundWard = wards.length > 0 && 
-      wards?.find(item => item.ward_name === addressArray[addressArray.length - 3]?.trim())
-    setWard(foundWard ? foundWard.ward_id : "")
-  }, [wards])
+    if(dataPost) {
+      let addressArray = dataPost?.address?.split(',')
+      let foundWard = wards?.length > 0 && 
+        wards?.find(item => item.ward_name === addressArray[addressArray.length - 3]?.trim())
+      setWard(foundWard ? foundWard.ward_id : "")
+    }
+  }, [wards, dataPost])
 
   useEffect(() => {
-    let addressArray = dataPost?.address?.split(',');
-    setStreet(addressArray[0]?.trim() || ""); // Assuming street is the first element in the array
-  }, [dataPost?.address]);
-
+    if(dataPost) {
+      let addressArray = dataPost?.address?.split(',');
+      setStreet(addressArray[0]?.trim() || ""); // Assuming street is the first element in the array
+    }
+  }, [dataPost?.address, dataPost]);
 
   useEffect(() => {
     const fetchPublicProvince = async () => {

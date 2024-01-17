@@ -15,7 +15,6 @@ const PageNum = ({ text, currentPage, icon, setCurrentPage, type }) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location)
   const [paramsSeach] = useSearchParams();
   let entries = paramsSeach.entries();
 

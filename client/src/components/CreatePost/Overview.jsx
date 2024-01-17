@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, InputReadOnly, InputFormV2 } from "..";
+import { Select, InputReadOnly, InputFormV2 } from "components";
 import { useSelector } from "react-redux";
 
 const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {

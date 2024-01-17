@@ -77,3 +77,7 @@ export const editPosts = (dataPost) => ({
   type: actionTypes.EDIT_POST,
   dataPost
 });
+
+export const resetData= () => ({
+  type: actionTypes.RESET_DATA,
+});
