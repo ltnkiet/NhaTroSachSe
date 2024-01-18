@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
-import { Intro, Contact, Footer} from 'components'
+import { Intro, Contact, Footer } from "components";
 import { Outlet } from "react-router-dom";
 import Search from "../Search/Search";
 
@@ -15,8 +15,8 @@ const Home = () => {
         <Outlet />
       </div>
       <Intro />
-      <Contact/>
-      <Footer/>
+      <Contact />
+      <Footer />
     </div>
   );
 };
