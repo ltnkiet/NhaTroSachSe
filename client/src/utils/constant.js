@@ -10,6 +10,7 @@ export const path = {
   DETAL_POST__TITLE__POSTID: 'chi-tiet/:title/:postId',
   SEARCH: 'tim-kiem',
   RESET_PASSWORD: "password/reset/:token",
+  ABOUT_US: 've-chung-toi',
   // System
   SYSTEM: '/he-thong/*',
   CREATE_POST: 'tao-bai-dang',
