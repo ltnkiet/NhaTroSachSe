@@ -18,6 +18,7 @@
 
     useEffect(() => {
       !dataPost && dispatch(actions.getPostByUser());
+      // eslint-disable-next-line
     }, [dataPost, update]);
 
     useEffect(() => {
@@ -57,11 +58,12 @@
       } else {
         setPosts(postByUser)
       }
+      // eslint-disable-next-line
     }, [status])
 
     return (
       <div className="flex flex-col gap-5">
-        <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+        <div className="px-6 py-4 border-b-2 border-gray-200 flex items-center justify-between">
           <h1 className="text-3xl font-medium ">Quản lý bài đăng</h1>
           <div className="flex gap-5">
             <select onChange={(e) => setStatus(+e.target.value)} value={status}

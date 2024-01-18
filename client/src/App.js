@@ -7,9 +7,9 @@ import {
   Rental,
   SearchDetail,
   ResetPassword,
-  InfoUs,
+  AboutUS
 } from "containers/public";
-import { System, CreatePost, ManagePost } from "containers/system";
+import { System, CreatePost, ManagePost, UserInfor } from "containers/system";
 import { Admin, Auth } from "containers/admin";
 import { path } from "utils/constant";
 import * as actions from "store/actions";
@@ -22,11 +22,13 @@ function App() {
     setTimeout(() => {
       isLoggedIn && dispatch(actions.getUser());
     }, 1000);
+    // eslint-disable-next-line
   }, [isLoggedIn]);
   useEffect(() => {
     dispatch(actions.getPrices());
     dispatch(actions.getAreas());
     dispatch(actions.getProvinces());
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="bg-primary overflow-hidden">
@@ -40,11 +42,12 @@ function App() {
           <Route path={path.CHO_THUE_PHONG_TRO} element={<Rental />} />
           <Route path={path.NHA_CHO_THUE} element={<Rental />} />
           <Route path={path.SEARCH} element={<SearchDetail />} />
-          <Route path={path.ABOUT_US} element={<InfoUs />} />
+          <Route path={path.ABOUT_US} element={<AboutUS />} />
         </Route>
         <Route path={path.SYSTEM} element={<System />}>
           <Route path={path.CREATE_POST} element={<CreatePost />} />
           <Route path={path.MANAGE_POST} element={<ManagePost />} />
+          <Route path={path.USER} element={<UserInfor />} />
         </Route>
         <Route path={path.ADMIN} element={<Admin />}>
           <Route path={path.ADMIN_AUTH} element={<Auth />} />

@@ -116,6 +116,7 @@ const Address = ({ setPayload, invalidFields, setInvalidFields }) => {
             ?.province_name
         : "",
     }));
+    // eslint-disable-next-line
   }, [province, district, ward, street]);
 
   return (

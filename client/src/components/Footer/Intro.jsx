@@ -58,7 +58,7 @@ const Intro = () => {
       <span className="text-gray-700">{intro.author}</span>
       <h3 className="font-bold text-lg py-2">{intro.question}</h3>
       <p>{intro.answer}</p>
-      <Link to={`${path.SYSTEM}/${path.CREATE_POST}`}>
+      <Link to={`${path.SYSTEM}${path.CREATE_POST}`}>
         <Button
           text="Đăng tin ngay"
           bgColor="bg-secondary"

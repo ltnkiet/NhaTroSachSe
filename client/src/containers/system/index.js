@@ -6,4 +6,5 @@ export { default as ManagePost } from "./Post/ManagePost";
 // Sidebar
 export { default as Sidebar } from "./Sidebar/Sidebar";
 // User
-export { default as EditUser } from './User/EditUser'
+export { default as UserInfor } from './User/UserInfor'
+

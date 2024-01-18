@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "store/actions";
 
 const {
-  AiOutlinePlusCircle,
   AiOutlineLogout,
   BsChevronDown,
   MdOutlineLibraryBooks,
@@ -24,10 +23,12 @@ const Header = () => {
 
   const goLogin = useCallback((flag) => {
     navigate(path.LOGIN, { state: { flag } });
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    // eslint-disable-next-line
   }, [searchParams.get("page")]);
 
   return (

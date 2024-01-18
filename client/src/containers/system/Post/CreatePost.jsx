@@ -5,7 +5,7 @@ import { apiUploadImages, apiCreatePost, apiUpdatePost } from "services";
 import { getCodesArea, getCodesPrice } from "utils/Common/getCodes";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import validate from "utils/helper";
+import {validate} from "utils/helper";
 import { useDispatch } from 'react-redux'
 import { resetData } from 'store/actions'
 
@@ -214,7 +214,7 @@ const CreatePost = ({isEdit}) => {
           <Button
             onClick={handleSubmit}
             text={isEdit ? "Cập nhật" : "Tạo tin"}
-            bgColor="bg-green-600"
+            bgColor="bg-secondary"
             textColor="text-white"
           />
         </div>

@@ -21,6 +21,7 @@ export const validate = (payload, setInvalidFields) => {
     }
   });
   fields.forEach((item) => {
+    // eslint-disable-next-line
     switch (item[0]) {
       case "password":
         if (item[1].length < 8) {
@@ -54,7 +55,6 @@ export const validate = (payload, setInvalidFields) => {
           ]);
           invalids++;
         }
-      default:
         break;
       case "phone":
         const phoneRegex = /^\d{10,11}$/;
@@ -107,5 +107,3 @@ export const validate = (payload, setInvalidFields) => {
   });
   return invalids;
 };
-
-export default validate

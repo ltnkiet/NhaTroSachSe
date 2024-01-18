@@ -46,8 +46,8 @@ const Search = () => {
       setQueries((prev) => ({ ...prev, ...query }));
       setIsShowModal(false);
       arrMaxMin && setArrMinMax((prev) => ({ ...prev, ...arrMaxMin }));
-      // eslint-disable-next-line
     },
+    // eslint-disable-next-line
     [isShowModal, queries]
   );
 

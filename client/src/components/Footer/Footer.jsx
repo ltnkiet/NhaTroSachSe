@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import logo from "asset/img/logo_ntss.png";
+import { path } from 'utils/constant';
 
 
 const Footer = () => {
@@ -79,7 +80,7 @@ const Footer = () => {
 
           <Link
             className="w-28 font-semibold text-lg text-yellow-500"
-            to="/about"
+            to={path.ABOUT_US}
           >
             About us
           </Link>

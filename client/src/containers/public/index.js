@@ -10,4 +10,4 @@ export { default as Pagination } from "./Post/Pagination";
 export { default as DetailPost } from "./Post/DetailPost";
 export { default as Rental } from "./Sidebar/Rental";
 export { default as SearchDetail } from "./Search/SearchDetail";
-export { default as InfoUs } from "./AboutUs/Info";
+export { default as AboutUS } from "./AboutUs/AboutUs";

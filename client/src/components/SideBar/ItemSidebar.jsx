@@ -2,15 +2,12 @@ import React, { memo } from "react";
 import icons from "../../asset/icon";
 import { formatVietnameseToString } from "../../utils/Common/formatVietnameseToString";
 import { Link } from "react-router-dom";
-import * as actions from "../../store/actions";
-import { useDispatch } from "react-redux";
 import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 
 const { GrNext } = icons;
 
 const ItemSidebar = ({ title, content, isDouble, type }) => {
 
-  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 

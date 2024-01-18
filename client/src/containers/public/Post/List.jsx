@@ -27,10 +27,12 @@ const List = ({ categoryCode }) => {
     });
     if (categoryCode) searchParamsObject.categoryCode = categoryCode;
     dispatch(getPostsLimit(searchParamsObject));
+    // eslint-disable-next-line
   }, [searchParams, categoryCode]);
 
   useEffect(() => {
     listRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    // eslint-disable-next-line
   }, [searchParams.get("page")]);
 
   return (

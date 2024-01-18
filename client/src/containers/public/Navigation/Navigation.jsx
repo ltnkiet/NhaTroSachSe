@@ -13,6 +13,7 @@ const Navigation = () => {
   const { categories } = useSelector((state) => state.app);
   useEffect(() => {
     dispatch(actions.getCategories());
+    // eslint-disable-next-line
   }, []);
   return (
     <div

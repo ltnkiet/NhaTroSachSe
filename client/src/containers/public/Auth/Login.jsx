@@ -5,7 +5,7 @@ import * as actions from "store/actions";
 import { apiForgotPassword } from "services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import validate from 'utils/helper'
+import {validate} from 'utils/helper'
 
 const Login = () => {
 
@@ -31,6 +31,7 @@ const Login = () => {
 
   useEffect(() => {
     isLoggedIn && navigate("/");
+    // eslint-disable-next-line
   }, [isLoggedIn]);
   
   useEffect(() => {

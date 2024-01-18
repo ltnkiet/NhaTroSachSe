@@ -9,7 +9,8 @@ const RelatedPost = () => {
 
   useEffect(() => {
     dispatch(actions.getNewPosts());
-  }, []);
+    // eslint-disable-next-line
+  }, [newPosts]);
 
   return (
     <div className="w-full bg-white rounded-md p-4">

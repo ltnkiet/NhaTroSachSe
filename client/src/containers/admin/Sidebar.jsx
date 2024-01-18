@@ -1,10 +1,8 @@
 import React from "react";
 import anonAvatar from "asset/img/anon-avatar.png";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import adminSidebar from "utils/adminSidebar";
 import { NavLink, Link } from "react-router-dom";
-import * as actions from "store/actions";
-import { AiOutlineLogout } from "react-icons/ai";
 import logo from "asset/img/logo_ntss.png";
 
 const activeStyle =
@@ -13,7 +11,6 @@ const notActiceStyle =
   "hover:bg-secondary flex rounded-md items-center gap-2 p-2 cursor-pointer mt-4";
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
   const { currentData } = useSelector((state) => state.user);
   return (
     <div className="w-[20%] flex-none p-4 flex flex-col gap-6 bg-main text-white">

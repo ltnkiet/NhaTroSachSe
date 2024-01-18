@@ -1,11 +1,12 @@
 import React, { memo, useState } from "react";
 import icons from "asset/icon";
+import nonAvatar from 'asset/img/anon-avatar.png'
 import { Link } from "react-router-dom";
 import { formatVietnameseToString } from "utils/Common/formatVietnameseToString";
 
 const indexs = [0, 1, 2, 3];
 
-const { GrStar, RiHeartFill, RiHeartLine, BsBookmarkStarFill } = icons;
+const {RiHeartFill, RiHeartLine, BsBookmarkStarFill } = icons;
 
 const Item = ({
   images,
@@ -17,12 +18,6 @@ const Item = ({
   id,
 }) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false);
-  const handleStar = (star) => {
-    let stars = [];
-    for (let i = 1; i <= +star; i++)
-      stars.push(<GrStar className="star-item" size={18} color="yellow" />);
-    return stars;
-  };
   return (
     <div className="w-full flex border-t border-orange-600 py-4 ">
       <Link
@@ -49,7 +44,7 @@ const Item = ({
           {isHoverHeart ? (
             <RiHeartFill size={26} color="red" />
           ) : (
-            <RiHeartLine size={26} />
+            <RiHeartLine size={26} color="yellow"/>
           )}
         </span>
       </Link>
@@ -86,9 +81,9 @@ const Item = ({
         <div className="flex items-center my-5 justify-between">
           <div className="flex items-center">
             <img
-              src="https://lnsel.com/wp-content/uploads/2018/12/anon-avatar-300x300.png"
+              src={user?.avatar ? user?.avatar : nonAvatar}
               alt="avatar"
-              className="w-[30px] h-[30px] object-cover rounded-full"
+              className="w-[40px] h-[40px] object-cover rounded-full"
             />
             <p className="ml-2">{user?.name}</p>
           </div>
@@ -110,4 +105,4 @@ const Item = ({
   );
 };
 
-export default Item;
+export default memo(Item);
