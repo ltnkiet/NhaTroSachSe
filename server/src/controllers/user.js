@@ -13,3 +13,22 @@ export const getUser= async (req, res) => {
         })
     }
 }
+
+export const updateUser= async (req, res) => {
+    const { id } = req.user
+    const payload = req.body
+    try {
+        if(!payload) return res.status(400).json({
+            err: 1,
+            msg: "Missing input"
+        })
+        const response = await services.updateInfor(id, payload)
+        return res.status(200).json(response)
+
+    } catch (error) {
+        return res.status(500).json({
+            err: -1,
+            msg: 'Failed at category controller: ' + error
+        })
+    }
+}

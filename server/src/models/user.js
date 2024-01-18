@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       zalo: DataTypes.STRING,
       fbUrl: DataTypes.STRING,
-      avatar: DataTypes.BLOB,
+      avatar: DataTypes.STRING,
       role: DataTypes.ENUM(0, 1),  // 0: user, 1: admin
       passwordChangedAt: DataTypes.STRING,
       passwordResetToken: DataTypes.STRING,

@@ -12,9 +12,10 @@ export const path = {
   RESET_PASSWORD: "password/reset/:token",
   ABOUT_US: 've-chung-toi',
   // System
-  SYSTEM: '/he-thong/*',
+  SYSTEM: '/he-thong/',
   CREATE_POST: 'tao-bai-dang',
   MANAGE_POST: 'quan-ly-bai-dang',
+  USER: 'thong-tin-ca-nhan',
   // Admin
   ADMIN: '/quan-tri/*',
   // ADMIN_AUTH: '/quan-tri/dang-nhap',

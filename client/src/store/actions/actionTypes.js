@@ -24,6 +24,7 @@ const actionTypes = {
   GET_PROVINCES: "GET_PROVINCES",
   // USER
   GET_USER: "GET_USER",
+  EDIT_USER: 'EDIT_USER'
 };
 
 export default actionTypes;
