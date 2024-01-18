@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "store/actions";
 
 const notActive =
-  "px-4 h-full flex items-center bg-main outline-none hover:text-white";
-const active = "px-4 h-full flex items-center text-white";
+  "px-4 h-full flex items-center bg-main outline-none text-white hover:text-main";
+const active = "px-4 h-full flex items-center text-main";
 
 const Navigation = () => {
   const dispatch = useDispatch();

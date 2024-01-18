@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { intro } from "utils/constant";
+import { intro, path } from "utils/constant";
 import icons from "asset/icon";
 import { Button } from "components";
 import { useSelector } from "react-redux";
@@ -58,12 +58,14 @@ const Intro = () => {
       <span className="text-gray-700">{intro.author}</span>
       <h3 className="font-bold text-lg py-2">{intro.question}</h3>
       <p>{intro.answer}</p>
-      <Button
-        text="Đăng tin ngay"
-        bgColor="bg-secondary"
-        textColor="text-white"
-        px="px-6"
-      />
+      <Link to={`${path.SYSTEM}/${path.CREATE_POST}`}>
+        <Button
+          text="Đăng tin ngay"
+          bgColor="bg-secondary"
+          textColor="text-white"
+          px="px-6"
+        />
+      </Link>
       <div className="h-12"></div>
     </div>
   );
