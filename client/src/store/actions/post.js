@@ -11,8 +11,8 @@ export const getPostByUser = (query) => async (dispatch) => {
     if (response?.err === 0) {
       dispatch({
         type: actionTypes.GET_POST_USER,
-        posts: response?.response?.rows,
-        count: response?.response?.count,
+        posts: response.response?.rows,
+        count: response.response?.count,
       });
     } else {
       dispatch({
@@ -73,7 +73,11 @@ export const getNewPosts = () => async (dispatch) => {
     });
   }
 };
-export const editPosts = (data) => ({
+export const editPosts = (dataPost) => ({
   type: actionTypes.EDIT_POST,
-  data
+  dataPost
+});
+
+export const resetData= () => ({
+  type: actionTypes.RESET_DATA,
 });

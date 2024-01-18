@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
 import { Routes, Route } from "react-router-dom";
-import { Home, Login, Homepage, Rental, SearchDetail, ResetPassword } from "./containers/public";
-import {System, CreatePost, ManagePost} from './containers/system'
-import {Admin, Auth} from './containers/admin'
-import { path } from "./utils/constant";
-import * as actions from './store/actions'
+import { Home, Login, Homepage, Rental, SearchDetail, ResetPassword } from "containers/public";
+import {System, CreatePost, ManagePost} from 'containers/system'
+import {Admin, Auth} from 'containers/admin'
+import { path } from "utils/constant";
+import * as actions from 'store/actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { PageNum } from "../../../components";
+import { PageNum } from "components";
 import { useSelector } from "react-redux";
-import icons from "../../../asset/icon";
+import icons from "asset/icon";
 import { useSearchParams } from "react-router-dom";
 
 const { GrLinkNext } = icons;

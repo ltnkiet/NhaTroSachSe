@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
-import icons from "../../asset/icon";
+import icons from "asset/icon";
 import { Link } from "react-router-dom";
-import { formatVietnameseToString } from "../../utils/Common/formatVietnameseToString";
+import { formatVietnameseToString } from "utils/Common/formatVietnameseToString";
 
 const indexs = [0, 1, 2, 3];
 
@@ -24,7 +24,7 @@ const Item = ({
     return stars;
   };
   return (
-    <div className="w-full flex border-t border-orange-600 py-4">
+    <div className="w-full flex border-t border-orange-600 py-4 ">
       <Link
         to={`chi-tiet/${formatVietnameseToString(title)}/${id}`}
         className="w-2/5 flex flex-wrap gap-[2px] items-center relative cursor-pointer">

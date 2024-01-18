@@ -6,7 +6,7 @@ export const apiGetPostByUser = (query) =>
     try {
       const response = await axiosConfig({
         method: "GET",
-        url: "/api/v1/post/all/user",
+        url: "/post/user/all",
         params: query,
 
       });
@@ -20,7 +20,7 @@ export const apiGetPostsLimit = (query) =>
     try {
       const response = await axiosConfig({
         method: "GET",
-        url: `/api/v1/post/limit`,
+        url: `/post/limit`,
         params: query,
       });
       resolve(response);
@@ -33,7 +33,7 @@ export const apiGetNewPosts = () =>
     try {
       const response = await axiosConfig({
         method: "GET",
-        url: `/api/v1/post/new-post`,
+        url: `/post/new`,
       });
       resolve(response);
     } catch (error) {
@@ -54,15 +54,42 @@ export const apiUploadImages = (images) =>
     }
   });
 export const apiCreatePost = (payload) =>
-new Promise(async (resolve, reject) => {
-  try {
-    const response = await axiosConfig({
-      method: "POST",
-      url: `/api/v1/post/create-post`,
-      data: payload,
-    });
-    resolve(response);
-  } catch (error) {
-    reject(error);
-  }
-});
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "POST",
+        url: `/post/create`,
+        data: payload,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+export const apiUpdatePost = (payload) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "PUT",
+        url: `/post/user/update`,
+        data: payload,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+export const apiDeletePost = (postId) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "DELETE",
+        url: `/post/delete`,
+        params: { postId }
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

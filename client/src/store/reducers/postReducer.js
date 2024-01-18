@@ -6,7 +6,7 @@ const initState = {
   count: 0,
   newPosts: [],
   postByUser: [],
-  dataPost: {}
+  dataPost: null
 };
 
 const postReducer = (state = initState, action) => {
@@ -34,7 +34,12 @@ const postReducer = (state = initState, action) => {
     case actionTypes.EDIT_POST:
       return {
         ...state,
-        dataPost: action.dataPost || {},
+        dataPost: action.dataPost || null,
+      }
+    case actionTypes.RESET_DATA:
+      return {
+        ...state,
+        dataPost: null,
       }
     default:
       return state;

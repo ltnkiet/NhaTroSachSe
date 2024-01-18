@@ -1,9 +1,9 @@
 import React from "react";
-import anonAvatar from "../../../asset/img/anon-avatar.png";
+import anonAvatar from "asset/img/anon-avatar.png";
 import { useSelector } from "react-redux";
-import menuSidebar from "../../../utils/menuSidebar";
+import menuSidebar from "utils/menuSidebar";
 import { NavLink, Link } from "react-router-dom";
-import logo from "../../../asset/img/logo_ntss.png";
+import logo from "asset/img/logo_ntss.png";
 
 const activeStyle =
   "hover:bg-secondary flex rounded-md items-center gap-2 p-2 font-bold bg-secondary my-4";

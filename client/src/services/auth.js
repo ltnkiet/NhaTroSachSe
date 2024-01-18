@@ -5,7 +5,7 @@ export const apiRegister = (payload) =>
     try {
       const response = await axiosConfig({
         method: "POST",
-        url: "/api/v1/auth/register",
+        url: "/auth/register",
         data: payload,
       });
       resolve(response);
@@ -18,7 +18,7 @@ export const apiLogin = (payload) =>
     try {
       const response = await axiosConfig({
         method: "POST",
-        url: "/api/v1/auth/login",
+        url: "/auth/login",
         data: payload,
       });
       resolve(response);
@@ -33,7 +33,7 @@ export const apiForgotPassword = (payload) =>
     try {
       const response = await axiosConfig({
         method: "POST",
-        url: "/api/v1/auth/password/forgot",
+        url: "/auth/password/forgot",
         data: payload,
       });
       resolve(response);
@@ -48,7 +48,7 @@ export const apiResetPassword = (payload) =>
     try {
       const response = await axiosConfig({
         method: "PUT",
-        url: "/api/v1/auth/password/reset",
+        url: "/auth/password/reset",
         data: payload,
       });
       resolve(response);

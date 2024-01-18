@@ -1,35 +1,46 @@
-import React, { useState } from "react";
-import { Address, Overview, Loading, Button } from "../../../components";
-import icons from "../../../asset/icon";
-import { apiUploadImages, apiCreatePost } from "../../../services";
-import { getCodesArea, getCodesPrice } from "../../../utils/Common/getCodes";
+import React, { useState, useEffect } from "react";
+import { Address, Overview, Loading, Button } from "components";
+import icons from "asset/icon";
+import { apiUploadImages, apiCreatePost, apiUpdatePost } from "services";
+import { getCodesArea, getCodesPrice } from "utils/Common/getCodes";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import validate from "../../../utils/validateFields";
+import validate from "utils/helper";
+import { useDispatch } from 'react-redux'
+import { resetData } from 'store/actions'
 
 const { BsCameraFill, ImBin } = icons;
 
 const CreatePost = ({isEdit}) => {
+  
   const [isLoading, setIsLoading] = useState(false);
   const [imagesPreview, setImagesPreview] = useState([]);
   const [invalidFields, setInvalidFields] = useState([]);
-  const { prices, areas, categories, provinces } = useSelector(
-    (state) => state.app
-  );
+
+  const { prices, areas, categories } = useSelector((state) => state.app);
   const { userData } = useSelector((state) => state.user);
   const { dataPost } = useSelector((state) => state.post);
-  
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if(dataPost) {
+      let imgs = JSON.parse(dataPost?.images?.image)
+      imgs && setImagesPreview(imgs)
+    }
+  }, [dataPost])
+
   const [payload, setPayload] = useState(() => {
     const initData = {
       categoryCode: dataPost?.categoryCode || "",
       title: dataPost?.title || "",
       priceNumber: dataPost?.priceNumber * 1000000 || 0,
       areaNumber: dataPost?.areaNumber || 0,
-      images: dataPost?.images || "",
+      images: dataPost?.images?.image ? JSON.parse(dataPost?.images?.image) : "",
       address: dataPost?.address || "",
       priceCode: dataPost?.priceCode || "",
       areaCode: dataPost?.areaCode || "",
-      description: dataPost?.description || "",
+      description: dataPost?.description ? JSON.parse(dataPost?.description) : "",
       province: dataPost?.province || "",
       category: dataPost?.category || "",
     }
@@ -90,31 +101,46 @@ const CreatePost = ({isEdit}) => {
       userId: userData.id,
     };
     const rs = validate(finalPayload, setInvalidFields);
-    console.log(finalPayload)
     if(rs === 0) {
-      const response = await apiCreatePost(finalPayload);
-      if (response?.data?.err === 1)
-        Swal.fire("Sự cố!", response?.data?.msg, "error");
-      else {
-        Swal.fire("Hoàn tất", response?.data?.msg, "success").then(() => {
-          setPayload({
-            categoryCode: "",
-            title: "",
-            priceNumber: 0,
-            areaNumber: 0,
-            images: "",
-            address: "",
-            priceCode: "",
-            areaCode: "",
-            description: "",
-            province: "",
-            category: "",
+      if(dataPost && isEdit) {
+        finalPayload.postId = dataPost?.id
+        finalPayload.attributesId = dataPost?.attributesId
+        finalPayload.overviewId = dataPost?.overviewId
+        finalPayload.imagesId = dataPost?.imagesId
+        const response = await apiUpdatePost(finalPayload)
+        if (response?.data?.err === 1) Swal.fire("Sự cố!", response?.data?.msg, "error");
+        else {
+          Swal.fire("Hoàn tất", response?.data?.msg, "success").then(() => {
+            resetPayload()
+            dispatch(resetData())
           });
-        });
+        }
+      } else {
+        const response = await apiCreatePost(finalPayload);
+        if (response?.data?.err === 1)
+          Swal.fire("Sự cố!", response?.data?.msg, "error");
+        else {
+          Swal.fire("Hoàn tất", response?.data?.msg, "success").then(() => {resetPayload()});
+        }
       }
     }
-      
   };
+
+  const resetPayload = () => {
+    setPayload({
+      categoryCode: "",
+      title: "",
+      priceNumber: 0,
+      areaNumber: 0,
+      images: "",
+      address: "",
+      priceCode: "",
+      areaCode: "",
+      description: "",
+      province: "",
+      category: "",
+    });
+  }
 
   return (
     <div className="px-6">

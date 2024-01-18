@@ -5,10 +5,12 @@ import { verifyTokens, isAdmin } from "../middlewares/verifyToken";
 // router.get('/all', postController.getPosts)
 router.get('/limit', postController.getPostsLimit)
 
-router.get('/new-post', verifyTokens, postController.getNewPosts)
-router.post('/create-post', verifyTokens, postController.createPost)
-router.get('/all/user', verifyTokens, postController.getPostByUser)
-router.get('/all/admin', [verifyTokens, isAdmin], postController.getPostbyAdmin)
+router.get('/new', verifyTokens, postController.getNewPosts)
+router.delete('/delete', verifyTokens, postController.deletePost)
+router.post('/create', verifyTokens, postController.createPost)
+router.get('/user/all', verifyTokens, postController.getPostByUser)
+router.put('/user/update', verifyTokens, postController.updatePost)
+router.get('/admin/all', [verifyTokens, isAdmin], postController.getPostbyAdmin)
 
 
 
