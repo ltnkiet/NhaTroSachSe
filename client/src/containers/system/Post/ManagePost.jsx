@@ -11,12 +11,18 @@
 
     const [isEdit, setIsEdit] = useState(false);
     const [update, setUpdate] = useState(false)
+    const [posts, setPosts] = useState([])
+    const [status, setStatus] = useState('0')
     const dispatch = useDispatch();
     const { postByUser, dataPost } = useSelector((state) => state.post);
 
     useEffect(() => {
       !dataPost && dispatch(actions.getPostByUser());
     }, [dataPost, update]);
+
+    useEffect(() => {
+      setPosts(postByUser)
+    }, [postByUser]);
 
     useEffect(() => {
       !dataPost && setIsEdit(false);
@@ -41,12 +47,25 @@
       })
     }
 
+    useEffect(() => {
+      if (status === 1) {
+        const pendingPosts = postByUser.filter((item) => item.status === "pending");
+        setPosts(pendingPosts)
+      } else if (status === 2)  {
+        const activePosts = postByUser.filter((item) => item.status === "active");
+        setPosts(activePosts)
+      } else {
+        setPosts(postByUser)
+      }
+    }, [status])
+
     return (
       <div className="flex flex-col gap-5">
         <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
           <h1 className="text-3xl font-medium ">Quản lý bài đăng</h1>
           <div className="flex gap-5">
-            <select className="outline-none border p-2 border-gray-200 rounded-md">
+            <select onChange={(e) => setStatus(+e.target.value)} value={status}
+            className="outline-none border p-2 border-gray-200 rounded-md">
               <option value="0">Xem theo trạng thái</option>
               <option value="1">Đang xử lý</option>
               <option value="2">Đang hoạt động</option>
@@ -70,7 +89,7 @@
             </tr>
           </thead>
           <tbody>
-            { postByUser?.map((item) => {
+            {posts?.map((item) => {
                 return (
                   <tr className="flex items-center h-[80px]" key={item.id}>
                     <td className="border flex-1 h-full flex items-center justify-center px-2">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { CreatePost } from 'containers'
+import { CreatePost } from 'containers/system'
 
 const EditPost = ({setIsEdit}) => {
   return (
