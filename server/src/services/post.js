@@ -60,25 +60,29 @@ export const getPostByUserService = (page, id, query) =>
     }
   })
 
-export const getPostsLimitService = (page, query, { priceNumber, areaNumber }) =>
+export const getPostsLimitService = (page, {limitPost, order, status, ...query}, { priceNumber, areaNumber }) =>
   new Promise(async (resolve, reject) => {
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1;
       const queries = { ...query, status: "active" };
-      if (priceNumber) queries.priceNumber = { [Op.between]: priceNumber };
-      if (areaNumber) queries.areaNumber = { [Op.between]: areaNumber };
+      const limit = +limitPost || +process.env.LIMIT
+      queries.limit = limit;
+      if (priceNumber) query.priceNumber = { [Op.between]: priceNumber };
+      if (areaNumber) query.areaNumber = { [Op.between]: areaNumber };
+      if (order) queries.order = [order]
       const response = await db.Post.findAndCountAll({
-        where: queries,
+        where: query,
         raw: true,
         nest: true,
-        offset: offset * +process.env.LIMIT,
-        limit: +process.env.LIMIT,
+        offset: offset * limit,
+        ...queries,
         include: [
           { model: db.Image, as: "images", attributes: ["image"] },
           { model: db.Attribute, as: "attributes", attributes: ["price", "acreage"]},
-          { model: db.User, as: "user", attributes: ["name", "zalo", "phone"] },
+          { model: db.User, as: "user", attributes: ["name", "zalo", "phone", "avatar"] },
+          { model: db.Overview, as: "overviews", attributes: ["area", "type"]},
         ],
-        attributes: ["id", "title", "address", "description"],
+        attributes: ["id", "title", "address", "description", 'createdAt'],
       });
       resolve({
         err: response ? 0 : 1,

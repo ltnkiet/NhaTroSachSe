@@ -3,7 +3,7 @@ import * as postController from '../controllers/post'
 import { verifyTokens, isAdmin } from "../middlewares/verifyToken";
 
 // router.get('/all', postController.getPosts)
-router.get('/limit', postController.getPostsLimit)
+router.get('/', postController.getPostsLimit)
 
 router.get('/new', verifyTokens, postController.getNewPosts)
 router.delete('/delete', verifyTokens, postController.deletePost)

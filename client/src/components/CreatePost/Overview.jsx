@@ -3,6 +3,7 @@ import { Select, InputReadOnly, InputFormV2 } from "components";
 import { useSelector } from "react-redux";
 
 const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
+
   const { categories } = useSelector((state) => state.app);
   const { userData } = useSelector((state) => state.user);
   return (
@@ -36,7 +37,7 @@ const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
             rows="10"
             className="w-full rounded-md outline-none border border-gray-300 p-2"
             value={payload.description}
-            onChange={(e) => setPayload((prev) => ({ ...prev, description: e.target.value }))}
+            onChange={(e) => setPayload((prev) => ({ ...prev, description: [e.target.value] }))}
             onFocus={() => setInvalidFields([])}>
           </textarea>
           <small className="text-red-500">

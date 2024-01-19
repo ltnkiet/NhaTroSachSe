@@ -2,12 +2,14 @@ import { AiOutlinePlusCircle, AiOutlineLogout, AiOutlineEye, AiOutlineEyeInvisib
 import { GrNext, GrStar, GrLinkNext, GrLinkPrevious } from 'react-icons/gr'
 import { BsChevronRight, BsBookmarkStarFill, BsChevronDown, BsCameraFill } from 'react-icons/bs'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
-import { TbReportMoney } from 'react-icons/tb'
+import { IoLocation } from "react-icons/io5";
+import { TbReportMoney,TbShapeOff  } from 'react-icons/tb'
 import { RiCrop2Line, RiHeartFill, RiHeartLine } from 'react-icons/ri'
 import { MdOutlineHouseSiding, MdOutlineLibraryBooks } from 'react-icons/md'
 import { FiSearch } from 'react-icons/fi'
 import { ImPencil2, ImBin } from 'react-icons/im'
 import { BiUserPin } from 'react-icons/bi'
+import { FaRegClock } from "react-icons/fa";
 
 const icons = {
     AiOutlinePlusCircle,  AiOutlineEye, AiOutlineEyeInvisible,
@@ -30,7 +32,10 @@ const icons = {
     AiOutlineLogout,
     BsChevronDown,
     ImBin,
-    BsCameraFill
+    BsCameraFill,
+    IoLocation,
+    TbShapeOff ,
+    FaRegClock
 }
 
 export default icons

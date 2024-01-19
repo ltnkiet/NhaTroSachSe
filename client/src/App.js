@@ -7,7 +7,8 @@ import {
   Rental,
   SearchDetail,
   ResetPassword,
-  AboutUS
+  AboutUS,
+  DetailPost
 } from "containers/public";
 import { System, CreatePost, ManagePost, UserInfor } from "containers/system";
 import { Admin, Auth } from "containers/admin";
@@ -43,6 +44,8 @@ function App() {
           <Route path={path.NHA_CHO_THUE} element={<Rental />} />
           <Route path={path.SEARCH} element={<SearchDetail />} />
           <Route path={path.ABOUT_US} element={<AboutUS />} />
+          <Route path={path.DETAIL_ALL} element={<DetailPost />} />
+          <Route path={path.DETAL_POST__TITLE__POSTID} element={<DetailPost />} />
         </Route>
         <Route path={path.SYSTEM} element={<System />}>
           <Route path={path.CREATE_POST} element={<CreatePost />} />

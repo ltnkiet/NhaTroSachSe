@@ -5,6 +5,10 @@ export const formatTime = (time) => {
   return moment(time).format('llll')
 };
 
+export const formatTimeV2 = (time) => {
+  return moment(time).format('l')
+};
+
 export const validate = (payload, setInvalidFields) => {
   let invalids = 0;
   let fields = Object.entries(payload);

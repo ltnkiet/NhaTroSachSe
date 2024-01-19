@@ -20,7 +20,7 @@ export const apiGetPostsLimit = (query) =>
     try {
       const response = await axiosConfig({
         method: "GET",
-        url: `/post/limit`,
+        url: `/post`,
         params: query,
       });
       resolve(response);
