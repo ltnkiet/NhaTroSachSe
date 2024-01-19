@@ -11,7 +11,6 @@ import { getUser } from 'store/actions'
 
 const UserInfor = () => {
   const { userData } = useSelector((state) => state.user);
-  const [user, setUser] = useState({});
   const [invalidFields, setInvalidFields] = useState([]);
   const [isEdit, setIsEdit] = useState(false)
 
@@ -27,9 +26,6 @@ const UserInfor = () => {
     avatar: userData?.avatar || ""
   })
 
-  useEffect(() => {
-    setUser(userData);
-  }, [userData]);
 
   const handleSubmit = async () => {
     const invalid = validate(payload, setInvalidFields)
@@ -119,12 +115,12 @@ const UserInfor = () => {
             </>
           ) : (
             <>
-              <InputReadOnly label={"Mã thành viên"} value={user.id?.match(/\d/g).join("")?.slice(0, 7)} />
-              <InputReadOnly label={"Số điện thoại"} value={user.phone} />
-              <InputReadOnly label={"Tên người dùng"} value={user.name} />
-              <InputReadOnly label={"Email"} value={user.email} />
-              <InputReadOnly label={"Zalo"} value={user.zalo ? user.zalo : ""} />
-              <InputReadOnly label={"Facebook"} value={user.fbUrl ? user.fbUrl : ""} />
+              <InputReadOnly label={"Mã thành viên"} value={userData.id?.match(/\d/g).join("")?.slice(0, 7)} />
+              <InputReadOnly label={"Số điện thoại"} value={userData.phone} />
+              <InputReadOnly label={"Tên người dùng"} value={userData.name} />
+              <InputReadOnly label={"Email"} value={userData.email} />
+              <InputReadOnly label={"Zalo"} value={userData.zalo ? userData.zalo : ""} />
+              <InputReadOnly label={"Facebook"} value={userData.fbUrl ? userData.fbUrl : ""} />
             </>
           )}
           <div className="mt-5 flex items-center justify-center">
@@ -176,7 +172,7 @@ const UserInfor = () => {
                 </span>
               </>  
             ) : (
-              <img src={user.avatar ||  anonAvatar} alt="" className="rounded-full w-60 h-60 object-cover"/>
+              <img src={userData.avatar ||  anonAvatar} alt="" className="rounded-full w-60 h-60 object-cover"/>
             )}
           </div>
           
