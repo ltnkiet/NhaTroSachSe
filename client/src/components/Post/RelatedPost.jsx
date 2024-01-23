@@ -10,7 +10,7 @@ const RelatedPost = () => {
   useEffect(() => {
     dispatch(actions.getNewPosts());
     // eslint-disable-next-line
-  }, [newPosts]);
+  }, [actions]);
 
   return (
     <div className="w-full bg-white rounded-md p-4">
@@ -20,6 +20,7 @@ const RelatedPost = () => {
           return (
             <Sitem
               key={item.id}
+              id={item.id}
               title={item.title}
               price={item?.attributes?.price}
               createdAt={item.createdAt}

@@ -14,7 +14,7 @@ const Navigation = () => {
   useEffect(() => {
     dispatch(actions.getCategories());
     // eslint-disable-next-line
-  }, []);
+  }, [actions]);
   return (
     <div
       className={`w-full flex justify-center items-center h-[40px] bg-yellow-400 text-main`}>

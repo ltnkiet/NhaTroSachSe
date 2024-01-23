@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Select, InputReadOnly, InputFormV2 } from "components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from 'store/actions'
 
 const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
-
+  const dispatch = useDispatch()
   const { categories } = useSelector((state) => state.app);
   const { userData } = useSelector((state) => state.user);
+  useEffect(() => {
+    dispatch(actions.getCategories());
+  }, [actions]);
   return (
     <div>
       <h2 className="font-semibold text-xl py-4">Thông tin mô tả</h2>

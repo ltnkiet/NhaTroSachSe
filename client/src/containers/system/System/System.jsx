@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 import { path } from "utils/constant";
 import { Sidebar } from "..";
+import { Contact, Intro } from 'components'
 
 
 const System = () => {

@@ -1,20 +1,25 @@
-  import React, { useEffect, useState } from "react";
+  import React, { useEffect, useState, useRef } from "react";
   import * as actions from "store/actions";
   import { useDispatch, useSelector } from "react-redux";
   import { formatTime } from "utils/helper";
   import { Button, EditPost } from "components";
-  import { Pagination } from 'containers/public'
+  import { Pagination} from 'components'
   import { apiDeletePost } from 'services'
   import Swal from 'sweetalert2'
+import { useSearchParams } from "react-router-dom";
+
 
   const ManagePost = () => {
-
     const [isEdit, setIsEdit] = useState(false);
     const [update, setUpdate] = useState(false)
     const [posts, setPosts] = useState([])
     const [status, setStatus] = useState('0')
     const dispatch = useDispatch();
     const { postByUser, dataPost } = useSelector((state) => state.post);
+    const [searchParams] = useSearchParams();
+    const listRef = useRef();
+
+    console.log(postByUser)
 
     useEffect(() => {
       !dataPost && dispatch(actions.getPostByUser());
@@ -28,6 +33,28 @@
     useEffect(() => {
       !dataPost && setIsEdit(false);
     }, [dataPost]);
+
+    useEffect(() => {
+      let params = [];
+      for (let entry of searchParams.entries()) {
+        params.push(entry);
+      }
+      let searchParamsObject = {};
+      params?.forEach((i) => {
+        if (Object.keys(searchParamsObject)?.some((item) => item === i[0])) {
+          searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]];
+        } else {
+          searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] };
+        }
+      });
+      dispatch(actions.getPostByUser(searchParamsObject));
+      // eslint-disable-next-line
+    }, [searchParams]);
+
+    useEffect(() => {
+      listRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      // eslint-disable-next-line
+    }, [searchParams.get("page")]);
 
     const handleDeletePost = (postId) => {
       Swal.fire({
@@ -62,7 +89,7 @@
     }, [status])
 
     return (
-      <div className="flex flex-col gap-5">
+      <div ref={listRef} className="flex flex-col gap-5">
         <div className="px-6 py-4 border-b-2 border-gray-200 flex items-center justify-between">
           <h1 className="text-3xl font-medium ">Quản lý bài đăng</h1>
           <div className="flex gap-5">
@@ -91,7 +118,8 @@
             </tr>
           </thead>
           <tbody>
-            {posts?.map((item) => {
+            {posts?.length > 0 && 
+              posts?.map((item) => {
                 return (
                   <tr className="flex items-center h-[80px]" key={item.id}>
                     <td className="border flex-1 h-full flex items-center justify-center px-2">

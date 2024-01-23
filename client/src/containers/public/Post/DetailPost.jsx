@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPostsLimit } from 'store/actions'
@@ -13,13 +13,19 @@ const DetailPost = () => {
   const {postId} = useParams()
   const dispatch = useDispatch()
   const { posts } = useSelector(state => state.post)
-  console.log(posts)
+  const listRef = useRef();
   useEffect(() => {
     postId && dispatch(getPostsLimit({id: postId}))
   }, [postId])
+
+  useEffect(() => {
+    listRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    // eslint-disable-next-line
+  }, [listRef]);
   
   return (
-    <div className='w-full flex gap-4'>
+    <div ref={listRef} 
+      className='w-full flex gap-4'>
       <div className='w-[70%]'>
         <SliderCustom images={posts && posts.length > 0 && JSON.parse(posts[0]?.images?.image)}/>
         <div className='bg-white rounded-md shadow-md p-4'>

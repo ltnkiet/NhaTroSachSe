@@ -11,7 +11,7 @@ const sendMail = async ({ email, html, subject }) => {
     },
   });
   const info = await transporter.sendMail({
-    from: '"Nhà Trọ Sạch Sẽ" <no-replay@nhatrosachse.com>',
+    from: '"Nhà Trọ Sạch Sẽ" <no-replay@cheemplus1@gmail.com>',
     to: email,
     subject: subject,
     html: html,

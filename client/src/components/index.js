@@ -12,7 +12,8 @@ export { default as InputFormV3 } from "./Input/InputFormV3";
 export { default as Loading } from "./Loading/Loading";
 
 export { default as PageNum } from "./Pagination/PageNum";
-export { default as PaginationV2 } from "./Pagination/PaginationV2";
+export { default as Pagination } from "./Pagination/Pagination";
+
 
 export { default as Item } from "./Post/Item";
 export { default as RelatedPost } from "./Post/RelatedPost";

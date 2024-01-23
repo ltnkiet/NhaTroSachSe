@@ -7,6 +7,7 @@ import { useSearchParams } from "react-router-dom";
 const { GrLinkNext } = icons;
 
 const Pagination = () => {
+  
   const { count, posts } = useSelector((state) => state.post);
   const [arrPage, setArrPage] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

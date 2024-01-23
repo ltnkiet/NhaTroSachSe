@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Province, ItemSidebar, RelatedPost } from "components";
-import { List, Pagination } from "../index";
+import { Province, ItemSidebar, RelatedPost, Pagination  } from "components";
+import { List} from "../index";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { formatVietnameseToString } from "utils/Common/formatVietnameseToString";

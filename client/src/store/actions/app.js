@@ -5,7 +5,7 @@ export const getCategories = () => async (dispatch) => {
   try {
     const response = await apis.apiGetCategories();
     if (response?.data.err === 0) {
-      dispatch({
+        dispatch({
         type: actionTypes.GET_CATEGORIES,
         categories: response.data.response,
       });
