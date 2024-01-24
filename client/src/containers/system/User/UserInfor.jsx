@@ -58,7 +58,7 @@ const UserInfor = () => {
   return (
     <div className="flex flex-col gap-5 items-center px-6">
       <h1 className="text-3xl text-start w-full py-4 font-medium border-b-2 border-gray-200">
-        Trang thông tin
+        Thông tin cá nhân
       </h1>
       <div className="w-full flex flex-row">
         <div className="w-3/5 flex flex-col gap-4">
@@ -163,7 +163,7 @@ const UserInfor = () => {
             <h1 className="font-medium text-lg py-2">Ảnh đại diện</h1>
             {isEdit ? (
               <>
-                <img src={payload.avatar ||  anonAvatar} alt="" className="rounded-full w-60 h-60 object-cover"/>
+                <img src={payload.avatar ||  anonAvatar} alt="" className="rounded-full w-60 h-60 object-cover border-4 shadow-md border-secondary"/>
                 <span className="mt-10 font-semibold text-lx">Thay đổi ảnh</span>
                 <input onChange={handleUploadFile} type="file" id="avatar" className="appearance-none my-4" />
                 <span className="text-red-500 text-sm">
@@ -172,7 +172,7 @@ const UserInfor = () => {
                 </span>
               </>  
             ) : (
-              <img src={userData.avatar ||  anonAvatar} alt="" className="rounded-full w-60 h-60 object-cover"/>
+              <img src={userData.avatar ||  anonAvatar} alt="" className="rounded-full w-60 h-60 object-cover border-4 shadow-md border-secondary"/>
             )}
           </div>
           

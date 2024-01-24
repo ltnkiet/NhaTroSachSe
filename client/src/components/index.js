@@ -14,12 +14,12 @@ export { default as Loading } from "./Loading/Loading";
 export { default as PageNum } from "./Pagination/PageNum";
 export { default as Pagination } from "./Pagination/Pagination";
 
-
 export { default as Item } from "./Post/Item";
 export { default as RelatedPost } from "./Post/RelatedPost";
 export { default as Sitem } from "./Post/Sitem";
 export { default as EditPost } from "./Post/EditPost";
 export { default as SliderCustom } from "./Post/SliderCustom";
+export { default as Map } from "./Post/Map";
 
 export { default as Province } from "./Province/Province";
 export { default as ProvinceBtn } from "./Province/ProvinceBtn";

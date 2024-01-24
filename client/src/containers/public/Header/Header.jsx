@@ -91,16 +91,6 @@ const Header = () => {
                 )}
               </div>
             )}
-            {/* {isLoggedIn && (
-            <Link to={`${path.SYSTEM}${path.CREATE_POST}`}>
-              <Button
-                text={"Đăng tin"}
-                textColor="text-white"
-                bgColor="bg-secondary"
-                IcAfter={AiOutlinePlusCircle}
-              />
-            </Link>
-          )} */}
           </div>
         </div>
       </div>

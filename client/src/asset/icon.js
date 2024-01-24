@@ -9,9 +9,10 @@ import { MdOutlineHouseSiding, MdOutlineLibraryBooks } from 'react-icons/md'
 import { FiSearch } from 'react-icons/fi'
 import { ImPencil2, ImBin } from 'react-icons/im'
 import { BiUserPin } from 'react-icons/bi'
-import { FaRegClock } from "react-icons/fa";
+import { FaRegClock, FaMapMarkedAlt  } from "react-icons/fa";
 
 const icons = {
+    FaMapMarkedAlt ,
     AiOutlinePlusCircle,  AiOutlineEye, AiOutlineEyeInvisible,
     GrNext,
     BsChevronRight,

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Address, Overview, Loading, Button } from "components";
+import { Address, Overview, Loading, Button, Map } from "components";
 import icons from "asset/icon";
 import { apiUploadImages, apiCreatePost, apiUpdatePost } from "services";
 import { getCodesArea, getCodesPrice } from "utils/Common/getCodes";
-import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import {validate} from "utils/helper";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { resetData } from 'store/actions'
 
 const { BsCameraFill, ImBin } = icons;
@@ -218,7 +217,9 @@ const CreatePost = ({isEdit}) => {
             textColor="text-white"
           />
         </div>
-        <div className="w-[30%] flex-none">Maps</div>
+        <div className="w-[30%] flex-none pt-12">
+          <Map address={payload.address}/>
+        </div>
       </div>
     </div>
   );

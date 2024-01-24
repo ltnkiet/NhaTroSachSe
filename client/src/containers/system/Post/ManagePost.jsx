@@ -19,8 +19,6 @@ import { useSearchParams } from "react-router-dom";
     const [searchParams] = useSearchParams();
     const listRef = useRef();
 
-    console.log(postByUser)
-
     useEffect(() => {
       !dataPost && dispatch(actions.getPostByUser());
       // eslint-disable-next-line
