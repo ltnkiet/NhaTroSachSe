@@ -79,7 +79,7 @@ export const getPostsLimitService = (page, {limitPost, order, status, ...query},
         include: [
           { model: db.Image, as: "images", attributes: ["image"] },
           { model: db.Attribute, as: "attributes", attributes: ["price", "acreage"]},
-          { model: db.User, as: "user", attributes: ["name", "zalo", "phone", "avatar"] },
+          { model: db.User, as: "user", attributes: ["name", "zalo", "phone", "avatar", 'fbUrl'] },
           { model: db.Overview, as: "overviews", attributes: ["area", "type"]},
         ],
         attributes: ["id", "title", "address", "description", 'createdAt'],
@@ -290,3 +290,78 @@ export const deletePostService = (postId) =>
       reject(error);
     }
   });
+  
+export const reviewPostService = (userId, postId, { star, comment }) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const alreadyReview = await db.Review.findOne({
+        where: { postId, userId },
+      });
+      if (alreadyReview) {
+        await db.Review.update(
+          { star, comment },
+          { where: { postId, userId } }
+        );
+      } else {
+        await db.Review.create({
+          userId, postId,
+          star, comment,
+        });
+      }
+      const updatedTotalRating = await db.Post.findOne({
+        where: { id: postId },
+        include: [
+          {
+            model: db.Review,
+            as: 'review',
+            attributes: ['star'],
+          },
+        ],
+      });
+
+      const reviewCount = updatedTotalRating.review.length;
+      const sumRating = updatedTotalRating.review.reduce(
+        (sum, review) => sum + review.star, 0
+      );
+      updatedTotalRating.totalRating =
+        Math.round((sumRating * 10) / reviewCount) / 10;
+      await updatedTotalRating.save();
+      resolve({
+        err: 0,
+        msg: 'Cảm ơn bạn đã để lại đánh giá',
+        updatedTotalRating,
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+// post controller
+
+// import * as postService from '../services/post';
+
+// export const reviewPost = async (req, res) => {
+//   const { postId, ...reviewData } = req.body;
+//   const { id: userId } = req.user;
+
+//   try {
+//     if (!userId || !postId) {
+//       return res.status(400).json({
+//         err: 1,
+//         msg: 'Missing Input',
+//       });
+//     }
+
+//     const response = await postService.reviewPostService(userId, postId, reviewData);
+
+//     return res.status(200).json(response);
+//   } catch (error) {
+//     return res.status(500).json({
+//       err: -1,
+//       msg: 'Failed at reviewPost controller: ' + error,
+//     });
+//   }
+// };
+
+
+

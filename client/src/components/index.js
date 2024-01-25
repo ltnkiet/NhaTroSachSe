@@ -34,5 +34,6 @@ export { default as Contact } from "./Footer/Contact";
 export { default as Footer } from "./Footer/Footer";
 
 export { default as User } from "./Users/User";
+export { default as BoxInfor } from "./Users/BoxInfor";
 
 

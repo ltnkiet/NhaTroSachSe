@@ -6,6 +6,7 @@ import icons from "asset/icon";
 import { path } from "utils/constant";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "store/actions";
+import Swal from "sweetalert2";
 
 const {
   AiOutlineLogout,
@@ -25,6 +26,21 @@ const Header = () => {
     navigate(path.LOGIN, { state: { flag } });
     // eslint-disable-next-line
   }, []);
+
+  const handleLogout = () => {
+    setIsShowMenu(false);
+    dispatch(actions.logout());
+    Swal.fire({
+      icon: "warning",
+      title: "Đăng xuất",
+      text: 'Vui lòng chở về trang chủ!',
+      confirmButtonText: 'OK',
+    }).then( async (rs) => {
+      if(rs.isConfirmed) {
+        navigate(path.HOME);
+      }
+    })
+  };
 
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -80,10 +96,7 @@ const Header = () => {
                     </Link>
                     <span
                       className="cursor-pointer hover:text-main font-medium text-white py-2 flex items-center gap-2"
-                      onClick={() => {
-                        setIsShowMenu(false);
-                        dispatch(actions.logout());
-                      }}>
+                      onClick={handleLogout}>
                       <AiOutlineLogout />
                       Đăng xuất
                     </span>

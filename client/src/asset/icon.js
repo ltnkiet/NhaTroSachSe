@@ -10,8 +10,11 @@ import { FiSearch } from 'react-icons/fi'
 import { ImPencil2, ImBin } from 'react-icons/im'
 import { BiUserPin } from 'react-icons/bi'
 import { FaRegClock, FaMapMarkedAlt  } from "react-icons/fa";
+import { FaPhone, FaSquareFacebook  } from "react-icons/fa6";
+import { SiZalo } from "react-icons/si";
 
 const icons = {
+    FaPhone, FaSquareFacebook , SiZalo,
     FaMapMarkedAlt ,
     AiOutlinePlusCircle,  AiOutlineEye, AiOutlineEyeInvisible,
     GrNext,

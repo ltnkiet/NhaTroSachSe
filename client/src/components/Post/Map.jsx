@@ -8,19 +8,30 @@ const Position = ({ icon }) => <div>{icon}</div>;
 
 const Map = ({ address }) => {
   const [coords, setCoords] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getCoords = async () => {
-      const result = await geocodeByAddress(address);
-      const latlng = await getLatLng(result[0]);
-      setCoords(latlng);
+      try {
+        setLoading(true);
+        const result = await geocodeByAddress(address);
+        const latlng = await getLatLng(result[0]);
+        setCoords(latlng);
+      } catch (error) {
+        console.error('Error getting coordinates:', error);
+      } finally {
+        setLoading(false)
+      }
     };
     if (address) {
-      getCoords()
+      getCoords();
     } else {
       navigator.geolocation.getCurrentPosition(
         ({ coords: { latitude, longitude } }) => {
           setCoords({ lat: latitude, lng: longitude });
+        },
+        error => {
+          console.error('Error getting current position:', error);
         }
       );
     }
@@ -28,6 +39,7 @@ const Map = ({ address }) => {
 
   return (
     <div className="h-[300px] w-full relative">
+
       <div className="absolute max-w-[180px] top-2 left-2 z-50 bg-white shadow-xl p-4 text-xs">
         {address}
       </div>

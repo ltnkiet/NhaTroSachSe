@@ -35,6 +35,9 @@ module.exports = {
       description: {
         type: Sequelize.TEXT,
       },
+      totalRating: {
+        type: Sequelize.FLOAT,
+      },
       userId: {
         type: Sequelize.STRING,
       },
@@ -42,9 +45,6 @@ module.exports = {
         type: Sequelize.STRING,
       },
       imagesId: {
-        type: Sequelize.STRING,
-      },
-      reviewId: {
         type: Sequelize.STRING,
       },
       priceNumber: {

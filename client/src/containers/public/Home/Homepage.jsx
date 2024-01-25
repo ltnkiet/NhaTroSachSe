@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 const Homepage = () => {
   const { categories, prices, areas } = useSelector((state) => state.app);
+
   return (
     <div className="w-full flex flex-col gap-3">
       <div>

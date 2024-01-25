@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsLimit } from "store/actions";
-import { SliderCustom, Map } from "components";
+import { SliderCustom, Map, BoxInfor, RelatedPost } from "components";
 import icons from "asset/icon";
 import { formatTimeV2 } from "utils/helper";
 
@@ -22,7 +22,7 @@ const DetailPost = () => {
     listRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     // eslint-disable-next-line
   }, [listRef]);
-  
+  console.log(posts[0]?.user)
 
   return (
     <div ref={listRef} className="w-full flex gap-4">
@@ -83,7 +83,10 @@ const DetailPost = () => {
         </div>
         <div className="bg-white rounded-md shadow-md p-4 mt-10">Đánh giá</div>
       </div>
-      <div className="w-[30%]">Content</div>
+      <div className="w-[30%] flex flex-col gap-4">
+        <BoxInfor user={posts[0]?.user}/>
+        <RelatedPost />
+      </div>
     </div>
   );
 };

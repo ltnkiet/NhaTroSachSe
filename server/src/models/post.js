@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
       Post.belongsTo(models.Attribute, { foreignKey: 'attributesId', targetKey: 'id', as: 'attributes' })
       Post.belongsTo(models.Overview, { foreignKey: 'overviewId', targetKey: 'id', as: 'overviews' })
       Post.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'id', as: 'user' })
-      Post.hasMany(models.Review, { foreignKey: 'postId', targetKey: 'id', as: 'review' });
     }
   }
   Post.init(
@@ -24,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       userId: DataTypes.STRING,
       overviewId: DataTypes.STRING,
       imagesId: DataTypes.STRING,
+      totaRating: DataTypes.FLOAT,
       reviewId: DataTypes.STRING,
       priceNumber: DataTypes.FLOAT,
       areaNumber: DataTypes.FLOAT,
