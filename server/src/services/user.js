@@ -21,6 +21,30 @@ export const getOne = (id) =>
     }
   });
 
+export const getAllUser = (page, query) => 
+  new Promise(async (resolve, reject) => {
+    try {
+      let offset = !page || +page <= 1 ? 0 : +page - 1;
+      const queries = { ...query, role: "0" };
+      const response = await db.User.findAndCountAll({
+        where: queries,
+        raw: true,
+        nest: true,
+        offset: offset * +process.env.lIMIT,
+        limit: +process.env.lIMIT,
+        attributes: { exclude: ["password"] },
+        order: [["createdAt", "DESC"]],
+      })
+      resolve({
+        err: response ? 0 : 1,
+        msg: response ? "OK" : "Getting User is failed.",
+        response,
+      });
+    } catch (error) {
+      reject(error);
+    }
+  })
+
 export const updateInfor = (id, payload) =>
   new Promise(async (resolve, reject) => {
     try {

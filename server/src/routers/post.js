@@ -11,6 +11,10 @@ router.post('/create', verifyTokens, postController.createPost)
 router.get('/user/all', verifyTokens, postController.getPostByUser)
 router.put('/user/update', verifyTokens, postController.updatePost)
 router.get('/admin/all', [verifyTokens, isAdmin], postController.getPostbyAdmin)
+router.put('/admin/update', [verifyTokens, isAdmin], postController.changeStatusPost)
+
+router.get('/:id', postController.getPostDetail)
+
 
 
 

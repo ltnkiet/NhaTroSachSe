@@ -4,7 +4,8 @@ import { Button } from "components";
 
 const Contact = () => {
   return (
-    <div className="bg-white rounded-md shadow-md p-4 mt-5 w-[70%] flex flex-col justify-center items-center
+    <div
+      className="bg-white rounded-md shadow-md p-4 mt-5 w-[70%] flex flex-col justify-center items-center
       gap-6 border-4 border-dashed border-secondary">
       <img
         src={contact.image}
@@ -18,9 +19,7 @@ const Contact = () => {
             <div
               key={index}
               className="flex flex-col items-center justify-center">
-              <span className="text-orange-500 font-semibold">
-                {item.text}
-              </span>
+              <span className="text-orange-500 font-semibold">{item.text}</span>
               <span className="text-blue-900 text-lg font-semibold">
                 {item.phone}
               </span>
@@ -39,7 +38,6 @@ const Contact = () => {
       />
       <div className="h-12"></div>
     </div>
-    
   );
 };
 

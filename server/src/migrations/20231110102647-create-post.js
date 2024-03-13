@@ -35,9 +35,6 @@ module.exports = {
       description: {
         type: Sequelize.TEXT,
       },
-      totalRating: {
-        type: Sequelize.FLOAT,
-      },
       userId: {
         type: Sequelize.STRING,
       },

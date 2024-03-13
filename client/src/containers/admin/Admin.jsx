@@ -7,8 +7,9 @@ import { Sidebar } from './'
 
 const Admin = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const { userData } = useSelector((state) => state.user);
 
-  if (!isLoggedIn) return <Navigate to={`/${path.LOGIN}`} replace={true} />;
+  if (!isLoggedIn || !userData || +userData.role !== 1) return <Navigate to={`/${path.HOME__PAGE}`} replace={true} />;
   return (
     <div className="w-full h-screen flex flex-col items-center">
       <div className="flex w-full flex-auto">

@@ -6,6 +6,7 @@ const initState = {
   msg: "",
   update: false,
   err: null,
+  role: ""
 };
 
 const authReducer = (state = initState, action) => {
@@ -18,6 +19,7 @@ const authReducer = (state = initState, action) => {
         token: action.data,
         msg: "",
         err: 0,
+        role: action.role
       };
     case actionTypes.REGISTER_FAIL:
     case actionTypes.LOGIN_FAIL:

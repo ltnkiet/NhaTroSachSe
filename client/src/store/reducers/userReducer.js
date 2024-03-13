@@ -2,6 +2,8 @@ import actionTypes from "../actions/actionTypes";
 
 const initState = {
   userData: {},
+  user: [],
+  count: 0,
 };
 
 const userReducer = (state = initState, action) => {
@@ -16,6 +18,12 @@ const userReducer = (state = initState, action) => {
         ...state,
         userData: {},
       };
+    case actionTypes.ALL_USER:
+      return {
+        ...state,
+        user: action.user || [],
+        count: action.count || 0,
+      }
     default:
       return state;
   }

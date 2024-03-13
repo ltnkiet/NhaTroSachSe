@@ -90,9 +90,6 @@ const Modal = ({
     let min = persent1 <= persent2 ? persent1 : persent2;
     let max = persent1 <= persent2 ? persent2 : persent1;
     let arrMinMax = [convert100toTarget(min), convert100toTarget(max)];
-    // const gaps = name === 'price'
-    //     ? getCodes(arrMinMax, content)
-    //     : name === 'area' ? getCodesArea(arrMinMax, content) : []
     handleSubmit(
       e,
       {
@@ -117,7 +114,7 @@ const Modal = ({
           e.stopPropagation();
           setIsShowModal(true);
         }}
-        className="w-2/5 h-[70%] bg-white rounded-md relative">
+        className="w-2/5 h-[70%] bg-white rounded-md relative overflow-y-auto no-scrollbar">
         <div className="h-[45px] px-4 flex items-center border-b border-gray-200">
           <span
             className="cursor-poiter"
@@ -129,8 +126,8 @@ const Modal = ({
           </span>
         </div>
         {(name === "category" || name === "province") && (
-          <div className="p-4 flex flex-col">
-            <span className="py-2 flex gap-2 items-center border-b border-gray-200">
+          <div className="p-4 flex flex-col ">
+            <span className="py-2 flex gap-2 items-center border-b border-gray-200 ">
               <input
                 type="radio"
                 name={name}

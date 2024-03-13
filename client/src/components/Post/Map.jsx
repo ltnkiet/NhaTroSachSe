@@ -18,9 +18,9 @@ const Map = ({ address }) => {
         const latlng = await getLatLng(result[0]);
         setCoords(latlng);
       } catch (error) {
-        console.error('Error getting coordinates:', error);
+        console.error("Error getting coordinates:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     };
     if (address) {
@@ -30,16 +30,15 @@ const Map = ({ address }) => {
         ({ coords: { latitude, longitude } }) => {
           setCoords({ lat: latitude, lng: longitude });
         },
-        error => {
-          console.error('Error getting current position:', error);
+        (error) => {
+          console.error("Error getting current position:", error);
         }
       );
     }
   }, [address]);
 
   return (
-    <div className="h-[300px] w-full relative">
-
+    <div className="h-[500px] w-full relative">
       <div className="absolute max-w-[180px] top-2 left-2 z-50 bg-white shadow-xl p-4 text-xs">
         {address}
       </div>

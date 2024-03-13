@@ -8,7 +8,31 @@ export const apiGetPostByUser = (query) =>
         method: "GET",
         url: "/post/user/all",
         params: query,
-
+      });
+      resolve(response?.data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+export const apiGetPostByAdmin = (query) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "GET",
+        url: "/post/admin/all",
+        params: query,
+      });
+      resolve(response?.data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+export const apiGetPostDetail = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "GET",
+        url: `/post/${id}`,
       });
       resolve(response?.data);
     } catch (error) {
@@ -80,13 +104,27 @@ export const apiUpdatePost = (payload) =>
     }
   });
 
+export const apiUpdatePostByAdmin = (payload) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "PUT",
+        url: `/post/admin/update`,
+        data: payload,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
 export const apiDeletePost = (postId) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axiosConfig({
         method: "DELETE",
         url: `/post/delete`,
-        params: { postId }
+        params: { postId },
       });
       resolve(response);
     } catch (error) {

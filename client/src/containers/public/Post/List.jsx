@@ -1,15 +1,15 @@
-  import React, { useEffect, useRef } from "react";
-import { Button, Item } from "components";
+import React, { useEffect, useRef, useState } from "react";
+import { Item, Pagination, Button } from "components";
 import { getPostsLimit } from "store/actions/post";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
 const List = ({ categoryCode }) => {
-
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const { posts } = useSelector((state) => state.post);
   const listRef = useRef();
+  const [sort, setSort] = useState(0);
 
   //Params
   useEffect(() => {
@@ -26,9 +26,10 @@ const List = ({ categoryCode }) => {
       }
     });
     if (categoryCode) searchParamsObject.categoryCode = categoryCode;
+    if (sort === 1) searchParamsObject.order = ["createdAt", "DESC"];
     dispatch(getPostsLimit(searchParamsObject));
     // eslint-disable-next-line
-  }, [searchParams, categoryCode]);
+  }, [searchParams, categoryCode, sort]);
 
   useEffect(() => {
     listRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -44,8 +45,18 @@ const List = ({ categoryCode }) => {
       </div>
       <div className="flex items-center gap-2 my-2">
         <span>Sắp xếp:</span>
-        <Button bgColor="bg-gray-200" text="Mặc định" />
-        <Button bgColor="bg-gray-200" text="Mới nhất" />
+        <Button
+          bgColor="bg-gray-200"
+          text="Mặc định"
+          textColor={`${sort === 0 && `text-secondary`}`}
+          onClick={() => setSort(0)}
+        />
+        <Button
+          bgColor="bg-gray-200"
+          text="Mới nhất"
+          textColor={`${sort === 1 && `text-secondary`}`}
+          onClick={() => setSort(1)}
+        />
       </div>
       <div className="items bg-[#fff9f3]">
         {posts?.length > 0 &&
@@ -65,6 +76,7 @@ const List = ({ categoryCode }) => {
             );
           })}
       </div>
+      <Pagination list={posts} />
     </div>
   );
 };

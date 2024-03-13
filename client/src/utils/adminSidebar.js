@@ -22,12 +22,6 @@ const memuSidebar = [
         path: path.ADMIN_USER,
         icon: <BiUserPin />
     },
-    {
-        id: 4,
-        text: 'Thoát',
-        path: '/*',
-        icon: <AiOutlineLogout />
-    }
 ]
 
 export default memuSidebar

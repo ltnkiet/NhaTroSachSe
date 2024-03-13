@@ -1,8 +1,7 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 import logo from "asset/img/logo_ntss.png";
-import { path } from 'utils/constant';
-
+import { path } from "utils/constant";
 
 const Footer = () => {
   return (
@@ -21,107 +20,65 @@ const Footer = () => {
           </p>
         </div>
         <div className="w-full sm:w-1/5 flex flex-col space-y-2 pb-6">
-          <h1 className="text-2xl font-semibold text-yellow-500">Welcome</h1>
-          <Link
-            className="w-28 font-semibold text-lg text-yellow-500"
-            to="/for-applicant"
-          >
-            How it works
+          <h1 className="text-2xl font-semibold text-yellow-500">
+            Về Nhà Trọ Sạch Sẽ
+          </h1>
+          <Link className="w-28 font-semibold text-lg text-yellow-500">
+            Giới thiệu
           </Link>
-
-          <Link
-            className="w-28  font-semibold text-lg text-yellow-500"
-            to="/jobs"
-          >
+          <Link className="w-28  font-semibold text-lg text-yellow-500">
             Tìm phòng trọ
           </Link>
           <Link
-            className="w-28  font-semibold text-lg text-yellow-500"
-            to="/sign-in"
-          >
+            className="w-28 font-semibold text-lg text-yellow-500"
+            to="/dang-nhap">
             Đăng nhập
           </Link>
 
           <Link
-            className="w-40  font-semibold text-lg text-yellow-500"
-            to="/sign-up/new-applicant"
-          >
+            className="w-28 font-semibold text-lg text-yellow-500"
+            to="/dang-ky">
             Đăng ký
           </Link>
         </div>
 
         <div className="w-full sm:w-1/5 flex flex-col space-y-2 pb-6">
-          <h1 className="text-2xl font-semibold text-yellow-500">Chủ trọ</h1>
-
-          <Link
-            className="w-28 font-semibold text-lg text-yellow-500"
-            to="/for-recruiter"
-          >
-            How it works
+          <h1 className="text-2xl font-semibold text-yellow-500">
+            Chăm sóc khách hàng
+          </h1>
+          <Link className="w-28 font-semibold text-lg text-yellow-500">
+            Hướng dẫn đăng tin
           </Link>
-
-          <Link
-            className="w-28 font-semibold text-lg text-yellow-500"
-            to="/sign-in"
-          >
-            Đăng nhập
+          <Link className="w-28 font-semibold text-lg text-yellow-500">
+            Quy định đăng tin
           </Link>
-
-          <Link
-            className="w-40font-semibold text-lg text-yellow-500"
-            to="/sign-up/new-recruiter"
-          >
-            Đăng ký
+          <Link className="w-28 font-semibold text-lg text-yellow-500">
+            Giải quyết khiếu nại
           </Link>
         </div>
 
         <div className="w-full sm:w-1/5 flex flex-col space-y-2 pb-6">
-          <h1 className="text-2xl font-semibold text-yellow-500">Thông tin</h1>
-
-          <Link
-            className="w-28 font-semibold text-lg text-yellow-500"
-            to={path.ABOUT_US}
-          >
-            About us
-          </Link>
-
-          <Link
-            className="font-semibold text-lg text-yellow-500"
-            to="/privacy-policy"
-          >
-            Privacy policy
-          </Link>
-
-          <Link
-            className="font-semibold text-lg text-yellow-500"
-            to="/cookie-policy"
-          >
-            Cookie policy
-          </Link>
-        </div>
-
-        <div className="w-full sm:w-1/5 flex flex-col space-y-2 pb-6">
-          <h1 className="text-2xl font-semibold text-yellow-500">Follow us</h1>
+          <h1 className="text-2xl font-semibold text-yellow-500">
+            Liên hệ với chúng tôi
+          </h1>
           <a
             className="w-28 font-semibold text-lg text-yellow-500"
-            href="https://www.instagram.com/kha_martin/"
+            href="https://www.facebook.com/profile.php?id=100011056752898"
             target="_blank"
-            rel="noreferrer"
-          >
-            Instagram
+            rel="noreferrer">
+            Facebook
           </a>
           <a
             className="w-28 font-semibold text-lg text-yellow-500"
             href="https://github.com/Nhat-Kha"
             target="_blank"
-            rel="noreferrer"
-          >
+            rel="noreferrer">
             GitHub
           </a>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

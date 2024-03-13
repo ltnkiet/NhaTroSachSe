@@ -1,13 +1,39 @@
 import * as postService from "../services/post";
 
-export const getPostbyAdmin= async (req, res) => {
-  const { page, ...query } = req.body;
+export const getPostbyAdmin = async (req, res) => {
+  const { page, ...query } = req.query;
+  const { id } = req.user;
   try {
+    if (!id) {
+      return res.status(400).json({
+        err: 1,
+        msg: "Require Auth",
+      });
+    }
     const response = await postService.getPostsByAdminService(page, query);
     return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({
-      err: -1,  
+      err: -1,
+      msg: "Failed at post controller: " + error,
+    });
+  }
+};
+
+export const getPostDetail = async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (!id) {
+      return res.status(400).json({
+        err: 1,
+        msg: "Require Id Post",
+      });
+    }
+    const response = await postService.getPostsDetailService(id);
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(500).json({
+      err: -1,
       msg: "Failed at post controller: " + error,
     });
   }
@@ -98,13 +124,33 @@ export const updatePost = async (req, res) => {
       msg: "Failed at post controller: " + error,
     });
   }
-}
+};
+
+export const changeStatusPost = async (req, res) => {
+  const { postId, sts } = req.body;
+  const { id } = req.user;
+  try {
+    if (!postId || !sts || !id) {
+      return res.status(400).json({
+        err: 1,
+        msg: "Không tìm thấy id",
+      });
+    }
+    const response = await postService.changeStatusPostService(sts, postId);
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(500).json({
+      err: -1,
+      msg: "Failed at post controller: " + error,
+    });
+  }
+};
 
 export const deletePost = async (req, res) => {
   const { postId } = req.query;
   const { id } = req.user;
   try {
-    if (!postId || !id ) {
+    if (!postId || !id) {
       return res.status(400).json({
         err: 1,
         msg: "Không tìm thấy id",
@@ -118,4 +164,4 @@ export const deletePost = async (req, res) => {
       msg: "Failed at post controller: " + error,
     });
   }
-}
+};

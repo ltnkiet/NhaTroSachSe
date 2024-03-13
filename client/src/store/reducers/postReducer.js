@@ -1,12 +1,14 @@
 import actionTypes from "../actions/actionTypes";
 
 const initState = {
+  postDetail: {},
   posts: [],
   msg: "",
   count: 0,
   newPosts: [],
   postByUser: [],
-  dataPost: null
+  postByAdmin: [],
+  dataPost: null,
 };
 
 const postReducer = (state = initState, action) => {
@@ -19,28 +21,36 @@ const postReducer = (state = initState, action) => {
         msg: action.msg || "",
         count: action.count || 0,
       };
+    case actionTypes.GET_POSTS_DETAIL:
+      return {
+        ...state,
+        postDetail: action.posts || {},
+      };
     case actionTypes.GET_NEW_POST:
       return {
         ...state,
         msg: action.msg || "",
         newPosts: action.posts || [],
       };
+    case actionTypes.GET_POST_BY_ADMIN:
+      return {
+        ...state,
+        msg: action.msg || "",
+        postByAdmin: action.posts || [],
+        count: action.count || 0,
+      };
     case actionTypes.GET_POST_USER:
       return {
         ...state,
         msg: action.msg || "",
         postByUser: action.posts || [],
-      }
+        count: action.count || 0,
+      };
     case actionTypes.EDIT_POST:
       return {
         ...state,
         dataPost: action.dataPost || null,
-      }
-    case actionTypes.RESET_DATA:
-      return {
-        ...state,
-        dataPost: null,
-      }
+      };
     default:
       return state;
   }

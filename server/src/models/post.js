@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       userId: DataTypes.STRING,
       overviewId: DataTypes.STRING,
       imagesId: DataTypes.STRING,
-      totaRating: DataTypes.FLOAT,
       reviewId: DataTypes.STRING,
       priceNumber: DataTypes.FLOAT,
       areaNumber: DataTypes.FLOAT,

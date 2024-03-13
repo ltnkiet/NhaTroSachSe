@@ -56,6 +56,7 @@ export const loginService = ({ phone, password }) =>
           { expiresIn: "2d" }
         );
       resolve({
+        role: response.role,
         err: token ? 0 : 1,
         msg: token
           ? "Đăng nhập thành công !"

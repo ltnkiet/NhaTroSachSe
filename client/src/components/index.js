@@ -20,6 +20,7 @@ export { default as Sitem } from "./Post/Sitem";
 export { default as EditPost } from "./Post/EditPost";
 export { default as SliderCustom } from "./Post/SliderCustom";
 export { default as Map } from "./Post/Map";
+export { default as QuickView } from "./Post/QuickView";
 
 export { default as Province } from "./Province/Province";
 export { default as ProvinceBtn } from "./Province/ProvinceBtn";

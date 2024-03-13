@@ -2,34 +2,26 @@ import React, { useEffect, useState, useRef } from "react";
 import * as actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { formatTime } from "utils/helper";
-import { Button, EditPost } from "components";
+import { Button, QuickView } from "components";
 import { Pagination } from "components";
-import { apiDeletePost } from "services";
+import { apiUpdatePostByAdmin } from "services";
 import Swal from "sweetalert2";
 import { useSearchParams } from "react-router-dom";
 
-const ManagePost = () => {
-  const [isEdit, setIsEdit] = useState(false);
+const DashboardPost = () => {
+  const [quickView, setQuickView] = useState(false);
   const [update, setUpdate] = useState(false);
   const [posts, setPosts] = useState([]);
   const [status, setStatus] = useState(0);
   const [sort, setSort] = useState(0);
   const dispatch = useDispatch();
-  const { postByUser, dataPost } = useSelector((state) => state.post);
+  const { postByAdmin } = useSelector((state) => state.post);
   const [searchParams] = useSearchParams();
   const listRef = useRef();
 
   useEffect(() => {
-    !dataPost && dispatch(actions.getPostByUser());
-  }, [dataPost, update]);
-
-  useEffect(() => {
-    setPosts(postByUser);
-  }, [postByUser]);
-
-  useEffect(() => {
-    !dataPost && setIsEdit(false);
-  }, [dataPost]);
+    setPosts(postByAdmin);
+  }, [postByAdmin, update]);
 
   useEffect(() => {
     let params = [];
@@ -46,43 +38,35 @@ const ManagePost = () => {
     });
     if (status === 1) searchParamsObject.status = "active";
     if (status === 2) searchParamsObject.status = "pending";
-    dispatch(actions.getPostByUser(searchParamsObject));
+    dispatch(actions.getPostByAdmin(searchParamsObject));
     // eslint-disable-next-line
-  }, [searchParams, status]);
+  }, [searchParams, status, update]);
 
   useEffect(() => {
     listRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     // eslint-disable-next-line
   }, [searchParams.get("page")]);
 
-  const handleDeletePost = (postId) => {
-    Swal.fire({
-      icon: "question",
-      title: "Xóa bài viết",
-      text: "Bạn có chắc là muốn xóa bài viết này?",
-      cancelButtonText: "Hủy",
-      confirmButtonText: "Xóa",
-      showCancelButton: true,
-    }).then(async (rs) => {
-      if (rs.isConfirmed) {
-        const res = await apiDeletePost(postId);
-        if (res?.data?.err === 0) {
-          setUpdate((prev) => !prev);
-          Swal.fire("Hoàn tất", res?.data?.msg, "success");
-        } else Swal.fire("Sự cố", res?.data?.msg, "error");
-      }
-    });
+  const handleSubmit = async (sts, postId) => {
+    const payload = { sts, postId };
+    const response = await apiUpdatePostByAdmin(payload);
+    if (response?.data?.err === 0) {
+      setUpdate((prev) => !prev);
+      Swal.fire("Hoàn tất", response?.data?.msg, "success");
+    } else {
+      Swal.fire("Sự cố!", response?.data?.msg, "error");
+    }
   };
 
   useEffect(() => {
-    let sortedPosts = [...postByUser];
+    let sortedPosts = [...postByAdmin];
     if (sort === 1) {
       sortedPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (sort === 2) {
       sortedPosts.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
     }
     setPosts(sortedPosts);
-  }, [postByUser, sort]);
+  }, [postByAdmin, sort]);
 
   return (
     <div ref={listRef} className="flex flex-col gap-5">
@@ -98,7 +82,7 @@ const ManagePost = () => {
             <option value="2">Đang xử lý</option>
           </select>
           <select
-            onChange={(e) => setSort(+e.target.value)} // Thêm sự kiện onChange để cập nhật sortBy
+            onChange={(e) => setSort(+e.target.value)}
             value={sort}
             className="outline-none border p-2 border-gray-200 rounded-md ">
             <option value="0">Xem theo ngày</option>
@@ -110,10 +94,10 @@ const ManagePost = () => {
       <table className="w-full table-auto">
         <thead>
           <tr className="flex w-full bg-main text-white">
-            {/* <th className="border flex-1 p-2">Mã tin</th> */}
+            <th className="border flex-1 p-2">Mã tin</th>
+            <th className="border flex-1 p-2">Tác giả</th>
             <th className="border flex-1 p-2">Tiêu đề</th>
-            <th className="border flex-1 p-2">Ngày tạo</th>
-            <th className="border flex-1 p-2">Ngày chỉnh sửa</th>
+            <th className="border flex-1 p-2">Ngày đăng</th>
             <th className="border flex-1 p-2">Trạng thái</th>
             <th className="border flex-1 p-2">Tùy chọn</th>
           </tr>
@@ -123,19 +107,24 @@ const ManagePost = () => {
             posts?.map((item) => {
               return (
                 <tr className="flex items-center h-[80px]" key={item.id}>
-                  {/* <td className="border flex-1 h-full flex items-center justify-center px-2">
+                  <td className="border flex-1 h-full flex items-center justify-center px-2">
                     #{item?.id.match(/\d/g).join("")?.slice(0, 7)}
-                  </td> */}
-                  <td className="border flex-1 h-full flex items-center justify-center p-2">
+                  </td>
+                  <td className="border flex-1  h-full flex items-center justify-center px-2 gap-2">
+                    <img
+                      src={item?.user?.avatar}
+                      alt=""
+                      className="rounded-full w-[20%] object-cover border-2 shadow-md border-secondary"
+                    />
+                    {item?.user?.name}
+                  </td>
+                  <td className="border flex-1 h-full flex items-center justify-center px-2">
                     {item?.title.length > 65
                       ? item?.title.slice(0, 65) + "..."
                       : item?.title}
                   </td>
                   <td className="border flex-1 h-full flex items-center justify-center px-2">
                     {formatTime(item?.createdAt)}
-                  </td>
-                  <td className="border flex-1 h-full flex items-center justify-center px-2">
-                    {formatTime(item?.updatedAt)}
                   </td>
                   <td
                     className={`border flex-1 h-full flex items-center justify-center px-2 font-bold
@@ -151,28 +140,36 @@ const ManagePost = () => {
                   </td>
                   <td className="border flex-1 h-full flex items-center justify-center gap-2 px-2">
                     <Button
-                      text={"Sửa"}
+                      text={"Xem"}
                       bgColor={"bg-secondary"}
                       onClick={() => {
-                        dispatch(actions.editPosts(item));
-                        setIsEdit(true);
+                        dispatch(actions.getPostsDetail(item.id));
+                        setQuickView(true);
                       }}
                     />
-                    <Button
-                      onClick={() => handleDeletePost(item.id)}
-                      text={"Xóa"}
-                      bgColor={"bg-red-500"}
-                    />
+                    {item.status === "active" ? (
+                      <Button
+                        onClick={() => handleSubmit("pending", item.id)}
+                        text={"Ẩn"}
+                        bgColor={"bg-red-500"}
+                      />
+                    ) : (
+                      <Button
+                        onClick={() => handleSubmit("active", item.id)}
+                        text={"Duyệt"}
+                        bgColor={"bg-green-500"}
+                      />
+                    )}
                   </td>
                 </tr>
               );
             })}
         </tbody>
       </table>
-      {isEdit && <EditPost setIsEdit={setIsEdit} />}
-      <Pagination list={postByUser} />
+      {quickView && <QuickView setQuickView={setQuickView} />}
+      <Pagination list={postByAdmin} />
     </div>
   );
 };
 
-export default ManagePost;
+export default DashboardPost;

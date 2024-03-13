@@ -8,15 +8,12 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "store/actions";
 import Swal from "sweetalert2";
 
-const {
-  AiOutlineLogout,
-  BsChevronDown,
-  MdOutlineLibraryBooks,
-} = icons;
+const { AiOutlineLogout, BsChevronDown, MdOutlineLibraryBooks } = icons;
 
 const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const { userData } = useSelector((state) => state.user);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -33,13 +30,13 @@ const Header = () => {
     Swal.fire({
       icon: "warning",
       title: "Đăng xuất",
-      text: 'Vui lòng chở về trang chủ!',
-      confirmButtonText: 'OK',
-    }).then( async (rs) => {
-      if(rs.isConfirmed) {
+      text: "Vui lòng chở về trang chủ!",
+      confirmButtonText: "OK",
+    }).then(async (rs) => {
+      if (rs.isConfirmed) {
         navigate(path.HOME);
       }
-    })
+    });
   };
 
   useEffect(() => {
@@ -88,6 +85,14 @@ const Header = () => {
                 />
                 {isShowMenu && (
                   <div className="absolute min-w-200 top-full bg-secondary shadow-md rounded-md p-4 right-0 flex flex-col mt-2">
+                    {userData.role === "1" && (
+                      <Link
+                        className="cursor-pointer hover:text-main font-medium text-white  py-2 flex items-center gap-2"
+                        to={path.ADMIN}>
+                        <MdOutlineLibraryBooks />
+                        Trang Quản Trị
+                      </Link>
+                    )}
                     <Link
                       className="cursor-pointer hover:text-main font-medium text-white  py-2 flex items-center gap-2"
                       to={"/he-thong"}>

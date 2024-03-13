@@ -8,7 +8,10 @@ instance.interceptors.request.use(
     // gắn token vào header
     let token =
       window.localStorage.getItem("persist:auth") &&
-      JSON.parse(window.localStorage.getItem("persist:auth"))?.token?.slice(1,-1);
+      JSON.parse(window.localStorage.getItem("persist:auth"))?.token?.slice(
+        1,
+        -1
+      );
     config.headers = {
       authorization: token ? `Bearer ${token}` : null,
     };

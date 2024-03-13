@@ -1,6 +1,6 @@
 import React from "react";
 import { text } from "utils/constant";
-import { Province, ItemSidebar, RelatedPost, Pagination } from "components";
+import { Province, ItemSidebar, RelatedPost } from "components";
 import { List } from "../index";
 import { useSelector } from "react-redux";
 
@@ -17,7 +17,6 @@ const Homepage = () => {
       <div className="w-full flex gap-4">
         <div className="w-[70%]">
           <List />
-          <Pagination/>
         </div>
         <div className="w-[30%] border-blue-500 flex flex-col gap-4 justify-start items-center">
           <ItemSidebar content={categories} title="Danh sách cho thuê" />

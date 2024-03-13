@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Province, ItemSidebar, RelatedPost, Pagination  } from "components";
+import { Province, ItemSidebar, RelatedPost  } from "components";
 import { List} from "../index";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -14,7 +14,6 @@ const Rental = () => {
     const category = categories?.find(
       (item) => `/${formatVietnameseToString(item.value)}` === location.pathname
     );
-    console.log(category);
     setCategoryCurrent(category);
     if (category) {
       setCategoryCode(category.code);
@@ -32,7 +31,6 @@ const Rental = () => {
       <div className="w-full flex gap-4">
         <div className="w-[70%]">
           <List categoryCode={categoryCode} />
-          <Pagination />
         </div>
         <div className="w-[30%] flex flex-col gap-4 justify-start items-center">
           <ItemSidebar

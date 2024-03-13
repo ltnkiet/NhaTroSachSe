@@ -7,18 +7,18 @@ export const getPostsByAdminService = (page, query) =>
   new Promise(async (resolve, reject) => {
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1;
-      const queries = {...query }
       const response = await db.Post.findAndCountAll({
-        where: queries,
+        where: { ...query },
         raw: true,
         nest: true,
-        offset: offset * +process.env.LIMIT,
-        limit: +process.env.LIMIT,
+        offset: offset * +process.env.lIMIT,
+        limit: +process.env.lIMIT,
         order: [["createdAt", "DESC"]],
         include: [
-          { model: db.Image, as: "images"},
-          { model: db.Attribute, as: "attributes"},
-          { model: db.User, as: "user"},
+          { model: db.Image, as: "images" },
+          { model: db.Attribute, as: "attributes" },
+          { model: db.User, as: "user" },
+          { model: db.Overview, as: "overviews" },
         ],
       });
       resolve({
@@ -31,11 +31,11 @@ export const getPostsByAdminService = (page, query) =>
     }
   });
 
-export const getPostByUserService = (page, id, query) => 
+export const getPostByUserService = (page, id, query) =>
   new Promise(async (resolve, reject) => {
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1;
-      const queries = { ...query, userId: id};  
+      const queries = { ...query, userId: id };
       const response = await db.Post.findAndCountAll({
         where: queries,
         raw: true,
@@ -44,10 +44,10 @@ export const getPostByUserService = (page, id, query) =>
         limit: +process.env.LIMIT,
         order: [["createdAt", "DESC"]],
         include: [
-          { model: db.Image, as: "images"},
-          { model: db.Attribute, as: "attributes"},
-          { model: db.User, as: "user"},
-          { model: db.Overview, as: "overviews"},
+          { model: db.Image, as: "images" },
+          { model: db.Attribute, as: "attributes" },
+          { model: db.User, as: "user" },
+          { model: db.Overview, as: "overviews" },
         ],
       });
       resolve({
@@ -58,31 +58,90 @@ export const getPostByUserService = (page, id, query) =>
     } catch (error) {
       reject(error);
     }
-  })
+  });
 
-export const getPostsLimitService = (page, {limitPost, order, status, ...query}, { priceNumber, areaNumber }) =>
+export const getPostsDetailService = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await db.Post.findOne({
+        where: { id },
+        raw: true,
+        nest: true,
+        include: [
+          { model: db.Image, as: "images", attributes: ["image"] },
+          {
+            model: db.Attribute,
+            as: "attributes",
+            attributes: ["price", "acreage"],
+          },
+          {
+            model: db.User,
+            as: "user",
+            attributes: ["name", "zalo", "phone", "avatar", "fbUrl"],
+          },
+          { model: db.Overview, as: "overviews", attributes: ["area", "type"] },
+        ],
+        attributes: [
+          "id",
+          "title",
+          "address",
+          "description",
+          "createdAt",
+          "status",
+        ],
+      });
+      resolve({
+        err: response ? 0 : 1,
+        msg: response ? "OK" : "Getting posts is failed.",
+        response,
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+export const getPostsLimitService = (
+  page,
+  { limitPost, order, ...query },
+  { priceNumber, areaNumber }
+) =>
   new Promise(async (resolve, reject) => {
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1;
-      const queries = { ...query, status: "active" };
-      const limit = +limitPost || +process.env.LIMIT
+      const queries = { ...query };
+      const limit = +limitPost || +process.env.LIMIT;
       queries.limit = limit;
       if (priceNumber) query.priceNumber = { [Op.between]: priceNumber };
       if (areaNumber) query.areaNumber = { [Op.between]: areaNumber };
-      if (order) queries.order = [order]
+      if (order) queries.order = [order];
       const response = await db.Post.findAndCountAll({
-        where: query,
+        where: { ...query, status: "active" },
         raw: true,
         nest: true,
         offset: offset * limit,
         ...queries,
         include: [
           { model: db.Image, as: "images", attributes: ["image"] },
-          { model: db.Attribute, as: "attributes", attributes: ["price", "acreage"]},
-          { model: db.User, as: "user", attributes: ["name", "zalo", "phone", "avatar", 'fbUrl'] },
-          { model: db.Overview, as: "overviews", attributes: ["area", "type"]},
+          {
+            model: db.Attribute,
+            as: "attributes",
+            attributes: ["price", "acreage"],
+          },
+          {
+            model: db.User,
+            as: "user",
+            attributes: ["name", "zalo", "phone", "avatar", "fbUrl"],
+          },
+          { model: db.Overview, as: "overviews", attributes: ["area", "type"] },
         ],
-        attributes: ["id", "title", "address", "description", 'createdAt'],
+        attributes: [
+          "id",
+          "title",
+          "address",
+          "description",
+          "createdAt",
+          "status",
+        ],
       });
       resolve({
         err: response ? 0 : 1,
@@ -201,11 +260,19 @@ export const createPostService = (userId, body) =>
     }
   });
 
-  export const updatePostService = ({postId, attributesId, overviewId, imagesId, ...body}) =>
-    new Promise(async (resolve, reject) => {
-      try {
-        const labelCode = generateCode(body.label);
-        await db.Post.update({
+export const updatePostService = ({
+  postId,
+  attributesId,
+  overviewId,
+  imagesId,
+  ...body
+}) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const labelCode = generateCode(body.label);
+
+      await db.Post.update(
+        {
           title: body.title,
           labelCode,
           address: body.address || null,
@@ -218,62 +285,89 @@ export const createPostService = (userId, body) =>
             : generateCode(body?.province?.replace("Tỉnh ", "")) || null,
           priceNumber: body.priceNumber,
           areaNumber: body.areaNumber,
-        }, {
-          where: {id: postId}
-        });
-        await db.Attribute.update({
+        },
+        {
+          where: { id: postId },
+        }
+      );
+      await db.Attribute.update(
+        {
           price:
             +body.priceNumber < 1
               ? `${body.priceNumber * 1000000} đồng/tháng`
               : `${body.priceNumber} triệu/tháng`,
           acreage: `${body.areaNumber}m2`,
-        }, {
-          where: {id: attributesId}
-        });
-        await db.Image.update({
-          image: JSON.stringify(body.images)
-        }, {
-          where: {id: imagesId,}
-        });
-        await db.Overview.update({
+        },
+        {
+          where: { id: attributesId },
+        }
+      );
+      await db.Image.update(
+        {
+          image: JSON.stringify(body.images),
+        },
+        {
+          where: { id: imagesId },
+        }
+      );
+      await db.Overview.update(
+        {
           area: body.label,
           type: body?.category,
-        }, {
-          where: {id: overviewId,}
-        });
-        await db.Province.findOrCreate({
-          where: {
-            [Op.or]: [
-              { value: body?.province?.replace("Tỉnh ", "") },
-              { value: body?.province?.replace("Thành phố ", "") },
-            ],
-          },
-          defaults: {
-            code: body?.province?.includes("Thành phố")
-              ? generateCode(body?.province?.replace("Thành phố ", ""))
-              : generateCode(body?.province?.replace("Tỉnh ", "")),
-            value: body?.province?.includes("Thành phố")
-              ? body?.province?.replace("Thành phố ", "")
-              : body?.province?.replace("Tỉnh ", ""),
-          },
-        });
-        await db.Label.findOrCreate({
-          where: {
-            code: labelCode,
-          },
-          defaults: {
-            code: labelCode,
-            value: body.label,
-          },
-        });
-        resolve({
-          err: 0 ,
-          msg: "Cập nhật bài viết thành công"
-        })
-      } catch (error) {
-        reject(error)
-      }
-    })
+        },
+        {
+          where: { id: overviewId },
+        }
+      );
+      await db.Province.findOrCreate({
+        where: {
+          [Op.or]: [
+            { value: body?.province?.replace("Tỉnh ", "") },
+            { value: body?.province?.replace("Thành phố ", "") },
+          ],
+        },
+        defaults: {
+          code: body?.province?.includes("Thành phố")
+            ? generateCode(body?.province?.replace("Thành phố ", ""))
+            : generateCode(body?.province?.replace("Tỉnh ", "")),
+          value: body?.province?.includes("Thành phố")
+            ? body?.province?.replace("Thành phố ", "")
+            : body?.province?.replace("Tỉnh ", ""),
+        },
+      });
+      await db.Label.findOrCreate({
+        where: {
+          code: labelCode,
+        },
+        defaults: {
+          code: labelCode,
+          value: body.label,
+        },
+      });
+      resolve({
+        err: 0,
+        msg: "Cập nhật bài viết thành công",
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+export const changeStatusPostService = (sts, postId) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await db.Post.update(
+        { status: sts },
+        { where: { id: postId } }
+      );
+      resolve({
+        err: 0,
+        msg: "Đã thay đổi trạng thái thành hoạt động",
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
 
 export const deletePostService = (postId) =>
   new Promise(async (resolve, reject) => {
@@ -290,51 +384,51 @@ export const deletePostService = (postId) =>
       reject(error);
     }
   });
-  
-export const reviewPostService = (userId, postId, { star, comment }) =>
-  new Promise(async (resolve, reject) => {
-    try {
-      const alreadyReview = await db.Review.findOne({
-        where: { postId, userId },
-      });
-      if (alreadyReview) {
-        await db.Review.update(
-          { star, comment },
-          { where: { postId, userId } }
-        );
-      } else {
-        await db.Review.create({
-          userId, postId,
-          star, comment,
-        });
-      }
-      const updatedTotalRating = await db.Post.findOne({
-        where: { id: postId },
-        include: [
-          {
-            model: db.Review,
-            as: 'review',
-            attributes: ['star'],
-          },
-        ],
-      });
 
-      const reviewCount = updatedTotalRating.review.length;
-      const sumRating = updatedTotalRating.review.reduce(
-        (sum, review) => sum + review.star, 0
-      );
-      updatedTotalRating.totalRating =
-        Math.round((sumRating * 10) / reviewCount) / 10;
-      await updatedTotalRating.save();
-      resolve({
-        err: 0,
-        msg: 'Cảm ơn bạn đã để lại đánh giá',
-        updatedTotalRating,
-      });
-    } catch (error) {
-      reject(error);
-    }
-  });
+// export const reviewPostService = (userId, postId, { star, comment }) =>
+//   new Promise(async (resolve, reject) => {
+//     try {
+//       const alreadyReview = await db.Review.findOne({
+//         where: { postId, userId },
+//       });
+//       if (alreadyReview) {
+//         await db.Review.update(
+//           { star, comment },
+//           { where: { postId, userId } }
+//         );
+//       } else {
+//         await db.Review.create({
+//           userId, postId,
+//           star, comment,
+//         });
+//       }
+//       const updatedTotalRating = await db.Post.findOne({
+//         where: { id: postId },
+//         include: [
+//           {
+//             model: db.Review,
+//             as: 'review',
+//             attributes: ['star'],
+//           },
+//         ],
+//       });
+
+//       const reviewCount = updatedTotalRating.review.length;
+//       const sumRating = updatedTotalRating.review.reduce(
+//         (sum, review) => sum + review.star, 0
+//       );
+//       updatedTotalRating.totalRating =
+//         Math.round((sumRating * 10) / reviewCount) / 10;
+//       await updatedTotalRating.save();
+//       resolve({
+//         err: 0,
+//         msg: 'Cảm ơn bạn đã để lại đánh giá',
+//         updatedTotalRating,
+//       });
+//     } catch (error) {
+//       reject(error);
+//     }
+//   });
 
 // post controller
 
@@ -362,6 +456,3 @@ export const reviewPostService = (userId, postId, { star, comment }) =>
 //     });
 //   }
 // };
-
-
-

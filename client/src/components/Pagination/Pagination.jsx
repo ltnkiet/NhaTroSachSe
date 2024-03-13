@@ -6,9 +6,9 @@ import { useSearchParams } from "react-router-dom";
 
 const { GrLinkNext } = icons;
 
-const Pagination = () => {
+const Pagination = ({list}) => {
   
-  const { count, posts } = useSelector((state) => state.post);
+  const { count } = useSelector((state) => state.post);
   const [arrPage, setArrPage] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isHideEnd, setIsHideEnd] = useState(false);
@@ -30,7 +30,7 @@ const Pagination = () => {
     setArrPage(temp);
     currentPage >= maxPage - 2 ? setIsHideEnd(true) : setIsHideEnd(false);
     currentPage <= 3 ? setIsHideStart(true) : setIsHideStart(false);
-  }, [count, posts, currentPage]);
+  }, [count, list, currentPage]);
   return (
     <div className="flex items-center justify-center gap-2 py-5">
       {!isHideStart && <PageNum setCurrentPage={setCurrentPage} text={1} />}
@@ -51,7 +51,7 @@ const Pagination = () => {
         <PageNum
           icon={<GrLinkNext />}
           setCurrentPage={setCurrentPage}
-          text={Math.floor(count / posts.length)}
+          text={Math.floor(count / list.length)}
         />
       )}
     </div>

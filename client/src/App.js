@@ -8,10 +8,15 @@ import {
   SearchDetail,
   ResetPassword,
   AboutUS,
-  DetailPost
+  DetailPost,
 } from "containers/public";
 import { System, CreatePost, ManagePost, UserInfor } from "containers/system";
-import { Admin, Auth } from "containers/admin";
+import {
+  Admin,
+  DashboardPost,
+  DashboardCategory,
+  DashboardUser,
+} from "containers/admin";
 import { path } from "utils/constant";
 import * as actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,7 +50,10 @@ function App() {
           <Route path={path.SEARCH} element={<SearchDetail />} />
           <Route path={path.ABOUT_US} element={<AboutUS />} />
           <Route path={path.DETAIL_ALL} element={<DetailPost />} />
-          <Route path={path.DETAL_POST__TITLE__POSTID} element={<DetailPost />} />
+          <Route
+            path={path.DETAL_POST__TITLE__POSTID}
+            element={<DetailPost />}
+          />
         </Route>
         <Route path={path.SYSTEM} element={<System />}>
           <Route path={path.CREATE_POST} element={<CreatePost />} />
@@ -53,7 +61,9 @@ function App() {
           <Route path={path.USER} element={<UserInfor />} />
         </Route>
         <Route path={path.ADMIN} element={<Admin />}>
-          <Route path={path.ADMIN_AUTH} element={<Auth />} />
+          <Route path={path.ADMIN_POST} element={<DashboardPost />} />
+          <Route path={path.ADMIN_CATEGORY} element={<DashboardCategory />} />
+          <Route path={path.ADMIN_USER} element={<DashboardUser />} />
         </Route>
       </Routes>
     </div>

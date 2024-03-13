@@ -20,7 +20,6 @@ const SearchDetail = () => {
       <div className="w-full flex gap-4">
         <div className="w-[70%]">
           <List />
-          <Pagination />
         </div>
         <div className="w-[30%] flex flex-col gap-4 justify-start items-center">
           <ItemSidebar
