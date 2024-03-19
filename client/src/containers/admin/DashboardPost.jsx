@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { useSearchParams } from "react-router-dom";
 
 const DashboardPost = () => {
+  
   const [quickView, setQuickView] = useState(false);
   const [update, setUpdate] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -79,7 +80,7 @@ const DashboardPost = () => {
             className="outline-none border p-2 border-gray-200 rounded-md">
             <option value="0">Xem theo trạng thái</option>
             <option value="1">Đang hoạt động</option>
-            <option value="2">Đang xử lý</option>
+            <option value="2">Chưa được duyệt</option>
           </select>
           <select
             onChange={(e) => setSort(+e.target.value)}
@@ -94,9 +95,9 @@ const DashboardPost = () => {
       <table className="w-full table-auto">
         <thead>
           <tr className="flex w-full bg-main text-white">
-            <th className="border flex-1 p-2">Mã tin</th>
             <th className="border flex-1 p-2">Tác giả</th>
-            <th className="border flex-1 p-2">Tiêu đề</th>
+            <th className="border flex-2 p-2">Tiêu đề</th>
+            <th className="border flex-1 p-2">Danh mục</th>
             <th className="border flex-1 p-2">Ngày đăng</th>
             <th className="border flex-1 p-2">Trạng thái</th>
             <th className="border flex-1 p-2">Tùy chọn</th>
@@ -107,21 +108,23 @@ const DashboardPost = () => {
             posts?.map((item) => {
               return (
                 <tr className="flex items-center h-[80px]" key={item.id}>
-                  <td className="border flex-1 h-full flex items-center justify-center px-2">
-                    #{item?.id.match(/\d/g).join("")?.slice(0, 7)}
+                  <td className="border flex-1 h-full flex items-center justify-center px-2 gap-2">
+                    <div className="w-10 h-10">
+                      <img
+                        src={item?.user?.avatar}
+                        alt=""
+                        className="rounded-full w-full h-full object-cover border-2 shadow-md border-secondary"
+                      />
+                    </div>
+                    <div>{item?.user?.name}</div>
                   </td>
-                  <td className="border flex-1  h-full flex items-center justify-center px-2 gap-2">
-                    <img
-                      src={item?.user?.avatar}
-                      alt=""
-                      className="rounded-full w-[20%] object-cover border-2 shadow-md border-secondary"
-                    />
-                    {item?.user?.name}
-                  </td>
-                  <td className="border flex-1 h-full flex items-center justify-center px-2">
+                  <td className="border flex-2 h-full flex items-center justify-center px-2">
                     {item?.title.length > 65
                       ? item?.title.slice(0, 65) + "..."
                       : item?.title}
+                  </td>
+                  <td className="border flex-1 h-full flex items-center justify-center px-2">
+                    {item?.overviews?.type}
                   </td>
                   <td className="border flex-1 h-full flex items-center justify-center px-2">
                     {formatTime(item?.createdAt)}

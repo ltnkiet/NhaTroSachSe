@@ -56,15 +56,6 @@ const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
             value={payload.description.join("\n")}
             onChange={handleDescriptionChange}
             onFocus={() => setInvalidFields([])}></textarea>
-          {/* <textarea
-            id="desc"
-            cols="30"
-            rows="10"
-            className="w-full rounded-md outline-none border border-gray-300 p-2"
-            value={payload.description}
-            onChange={(e) => setPayload((prev) => ({ ...prev, description: [e.target.value] }))}
-            onFocus={() => setInvalidFields([])}>
-          </textarea> */}
           <small className="text-red-500">
             {invalidFields?.some((item) => (item.name = "description")) &&
               invalidFields?.find((item) => (item.name = "description"))

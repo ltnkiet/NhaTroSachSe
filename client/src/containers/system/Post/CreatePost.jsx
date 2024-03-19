@@ -11,6 +11,7 @@ import { resetData } from "store/actions";
 const { BsCameraFill, ImBin } = icons;
 
 const CreatePost = ({ isEdit }) => {
+  
   const [isLoading, setIsLoading] = useState(false);
   const [imagesPreview, setImagesPreview] = useState([]);
   const [invalidFields, setInvalidFields] = useState([]);

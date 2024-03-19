@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { InputForm, Button } from "components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, redirect } from "react-router-dom";
 import * as actions from "store/actions";
 import { apiForgotPassword } from "services/auth";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,13 +35,6 @@ const Login = () => {
     isLoggedIn && navigate("/");
     // eslint-disable-next-line
   }, [isLoggedIn]);
-
-  useEffect(() => {
-    // Check role after login
-    if (isLoggedIn && role === 1) {
-      navigate(`${path.ADMIN}`);
-    }
-  }, [isLoggedIn, role]);
 
   useEffect(() => {
     if (msg) {

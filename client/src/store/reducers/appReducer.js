@@ -3,6 +3,8 @@ import actionTypes from "../actions/actionTypes";
 const initState = {
   msg: "",
   categories: [],
+  categoriesByAdmin: [],
+  dataCate: null,
   prices: [],
   areas: [],
   provinces: [],
@@ -15,6 +17,17 @@ const appReducer = (state = initState, action) => {
         ...state,
         categories: action.categories || [],
         msg: action.msg || "",
+      };
+    case actionTypes.GET_CATEGORIES_ADMIN:
+      return {
+        ...state,
+        categoriesByAdmin: action.categories || [],
+        count: action.count || 0,
+      };
+    case actionTypes.EDIT_CATEGORIES:
+      return {
+        ...state,
+        dataCate: action.dataCate || null,
       };
     case actionTypes.GET_PRICES:
       return {

@@ -98,7 +98,7 @@ const ManagePost = () => {
             <option value="2">Đang xử lý</option>
           </select>
           <select
-            onChange={(e) => setSort(+e.target.value)} // Thêm sự kiện onChange để cập nhật sortBy
+            onChange={(e) => setSort(+e.target.value)}
             value={sort}
             className="outline-none border p-2 border-gray-200 rounded-md ">
             <option value="0">Xem theo ngày</option>

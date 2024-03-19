@@ -8,7 +8,7 @@ const memuSidebar = [
         id: 1,
         text: 'Quản lý bài đăng',
         path: path.ADMIN_POST,
-        icon: <ImPencil2 />
+        icon: <MdOutlineLibraryBooks />
     },
     {
         id: 2,
@@ -18,6 +18,12 @@ const memuSidebar = [
     },
     {
         id: 3,
+        text: 'Tạo danh mục',
+        path: path.CREATE_CATEGORY,
+        icon: <ImPencil2 />
+    },
+    {
+        id: 4,
         text: 'Quản lý người dùng',
         path: path.ADMIN_USER,
         icon: <BiUserPin />

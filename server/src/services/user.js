@@ -26,7 +26,7 @@ export const getAllUser = (page, query) =>
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1;
       const queries = { ...query, role: "0" };
-      const response = await db.User.findAndCountAll({
+      const users = await db.User.findAndCountAll({
         where: queries,
         raw: true,
         nest: true,
@@ -35,10 +35,14 @@ export const getAllUser = (page, query) =>
         attributes: { exclude: ["password"] },
         order: [["createdAt", "DESC"]],
       })
+      for (let user of users.rows) {
+        const postCount = await db.Post.count({ where: { userId: user.id } });
+        user.postCount = postCount;
+      }
       resolve({
-        err: response ? 0 : 1,
-        msg: response ? "OK" : "Getting User is failed.",
-        response,
+        err: users ? 0 : 1,
+        msg: users ? "OK" : "Getting User is failed.",
+        response: users,
       });
     } catch (error) {
       reject(error);

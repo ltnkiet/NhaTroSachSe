@@ -37,7 +37,7 @@ const Footer = () => {
 
           <Link
             className="w-28 font-semibold text-lg text-yellow-500"
-            to="/dang-ky">
+            to="/dang-nhap">
             Đăng ký
           </Link>
         </div>

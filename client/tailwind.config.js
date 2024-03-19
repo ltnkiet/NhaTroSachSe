@@ -8,6 +8,9 @@ module.exports = {
       width: {
         '1100': '1100px'
       },
+      flex: {
+        2: "2 2 0%",
+      },
       colors: {
         main:  '#181460',
         secondary: '#fbbf24',

@@ -41,24 +41,6 @@ const DashboardUser = () => {
     <div ref={listRef} className="flex flex-col gap-5">
       <div className="px-6 py-4 border-b-2 border-gray-200 flex items-center justify-between">
         <h1 className="text-3xl font-medium ">Quản lý người dùng</h1>
-        {/* <div className="flex gap-5">
-          <select
-            onChange={(e) => setStatus(+e.target.value)}
-            value={status}
-            className="outline-none border p-2 border-gray-200 rounded-md">
-            <option value="0">Xem theo trạng thái</option>
-            <option value="1">Đang xử lý</option>
-            <option value="2">Đang hoạt động</option>
-          </select>
-          <select
-            onChange={(e) => setSortBy(e.target.value)}
-            value={sortBy}
-            className="outline-none border p-2 border-gray-200 rounded-md ">
-            <option value="0">Xem theo ngày</option>
-            <option value="1">Ngày gần nhất</option>
-            <option value="2">Ngày cũ nhất</option>
-          </select>
-        </div> */}
       </div>
       <table className="w-full table-auto">
         <thead>
@@ -68,7 +50,6 @@ const DashboardUser = () => {
             <th className="border flex-1 p-2">Số điện thoại</th>
             <th className="border flex-1 p-2">Ngày tham gia</th>
             <th className="border flex-1 p-2">Số bài viết</th>
-            <th className="border flex-1 p-2">Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
@@ -91,22 +72,7 @@ const DashboardUser = () => {
                     {formatTime(item?.createdAt)}
                   </td>
                   <td className="border flex-1 h-full flex items-center justify-center px-2">
-                    5
-                  </td>
-                  <td className="border flex-1 h-full flex items-center justify-center gap-2 px-2">
-                    <Button
-                      text={"Xem"}
-                      bgColor={"bg-secondary"}
-                      // onClick={() => {
-                      //   dispatch(actions.getuserLimit({ id: item.id }));
-                      //   setQuickView(true);
-                      // }}
-                    />
-                    <Button
-                      // onClick={() => handleDeletePost(item.id)}
-                      text={"Xóa"}
-                      bgColor={"bg-red-500"}
-                    />
+                    {item?.postCount}
                   </td>
                 </tr>
               );

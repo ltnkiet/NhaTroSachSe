@@ -1,8 +1,8 @@
 import actionTypes from "../actions/actionTypes";
 
 const initState = {
-  postDetail: {},
   posts: [],
+  postDetail: {},
   msg: "",
   count: 0,
   newPosts: [],

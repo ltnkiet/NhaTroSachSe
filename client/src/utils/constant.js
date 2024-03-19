@@ -2,7 +2,7 @@ export const path = {
   // Public
   HOME: "/*",
   HOME__PAGE: ":page",
-  LOGIN: "login",
+  LOGIN: "dang-nhap",
   CHO_THUE_CAN_HO: "cho-thue-can-ho",
   CHO_THUE_MAT_BANG: "cho-thue-mat-bang",
   NHA_CHO_THUE: "nha-cho-thue",
@@ -11,7 +11,7 @@ export const path = {
   DETAIL_ALL: "chi-tiet/*",
   DETAL_POST__TITLE__POSTID: "chi-tiet/:title/:postId",
   SEARCH: "tim-kiem",
-  RESET_PASSWORD: "password/reset/:token",
+  RESET_PASSWORD: "mat-khau/thay-doi/:token",
   ABOUT_US: "ve-chung-toi",
   // System
   SYSTEM: "/he-thong/",
@@ -22,6 +22,7 @@ export const path = {
   ADMIN: "/quan-tri",
   ADMIN_POST: "quan-ly-bai-dang",
   ADMIN_CATEGORY: "quan-ly-danh-muc",
+  CREATE_CATEGORY: "tao-danh-muc",
   ADMIN_USER: "quan-ly-nguoi-dung",
 };
 export const text = {

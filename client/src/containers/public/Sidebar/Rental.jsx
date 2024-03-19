@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Province, ItemSidebar, RelatedPost  } from "components";
-import { List} from "../index";
+import { Province, ItemSidebar, RelatedPost } from "components";
+import { List } from "../index";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { formatVietnameseToString } from "utils/Common/formatVietnameseToString";
@@ -20,6 +20,8 @@ const Rental = () => {
     }
     // eslint-disable-next-line
   }, [location]);
+
+  console.log(categoryCurrent);
 
   return (
     <div className="w-full flex flex-col gap-3">

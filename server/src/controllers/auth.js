@@ -57,7 +57,7 @@ export const forgotPassword = async (req, res) => {
           Chọn vào đây để lấy lại mật khẩu, yêu cầu này sẽ mất hiệu lực sau 15 phút:
         </p>
         <button style="padding: 14px; background-color: #181460; border-radius: 5px; border-style: none; cursor: pointer">
-          <a href=${process.env.CLIENT_URL}/password/reset/${resetToken}
+          <a href=${process.env.CLIENT_URL}/mat-khau/thay-doi/${resetToken}
             style="color:white; text-decoration-line: none; font-size: 14px; font-weight: 700">
             Cập nhật mật khẩu
           </a>

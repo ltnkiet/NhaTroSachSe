@@ -5,7 +5,7 @@ export const getCategories = () => async (dispatch) => {
   try {
     const response = await apis.apiGetCategories();
     if (response?.data.err === 0) {
-        dispatch({
+      dispatch({
         type: actionTypes.GET_CATEGORIES,
         categories: response.data.response,
       });
@@ -23,6 +23,7 @@ export const getCategories = () => async (dispatch) => {
     });
   }
 };
+
 export const getPrices = () => async (dispatch) => {
   try {
     const response = await apis.apiGetPrices();
@@ -49,6 +50,7 @@ export const getPrices = () => async (dispatch) => {
     });
   }
 };
+
 export const getAreas = () => async (dispatch) => {
   try {
     const response = await apis.apiGetAreas();
@@ -75,6 +77,7 @@ export const getAreas = () => async (dispatch) => {
     });
   }
 };
+
 export const getProvinces = () => async (dispatch) => {
   try {
     const response = await apis.apiGetProvinces();
@@ -99,3 +102,33 @@ export const getProvinces = () => async (dispatch) => {
     });
   }
 };
+
+export const getCategoriesAdmin = (query) => async (dispatch) => {
+  try {
+    const response = await apis.apiGetCategoriesAdmin(query);
+    console.log(response.data.response);
+    if (response.data?.err === 0) {
+      dispatch({
+        type: actionTypes.GET_CATEGORIES_ADMIN,
+        categories: response.data.response?.rows,
+        count: response.data.response?.count,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_CATEGORIES_ADMIN,
+        msg: response.data.msg,
+        categories: null,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_CATEGORIES_ADMIN,
+      categories: null,
+    });
+  }
+};
+
+export const editCategory = (dataCate) => ({
+  type: actionTypes.EDIT_CATEGORIES,
+  dataCate,
+});

@@ -16,6 +16,7 @@ import {
   DashboardPost,
   DashboardCategory,
   DashboardUser,
+  CreateCategory,
 } from "containers/admin";
 import { path } from "utils/constant";
 import * as actions from "store/actions";
@@ -63,6 +64,7 @@ function App() {
         <Route path={path.ADMIN} element={<Admin />}>
           <Route path={path.ADMIN_POST} element={<DashboardPost />} />
           <Route path={path.ADMIN_CATEGORY} element={<DashboardCategory />} />
+          <Route path={path.CREATE_CATEGORY} element={<CreateCategory />} />
           <Route path={path.ADMIN_USER} element={<DashboardUser />} />
         </Route>
       </Routes>
