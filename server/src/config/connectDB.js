@@ -9,6 +9,12 @@ const sequelize = new Sequelize(
     dialect: process.env.DB_DIALECT,
     logging: false,
     timezone: "+07:00",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
   }
 );
 

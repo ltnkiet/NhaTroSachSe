@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { InputForm, Button } from "components";
-import { useLocation, useNavigate, redirect } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as actions from "store/actions";
 import { apiForgotPassword } from "services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { validate } from "utils/helper";
-import { path } from "utils/constant";
 
 const Login = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn, msg, update, err, role } = useSelector(
-    (state) => state.auth
-  );
+  const { isLoggedIn, msg, update, err } = useSelector((state) => state.auth);
   const [isRegister, setIsRegister] = useState(location.state?.flag);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [invalidFields, setInvalidFields] = useState([]);

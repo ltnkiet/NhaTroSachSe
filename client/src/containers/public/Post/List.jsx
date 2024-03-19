@@ -10,7 +10,7 @@ const List = ({ categoryCode }) => {
   const { posts } = useSelector((state) => state.post);
   const listRef = useRef();
   const [sort, setSort] = useState(0);
-
+  console.log(posts);
   //Params
   useEffect(() => {
     let params = [];

@@ -1,27 +1,31 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
+    "username": "ntssadmin",
+    "password": "YbzeRrOh6GGMdbWH3bKCoZ9mP54jerYC",
     "database": "ntssdb",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "host": "dpg-cnsue4md3nmc73aqr9cg-a.singapore-postgres.render.com",
+    "dialect": "postgres",
     "logging": false,
-    "timezone": "+07:00"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "timezone": "+07:00"
+    "timezone": "+07:00",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "timezone": "+07:00"
+    "username": "ntssadmin",
+    "password": "YbzeRrOh6GGMdbWH3bKCoZ9mP54jerYC",
+    "database": "ntssdb",
+    "host": "dpg-cnsue4md3nmc73aqr9cg-a.singapore-postgres.render.com",
+    "dialect": "postgres",
+    "timezone": "+07:00",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }

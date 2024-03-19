@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       password: {
         type: Sequelize.STRING,
@@ -31,8 +31,8 @@ module.exports = {
       },
       role: {
         type: Sequelize.ENUM,
-        values: [0, 1], // 0: user, 1: admin
-        defaultValue: 0
+        values: ["0", "1"],
+        defaultValue: "0",
       },
       passwordChangedAt: {
         type: Sequelize.STRING,
@@ -46,14 +46,28 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE(3),
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
+    await queryInterface.sequelize.query(`
+      CREATE OR REPLACE FUNCTION update_timestamp()
+      RETURNS TRIGGER AS $$
+      BEGIN
+        NEW."updatedAt" = CURRENT_TIMESTAMP;
+        RETURN NEW;
+      END;
+      $$ language 'plpgsql';
+    `);
+    await queryInterface.sequelize.query(`
+      CREATE TRIGGER update_user_modtime
+      BEFORE UPDATE ON "Users"
+      FOR EACH ROW EXECUTE FUNCTION update_timestamp();
+    `);
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("Users");

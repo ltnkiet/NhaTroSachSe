@@ -1,7 +1,7 @@
 import React from "react";
-import moment from 'moment'
-import 'moment/locale/vi'
-import { Link } from 'react-router-dom'
+import moment from "moment";
+import "moment/locale/vi";
+import { Link } from "react-router-dom";
 import { formatVietnameseToString } from "utils/Common/formatVietnameseToString";
 import { path } from "utils/constant";
 
@@ -10,7 +10,10 @@ const Sitem = ({ title, price, image, createdAt, id }) => {
     return moment(createdAt).fromNow();
   };
   return (
-    <Link to={`${path.DETAIL}${formatVietnameseToString(title?.replaceAll('/', ''))}/${id}`}
+    <Link
+      to={`${path.DETAIL}${formatVietnameseToString(
+        title?.replaceAll("/", "")
+      )}/${id}`}
       className="w-full flex items-center gap-2 py-2 border-b border-gray-300">
       <img
         src={image[0]}

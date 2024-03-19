@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { formatTime } from "utils/helper";
 import { Button, Popup } from "components";
 import { Pagination } from "components";
-import { apiDeleteCategories, apiUpdateCategories } from "services";
+import { apiDeleteCategories } from "services";
 import Swal from "sweetalert2";
 import { useSearchParams } from "react-router-dom";
 
@@ -19,6 +18,7 @@ const DashboardCategory = () => {
 
   useEffect(() => {
     !dataCate && dispatch(actions.getCategoriesAdmin());
+    // eslint-disable-next-line
   }, [dataCate, update]);
 
   useEffect(() => {

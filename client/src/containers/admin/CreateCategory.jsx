@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, InputFormV2 } from "components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { apiUpdateCategories, apiCreateCategories } from "services";
 import { validate } from "utils/helper";
 import Swal from "sweetalert2";

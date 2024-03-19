@@ -2,9 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import * as actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { formatTime } from "utils/helper";
-import { Button, QuickView } from "components";
 import { Pagination } from "components";
-import Swal from "sweetalert2";
 import { useSearchParams } from "react-router-dom";
 
 const DashboardUser = () => {

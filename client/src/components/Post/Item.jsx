@@ -1,13 +1,13 @@
 import React, { memo, useState } from "react";
 import icons from "asset/icon";
-import nonAvatar from 'asset/img/anon-avatar.png'
+import nonAvatar from "asset/img/anon-avatar.png";
 import { Link } from "react-router-dom";
 import { formatVietnameseToString } from "utils/Common/formatVietnameseToString";
 import { path } from "utils/constant";
 
 const indexs = [0, 1, 2, 3];
 
-const {RiHeartFill, RiHeartLine, BsBookmarkStarFill } = icons;
+const { RiHeartFill, RiHeartLine, BsBookmarkStarFill } = icons;
 
 const Item = ({
   images,
@@ -19,13 +19,15 @@ const Item = ({
   id,
 }) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false);
-
   return (
     <div className="w-full flex border-t border-orange-600 py-4 ">
       <Link
-        to={`${path.DETAIL}${formatVietnameseToString(title?.replaceAll('/', ''))}/${id}`}
+        to={`${path.DETAIL}${formatVietnameseToString(
+          title?.replaceAll("/", "")
+        )}/${id}`}
         className="w-2/5 flex flex-wrap gap-[2px] items-center relative cursor-pointer">
-        {images.length > 0 &&
+        {images &&
+          images.length > 0 &&
           images
             .filter((i, index) => indexs.some((i) => i === index))
             ?.map((i, index) => {
@@ -46,12 +48,15 @@ const Item = ({
           {isHoverHeart ? (
             <RiHeartFill size={26} color="red" />
           ) : (
-            <RiHeartLine size={26} color="yellow"/>
+            <RiHeartLine size={26} color="yellow" />
           )}
         </span>
       </Link>
       <div className="w-[70%]">
-        <Link  to={`${path.DETAIL}${formatVietnameseToString(title?.replaceAll('/', ''))}/${id}`}>
+        <Link
+          to={`${path.DETAIL}${formatVietnameseToString(
+            title?.replaceAll("/", "")
+          )}/${id}`}>
           <div className="flex justify-between gap-2 w-full">
             <div className="flex flex-col">
               {/* <div className="text-red-600 font-medium flex flex-row">
