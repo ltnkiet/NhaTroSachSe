@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Popup } from "components";
+import { Button, Loading, Popup } from "components";
 import { Pagination } from "components";
 import { apiDeleteCategories } from "services";
 import Swal from "sweetalert2";
@@ -20,7 +20,6 @@ const DashboardCategory = () => {
     !dataCate && dispatch(actions.getCategoriesAdmin());
     // eslint-disable-next-line
   }, [dataCate, update]);
-
   useEffect(() => {
     setCategory(categoriesByAdmin);
   }, [categoriesByAdmin]);
@@ -82,7 +81,11 @@ const DashboardCategory = () => {
           </tr>
         </thead>
         <tbody>
-          {category?.length > 0 &&
+          {category && category?.length === 0 ? (
+            <div className="flex items-center justify-center">
+              <Loading />
+            </div>
+          ) : (
             category?.map((item) => {
               return (
                 <tr className="flex items-center h-[90px]" key={item.id}>
@@ -117,7 +120,8 @@ const DashboardCategory = () => {
                   </td>
                 </tr>
               );
-            })}
+            })
+          )}
         </tbody>
       </table>
       {edit && <Popup setPopup={setEdit} />}

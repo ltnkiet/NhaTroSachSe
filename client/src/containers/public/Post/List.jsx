@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Item, Pagination, Button } from "components";
+import { Item, Pagination, Button, Loading } from "components";
 import { getPostsLimit } from "store/actions/post";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
@@ -10,7 +10,7 @@ const List = ({ categoryCode }) => {
   const { posts } = useSelector((state) => state.post);
   const listRef = useRef();
   const [sort, setSort] = useState(0);
-  console.log(posts);
+
   //Params
   useEffect(() => {
     let params = [];
@@ -59,14 +59,18 @@ const List = ({ categoryCode }) => {
         />
       </div>
       <div className="items bg-[#fff9f3]">
-        {posts?.length > 0 &&
+        {posts && posts?.length === 0 ? (
+          <div className="flex items-center justify-center">
+            <Loading />
+          </div>
+        ) : (
           posts.map((item) => {
             return (
               <Item
                 key={item?.id}
                 address={item?.address}
                 attributes={item?.attributes}
-                description={JSON.parse(item?.description)}
+                description={item?.description}
                 images={JSON.parse(item?.images?.image)}
                 star={+item?.star}
                 title={item?.title}
@@ -74,7 +78,8 @@ const List = ({ categoryCode }) => {
                 id={item?.id}
               />
             );
-          })}
+          })
+        )}
       </div>
       <Pagination list={posts} />
     </div>

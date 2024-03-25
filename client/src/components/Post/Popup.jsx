@@ -1,5 +1,5 @@
 import React from "react";
-import { CreateCategory } from "containers/admin";
+import { UpdateCategory } from "containers/admin";
 
 const Popup = ({ setPopup }) => {
   return (
@@ -12,7 +12,7 @@ const Popup = ({ setPopup }) => {
       <div
         onClick={(e) => e.stopPropagation()}
         className="bg-white max-w-1100 w-full overflow-y-auto no-scrollbar border rounded-xl p-5 ">
-        <CreateCategory isEdit />
+        <UpdateCategory  />
       </div>
     </div>
   );

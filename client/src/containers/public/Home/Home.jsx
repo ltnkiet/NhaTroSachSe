@@ -1,26 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
-import { Intro, Contact, Footer, Loading } from "components";
+import { Intro, Contact, Footer } from "components";
 import { Outlet, useLocation } from "react-router-dom";
 import Search from "../Search/Search";
 import { path } from "utils/constant";
 
 const Home = () => {
-  const location = useLocation()
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
+  const location = useLocation();
   return (
     <div className=" relative w-full flex flex-col items-center h-full">
-      {loading && <Loading />}
       <Header />
       <Navigation />
       {!location.pathname?.includes(path.DETAIL) && <Search />}

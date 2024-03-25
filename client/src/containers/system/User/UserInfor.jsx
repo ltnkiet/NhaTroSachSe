@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { InputReadOnly, Button, InputFormV2 } from "components";
 import { useSelector, useDispatch } from "react-redux";
 import anonAvatar from "asset/img/anon-avatar.png";

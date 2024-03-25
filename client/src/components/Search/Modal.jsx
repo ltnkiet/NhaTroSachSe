@@ -115,9 +115,8 @@ const Modal = ({
           setIsShowModal(true);
         }}
         className="w-2/5 h-[70%] bg-white rounded-md relative overflow-y-auto no-scrollbar">
-        <div className="h-[45px] px-4 flex items-center border-b border-gray-200">
+        <div className="h-[45px] px-4 flex items-center border-b border-gray-200 cursor-pointer">
           <span
-            className="cursor-poiter"
             onClick={(e) => {
               e.stopPropagation();
               setIsShowModal(false);

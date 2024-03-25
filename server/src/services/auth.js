@@ -48,15 +48,16 @@ export const loginService = ({ phone, password }) =>
         where: { phone },
         raw: true,
       });
-      const isCorrectPassword = response && bcrypt.compareSync(password, response.password);
-      const token = isCorrectPassword &&
+      const isCorrectPassword =
+        response && bcrypt.compareSync(password, response.password);
+      const token =
+        isCorrectPassword &&
         jwt.sign(
           { id: response.id, phone: response.phone },
           process.env.TOKEN_SECRET_KEY,
           { expiresIn: "2d" }
         );
       resolve({
-        role: response.role,
         err: token ? 0 : 1,
         msg: token
           ? "Đăng nhập thành công !"
@@ -84,7 +85,7 @@ export const forgotPasswordService = (email) =>
       } else {
         const resetToken = crypto.randomBytes(32).toString("hex");
         response.passwordResetToken = resetToken;
-        response.passwordResetExpires = Date.now() + 5 * 60 * 1000; //thời gian token: 5p
+        response.passwordResetExpires = new Date() + 5 * 60 * 1000; //thời gian token: 5p
         await response.save();
         resolve({
           err: 0,
@@ -103,7 +104,7 @@ export const resetPasswordService = (password, token) =>
       const response = await db.User.findOne({
         where: {
           passwordResetToken: token,
-          passwordResetExpires: { [Op.gt]: Date.now() },
+          passwordResetExpires: { [Op.gt]: new Date() },
         },
       });
       if (!response) {
@@ -114,7 +115,6 @@ export const resetPasswordService = (password, token) =>
       } else {
         response.password = hashPassword(password);
         response.passwordResetToken = null;
-        response.passwordChangedAt = Date.now();
         response.passwordResetExpires = null;
         await response.save();
         resolve({

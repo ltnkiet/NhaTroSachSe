@@ -1,6 +1,5 @@
 import React from "react";
 import { DetailPost } from "containers/public";
-import { CreateCategory } from "containers/admin";
 
 const QuickView = ({ setQuickView }) => {
   return (

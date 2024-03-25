@@ -7,7 +7,7 @@ export const getPostbyAdmin = async (req, res) => {
     if (!id) {
       return res.status(400).json({
         err: 1,
-        msg: "Require Auth",
+        msg: "Require Admin Auth",
       });
     }
     const response = await postService.getPostsByAdminService(page, query);

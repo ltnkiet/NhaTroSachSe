@@ -20,9 +20,7 @@ const Rental = () => {
     }
     // eslint-disable-next-line
   }, [location]);
-
-  console.log(categoryCurrent);
-
+  
   return (
     <div className="w-full flex flex-col gap-3">
       <div>

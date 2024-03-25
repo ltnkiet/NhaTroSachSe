@@ -1,7 +1,7 @@
 import icons from '../asset/icon'
 import {path} from './constant'
 
-const { ImPencil2, MdOutlineLibraryBooks, BiUserPin, AiOutlineLogout } = icons
+const { ImPencil2, MdOutlineLibraryBooks, BiUserPin } = icons
 
 const memuSidebar = [
     {

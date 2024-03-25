@@ -44,9 +44,13 @@ export const getPostByUserService = (page, id, query) =>
         limit: +process.env.LIMIT,
         order: [["createdAt", "DESC"]],
         include: [
-          { model: db.Image, as: "images" },
-          { model: db.Attribute, as: "attributes" },
-          { model: db.User, as: "user" },
+          { model: db.Image, as: "images", attributes: ["image"] },
+          {
+            model: db.Attribute,
+            as: "attributes",
+            attributes: ["price", "acreage"],
+          },
+          { model: db.User, as: "user", attributes: ["name", "phone"] },
           { model: db.Overview, as: "overviews" },
         ],
       });

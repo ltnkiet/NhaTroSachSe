@@ -86,7 +86,7 @@ export const deleteCategoriesService = (CateId) =>
     }
   });
 
-export const updateCategoriesService = ({ cateId, ...payload }) =>
+export const updateCategoriesService = ({cateId, ...payload }) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.Category.update(

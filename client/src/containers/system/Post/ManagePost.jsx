@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import * as actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { formatTime } from "utils/helper";
-import { Button, EditPost } from "components";
+import { Button, EditPost, Loading } from "components";
 import { Pagination } from "components";
 import { apiDeletePost } from "services";
 import Swal from "sweetalert2";
@@ -21,6 +21,7 @@ const ManagePost = () => {
 
   useEffect(() => {
     !dataPost && dispatch(actions.getPostByUser());
+    // eslint-disable-next-line
   }, [dataPost, update]);
 
   useEffect(() => {
@@ -119,13 +120,14 @@ const ManagePost = () => {
           </tr>
         </thead>
         <tbody>
-          {posts?.length > 0 &&
+          {posts && posts?.length === 0 ? (
+            <div className="flex items-center justify-center">
+              <Loading />
+            </div>
+          ) : (
             posts?.map((item) => {
               return (
                 <tr className="flex items-center h-[80px]" key={item.id}>
-                  {/* <td className="border flex-1 h-full flex items-center justify-center px-2">
-                    #{item?.id.match(/\d/g).join("")?.slice(0, 7)}
-                  </td> */}
                   <td className="border flex-1 h-full flex items-center justify-center p-2">
                     {item?.title.length > 65
                       ? item?.title.slice(0, 65) + "..."
@@ -166,7 +168,8 @@ const ManagePost = () => {
                   </td>
                 </tr>
               );
-            })}
+            })
+          )}
         </tbody>
       </table>
       {isEdit && <EditPost setIsEdit={setIsEdit} />}

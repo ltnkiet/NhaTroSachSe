@@ -9,11 +9,12 @@ const Overview = ({ payload, setPayload, invalidFields, setInvalidFields }) => {
   const { userData } = useSelector((state) => state.user);
   useEffect(() => {
     dispatch(actions.getCategories());
+    // eslint-disable-next-line
   }, [actions]);
 
   const parseDescription = (description) => {
     // Tách mô tả thành các phần riêng biệt
-    const parts = description.split(/\.\s+/);
+    const parts = description.split(/\n|,|\./);
     return parts.filter((part) => part.trim() !== "");
   };
 

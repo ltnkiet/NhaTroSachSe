@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsDetail } from "store/actions";
@@ -16,6 +16,7 @@ const DetailPost = ({ setQuickView }) => {
 
   useEffect(() => {
     postId && dispatch(getPostsDetail(postId));
+    // eslint-disable-next-line
   }, [postId, setQuickView]);
 
   useEffect(() => {
@@ -84,7 +85,6 @@ const DetailPost = ({ setQuickView }) => {
             <Map address={postDetail?.address} />
           </div>
         </div>
-        <div className="bg-white rounded-md shadow-md p-4 mt-10">Đánh giá</div>
       </div>
       <div className="w-[30%] flex flex-col gap-4">
         <BoxInfor user={postDetail?.user} />

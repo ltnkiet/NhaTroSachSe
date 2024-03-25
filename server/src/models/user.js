@@ -4,20 +4,18 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       User.hasMany(models.Post, { foreignKey: "userId", as: "user" });
-      User.hasMany(models.Review, { foreignKey: "userId", as: "reviewer" });
-
     }
   }
   User.init(
     {
       name: DataTypes.STRING,
-      phone: DataTypes.INTEGER,
+      phone: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       zalo: DataTypes.STRING,
       fbUrl: DataTypes.STRING,
       avatar: DataTypes.STRING,
-      role: DataTypes.ENUM(0, 1),  // 0: user, 1: admin
+      role: DataTypes.ENUM(0, 1), // 0: user, 1: admin
       passwordChangedAt: DataTypes.STRING,
       passwordResetToken: DataTypes.STRING,
       passwordResetExpires: DataTypes.STRING,
@@ -27,6 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
-  
+
   return User;
 };

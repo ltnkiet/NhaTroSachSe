@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { InputForm, Button } from "components";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate  } from "react-router-dom";
 import Swal from "sweetalert2";
 import { apiResetPassword } from "services/auth";
-import {validate} from 'utils/helper'
+import { validate } from "utils/helper";
+import { path } from "utils/constant";
 
 const ResetPassword = () => {
-  
   const [payload, setPayload] = useState({ password: "", confirmPass: "" });
   const [invalidFields, setInvalidFields] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const { token } = useParams();
-
+  const navigate = useNavigate()
 
   const handleReset = async () => {
     const invalids = validate(payload, setInvalidFields);
@@ -22,6 +22,7 @@ const ResetPassword = () => {
         Swal.fire("Sự cố!", response?.data?.msg, "error");
       else {
         Swal.fire("Thành công", response?.data?.msg, "success");
+        navigate(`/${path.LOGIN}`)
       }
     }
   };

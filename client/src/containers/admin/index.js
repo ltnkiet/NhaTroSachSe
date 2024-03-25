@@ -4,5 +4,6 @@ export { default as DashboardPost } from './DashboardPost'
 export { default as DashboardCategory } from './DashboardCategory'
 export { default as DashboardUser } from './DashboardUser'
 export { default as CreateCategory } from './CreateCategory'
+export { default as UpdateCategory } from './UpdateCategory'
 
 

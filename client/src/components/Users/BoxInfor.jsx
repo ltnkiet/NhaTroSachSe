@@ -20,13 +20,13 @@ const BoxInfor = ({ user }) => {
       </div>
       <div className="w-full bg-white rounded-md flex items-center justify-center px-4 py-2 gap-4 text-black font-semibold text-lg">
         <SiZalo className="text-blue-600 text-xl" />
-        <a href={`https://zalo.me/${zalo}`} target="_blank">
+        <a href={`https://zalo.me/${zalo}`} target="_blank" rel="noreferrer">
           Nhắn Zalo
         </a>
       </div>
       <div className="w-full bg-white rounded-md flex items-center justify-center px-4 py-2 gap-4 text-black font-semibold text-lg">
         <FaSquareFacebook className="text-blue-800 text-2xl" />
-        <a href={fbUrl} target="_blank">
+        <a href={fbUrl} target="_blank" rel="noreferrer">
           Facebook
         </a>
       </div>

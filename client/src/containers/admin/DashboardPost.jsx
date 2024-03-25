@@ -2,14 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import * as actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { formatTime } from "utils/helper";
-import { Button, QuickView } from "components";
+import { Button, Loading, QuickView } from "components";
 import { Pagination } from "components";
 import { apiUpdatePostByAdmin } from "services";
 import Swal from "sweetalert2";
 import { useSearchParams } from "react-router-dom";
 
 const DashboardPost = () => {
-  
   const [quickView, setQuickView] = useState(false);
   const [update, setUpdate] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -99,12 +98,17 @@ const DashboardPost = () => {
             <th className="border flex-2 p-2">Tiêu đề</th>
             <th className="border flex-1 p-2">Danh mục</th>
             <th className="border flex-1 p-2">Ngày đăng</th>
+            <th className="border flex-1 p-2">Ngày cập nhật</th>
             <th className="border flex-1 p-2">Trạng thái</th>
             <th className="border flex-1 p-2">Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
-          {posts?.length > 0 &&
+          {posts && posts?.length === 0 ? (
+            <div className="flex items-center justify-center">
+              <Loading />
+            </div>
+          ) : (
             posts?.map((item) => {
               return (
                 <tr className="flex items-center h-[80px]" key={item.id}>
@@ -128,6 +132,9 @@ const DashboardPost = () => {
                   </td>
                   <td className="border flex-1 h-full flex items-center justify-center px-2">
                     {formatTime(item?.createdAt)}
+                  </td>
+                  <td className="border flex-1 h-full flex items-center justify-center px-2">
+                    {formatTime(item?.updatedAt)}
                   </td>
                   <td
                     className={`border flex-1 h-full flex items-center justify-center px-2 font-bold
@@ -166,7 +173,8 @@ const DashboardPost = () => {
                   </td>
                 </tr>
               );
-            })}
+            })
+          )}
         </tbody>
       </table>
       {quickView && <QuickView setQuickView={setQuickView} />}

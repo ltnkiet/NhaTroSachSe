@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "asset/img/logo_ntss.png";
-import { path } from "utils/constant";
+
 
 const Footer = () => {
   return (

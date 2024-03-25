@@ -19,6 +19,8 @@ const Item = ({
   id,
 }) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false);
+
+
   return (
     <div className="w-full flex border-t border-orange-600 py-4 ">
       <Link
@@ -84,7 +86,7 @@ const Item = ({
             </span>
           </div>
           <p className="text-gray-500 w-full h-[50px] text-ellipsis overflow-hidden">
-            {description}
+            {JSON.parse(description)}
           </p>
           <div className="flex items-center my-5 justify-between">
             <div className="flex items-center">

@@ -20,23 +20,26 @@
 - Environment Variables
 
 ```
-# Service
-PORT=yout-port
-CLIENT_URL =your-client-react-url
-LIMIT = your-limit-app (5 or 10)
+REACT_APP_SERVER_URL=
+REACT_APP_LIMIT_POSTS=5
+REACT_APP_CLOUDINARY_NAME=
+REACT_APP_UPLOAD_PRESER_NAME=
+REACT_APP_MAP_API=
+
+PORT=
+CLIENT_URL=
+TOKEN_SECRET_KEY=
+SECRET_GENERATE=
+DB_NAME=
+DB_USER_NAME=ntssdmin
+DB_PASSWORD=
+DB_HOST=
+DB_DIALECT=
+LIMIT=5
+ADMIN_lIMIT=10
 NODE_ENV=development
-
-# MySQL
-DB_NAME=your-db-name
-DB_USER_NAME=your-db-user-name
-
-# Email App
-EMAIL_NAME=your-email-name
-EMAIL_APP_PASSWORD=your-email-app-password
-
-# Token
-TOKEN_SECRET_KEY=your-jwt-secret
-SECRET_GENERATE=your-jwt-secret
+EMAIL_NAME=
+EMAIL_APP_PASSWORD=
 
 ```
 

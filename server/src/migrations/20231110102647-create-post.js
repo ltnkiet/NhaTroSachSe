@@ -53,7 +53,7 @@ module.exports = {
       status: {
         type: Sequelize.ENUM,
         values: ["pending", "active"],
-        defaultValue: 'pending'
+        defaultValue: "pending",
       },
       createdAt: {
         allowNull: false,
@@ -80,7 +80,6 @@ module.exports = {
       BEFORE UPDATE ON "Posts"
       FOR EACH ROW EXECUTE FUNCTION update_timestamp();
     `);
-
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("Posts");

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import * as actions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { formatTime } from "utils/helper";
-import { Pagination } from "components";
+import { Loading, Pagination } from "components";
 import { useSearchParams } from "react-router-dom";
 
 const DashboardUser = () => {
@@ -51,17 +51,30 @@ const DashboardUser = () => {
           </tr>
         </thead>
         <tbody>
-          {userList?.length > 0 &&
+          {userList && userList?.length === 0 ? (
+            <div className="flex items-center justify-center">
+              <Loading />
+            </div>
+          ) : (
             userList?.map((item) => {
               return (
                 <tr className="flex items-center h-[80px]" key={item.id}>
                   <td className="border flex-1 h-full flex items-center justify-center px-2">
                     #{item?.id.match(/\d/g).join("")?.slice(0, 7)}
                   </td>
-                  <td className="border flex-1 h-full flex items-center justify-center px-2">
-                    {item?.name.length > 65
-                      ? item?.name.slice(0, 65) + "..."
-                      : item?.name}
+                  <td className="border flex-1 h-full flex items-center justify-center px-2 gap-2">
+                    <div className="w-10 h-10">
+                      <img
+                        src={item?.avatar}
+                        alt=""
+                        className="rounded-full w-full h-full object-cover border-2 shadow-md border-secondary"
+                      />
+                    </div>
+                    <div>
+                      {item?.name.length > 65
+                        ? item?.name.slice(0, 65) + "..."
+                        : item?.name}
+                    </div>
                   </td>
                   <td className="border flex-1 h-full flex items-center justify-center px-2">
                     {item?.phone}
@@ -74,7 +87,8 @@ const DashboardUser = () => {
                   </td>
                 </tr>
               );
-            })}
+            })
+          )}
         </tbody>
       </table>
       <Pagination list={userList} />

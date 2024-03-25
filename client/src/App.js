@@ -25,18 +25,21 @@ import { useDispatch, useSelector } from "react-redux";
 function App() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
+
   useEffect(() => {
     setTimeout(() => {
       isLoggedIn && dispatch(actions.getUser());
     }, 1000);
     // eslint-disable-next-line
   }, [isLoggedIn]);
+
   useEffect(() => {
     dispatch(actions.getPrices());
     dispatch(actions.getAreas());
     dispatch(actions.getProvinces());
     // eslint-disable-next-line
   }, []);
+  
   return (
     <div className="bg-primary overflow-hidden">
       <Routes>
@@ -48,6 +51,7 @@ function App() {
           <Route path={path.CHO_THUE_MAT_BANG} element={<Rental />} />
           <Route path={path.CHO_THUE_PHONG_TRO} element={<Rental />} />
           <Route path={path.NHA_CHO_THUE} element={<Rental />} />
+          <Route path={path.TIM_NGUOI_O_GHEP} element={<Rental />} />
           <Route path={path.SEARCH} element={<SearchDetail />} />
           <Route path={path.ABOUT_US} element={<AboutUS />} />
           <Route path={path.DETAIL_ALL} element={<DetailPost />} />
